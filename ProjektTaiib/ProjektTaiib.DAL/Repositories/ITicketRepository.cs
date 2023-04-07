@@ -11,9 +11,10 @@ namespace ProjektTaiib.DAL.Repositories
     {
         Ticket GetTicketById(int id);
         IEnumerable<Ticket> GetAllTickets();
-        //IEnumerable<Ticket> GetTicketsByEvent(int eventId);
         void AddTicket(Ticket ticket);
         void UpdateTicket(Ticket ticket);
         void DeleteTicket(Ticket ticket);
+        void DeleteTicketById(int id);
+        bool ExistTicket(int id);
     }
 }

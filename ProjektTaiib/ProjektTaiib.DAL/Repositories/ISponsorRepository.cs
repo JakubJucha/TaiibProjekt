@@ -14,5 +14,7 @@ namespace ProjektTaiib.DAL.Repositories
         void AddSponsor(Sponsor sponsor);
         void UpdateSponsor(Sponsor sponsor);
         void DeleteSponsor(Sponsor sponsor);
+        void DeleteSponsorById(int id);
+        bool ExistSponsor(int id);
     }
 }

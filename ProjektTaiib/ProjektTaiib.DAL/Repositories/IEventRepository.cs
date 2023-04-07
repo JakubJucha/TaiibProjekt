@@ -11,9 +11,10 @@ namespace ProjektTaiib.DAL.Repositories
     {
         Event GetEventById(int id);
         IEnumerable<Event> GetEvents();
-        IEnumerable<Event> GetEventsByCategory(string category);
         void AddEvent(Event @event); 
         void UpdateEvent(Event @event);
         void DeleteEvent(Event @event);
+        void DeleteEventById(int id);
+        bool ExistEvent(int id);
     }
 }

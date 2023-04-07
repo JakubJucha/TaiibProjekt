@@ -14,5 +14,10 @@ namespace ProjektTaiib.DAL.Repositories
         void AddInformation(DetailedInformation detailedInformation);
         void UpdateInformation(DetailedInformation detailedInformation);
         void DeleteInformation(DetailedInformation detailedInformation);
+        void DeleteInformationById(int id);
+        bool ExistInformation(int id);
+
+       // Task<IEnumerable<DetailedInformation>> GetAllInformationAsync();
+
     }
 }

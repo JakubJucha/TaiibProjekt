@@ -10,12 +10,15 @@ namespace ProjektTaiib.DAL.Repositories
     public interface IUserRepository
     {
         User GetUserById(int id);
-        User LoginUser(string email, string password);
+  /*      User LoginUser(string email, string password);
         void RegisterUser(string email, string username, string password);
-       
-        ICollection<Ticket> GetTickets(int id);
+       */
+
+        IEnumerable<User> GetAllUsers();
         void AddUser(User user);
         void DeleteUser(User user);
+        void DeleteUserById(int id);
         void UpdateUser(User user);
+        bool ExistUser(int id);
     }
 }
