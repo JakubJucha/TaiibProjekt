@@ -17,18 +17,23 @@ namespace ProjektTaiib.DAL.Encje
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public int Id_user { get; set; }
+
         [Required]
         [MaxLength(25)]
         public string Username { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
         [Required]
         [RegularExpression(@"^(?=.[a-z])(?=.[A-Z])(?=.*\d).{8,}$",
          ErrorMessage = "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, and one digit.")]
         public string Password { get; set; }
+
         [Required]
         public bool Moderator { get; set; }
-        public virtual ICollection<Ticket>? Tickets { get; set; }
+
+        public List<Ticket>? Tickets { get; set; }
     }
 }

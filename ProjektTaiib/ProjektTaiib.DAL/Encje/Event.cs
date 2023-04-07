@@ -28,8 +28,8 @@ namespace ProjektTaiib.DAL.Encje
 
         [Required]
         public string Category { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
-        public virtual ICollection<Sponsor> Sponsors { get; set; }
+        public List<Ticket> Tickets { get; set; }
+        public List<Sponsor> Sponsors { get; set; }
 
     }
 }

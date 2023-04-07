@@ -15,9 +15,9 @@ namespace ProjektTaiib.DAL.Encje
         [Required]
         public int Id_information { get; set; }
 
-        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
-        public virtual User User { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public User User { get; set; }
 
         [Required]
         [MaxLength(25)]
@@ -50,6 +50,7 @@ namespace ProjektTaiib.DAL.Encje
 
         [Required]
         [MaxLength(10)]
+        [RegularExpression(@"^\d{2}(?:[-\s]\d{3})?$", ErrorMessage ="Wrong zip code")]
         public string Zip_code { get; set; }
 
         [Required]

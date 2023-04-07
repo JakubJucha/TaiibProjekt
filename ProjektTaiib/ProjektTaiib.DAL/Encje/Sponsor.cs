@@ -21,6 +21,6 @@ namespace ProjektTaiib.DAL.Encje
         [Required]
         [MaxLength(50)]
         public string Sponsor_name { get; set; }
-        public virtual ICollection<Event>? Events { get; set; }
+        public List<Event>? Events { get; set; }
     }
 }

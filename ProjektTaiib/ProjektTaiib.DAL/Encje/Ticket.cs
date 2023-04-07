@@ -21,13 +21,12 @@ namespace ProjektTaiib.DAL.Encje
         public int Id_event { get; set; }
         [ForeignKey(nameof(Id_event))]
         [Required]
-        public virtual Event Event { get; set; }
+        public Event Event { get; set; }
         [Required]
+        [MaxLength(50)]
         public string Type { get; set; }
         [Required]
         public double Price { get; set; }
         public bool? Premium { get; set; }
-
-
     }
 }
