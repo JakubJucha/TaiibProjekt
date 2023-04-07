@@ -16,5 +16,9 @@ namespace ProjektTaiib.DAL.Repositories
         void DeleteEvent(Event @event);
         void DeleteEventById(int id);
         bool ExistEvent(int id);
+
+        Task<IEnumerable<Event>> GetAllEventsAsync();
+        Task<Event?> FirstOrDefaultAsync(int? id);
+        Task<Event?> FindAsync(int? id);
     }
 }

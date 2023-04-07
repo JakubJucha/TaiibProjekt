@@ -1,4 +1,5 @@
-﻿using ProjektTaiib.DAL.Encje;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektTaiib.DAL.Encje;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,21 @@ namespace ProjektTaiib.DAL.Repositories
         public void UpdateSponsor(Sponsor sponsor)
         {
             context.Sponsors.Update(sponsor);
+        }
+
+        public async Task<Sponsor?> FindAsync(int? id)
+        {
+            return await context.Sponsors.FindAsync(id);
+        }
+
+        public async Task<Sponsor?> FirstOrDefaultAsync(int? id)
+        {
+            return await context.Sponsors.FirstOrDefaultAsync(a => a.Id_sponsor == id);
+        }
+
+        public async Task<IEnumerable<Sponsor>> GetAllSponsorsAsync()
+        {
+            return await context.Sponsors.ToListAsync();
         }
     }
 }

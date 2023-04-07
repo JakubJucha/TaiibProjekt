@@ -1,4 +1,5 @@
-﻿using ProjektTaiib.DAL.Encje;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektTaiib.DAL.Encje;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,21 @@ namespace ProjektTaiib.DAL.Repositories
         public void UpdateTicket(Ticket ticket)
         {
             context.Tickets.Update(ticket);
+        }
+
+        public async Task<Ticket?> FindAsync(int? id)
+        {
+            return await context.Tickets.FindAsync(id);
+        }
+
+        public async Task<Ticket?> FirstOrDefaultAsync(int? id)
+        {
+            return await context.Tickets.FirstOrDefaultAsync(a => a.Id_ticket == id);
+        }
+
+        public async Task<IEnumerable<Ticket>> GetAllTicketAsync()
+        {
+            return await context.Tickets.ToListAsync();
         }
     }
 }

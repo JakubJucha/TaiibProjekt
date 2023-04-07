@@ -10,9 +10,6 @@ namespace ProjektTaiib.DAL.Repositories
     public interface IUserRepository
     {
         User GetUserById(int id);
-  /*      User LoginUser(string email, string password);
-        void RegisterUser(string email, string username, string password);
-       */
 
         IEnumerable<User> GetAllUsers();
         void AddUser(User user);
@@ -20,5 +17,9 @@ namespace ProjektTaiib.DAL.Repositories
         void DeleteUserById(int id);
         void UpdateUser(User user);
         bool ExistUser(int id);
+
+        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<User?> FirstOrDefaultAsync(int? id);
+        Task<User?> FindAsync(int? id);
     }
 }

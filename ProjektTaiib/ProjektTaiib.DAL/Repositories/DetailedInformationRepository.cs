@@ -1,4 +1,5 @@
-﻿using ProjektTaiib.DAL.Encje;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektTaiib.DAL.Encje;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,21 @@ namespace ProjektTaiib.DAL.Repositories
         public bool ExistInformation(int id)
         {
             return context.DetailedInformation.Any(a => a.Id_information == id);
+        }
+
+        public async Task<DetailedInformation?> FindAsync(int? id)
+        {
+            return await context.DetailedInformation.FindAsync(id);
+        }
+
+        public async Task<DetailedInformation?> FirstOrDefaultAsync(int? id)
+        {
+            return await context.DetailedInformation.FirstOrDefaultAsync(a => a.Id_information == id);
+        }
+
+        public async Task<IEnumerable<DetailedInformation>> GetAllInformationAsync()
+        {
+            return await context.DetailedInformation.ToListAsync();
         }
 
         public IEnumerable<DetailedInformation> GetAllInformation()

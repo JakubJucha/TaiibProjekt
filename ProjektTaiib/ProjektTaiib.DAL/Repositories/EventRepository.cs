@@ -1,4 +1,5 @@
-﻿using ProjektTaiib.DAL.Encje;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektTaiib.DAL.Encje;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,21 @@ namespace ProjektTaiib.DAL.Repositories
         public void UpdateEvent(Event @event)
         {
             context.Events.Update(@event);
+        }
+
+        public async Task<Event?> FindAsync(int? id)
+        {
+            return await context.Events.FindAsync(id);
+        }
+
+        public async Task<Event?> FirstOrDefaultAsync(int? id)
+        {
+            return await context.Events.FirstOrDefaultAsync(a => a.Id_event == id);
+        }
+
+        public async Task<IEnumerable<Event>> GetAllEventsAsync()
+        {
+            return await context.Events.ToListAsync();
         }
     }
 }

@@ -16,5 +16,9 @@ namespace ProjektTaiib.DAL.Repositories
         void DeleteSponsor(Sponsor sponsor);
         void DeleteSponsorById(int id);
         bool ExistSponsor(int id);
+
+        Task<IEnumerable<Sponsor>> GetAllSponsorsAsync();
+        Task<Sponsor?> FirstOrDefaultAsync(int? id);
+        Task<Sponsor?> FindAsync(int? id);
     }
 }

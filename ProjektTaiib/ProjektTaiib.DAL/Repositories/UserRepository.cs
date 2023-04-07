@@ -1,4 +1,5 @@
-﻿using ProjektTaiib.DAL.Encje;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektTaiib.DAL.Encje;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,21 @@ namespace ProjektTaiib.DAL.Repositories
         public void UpdateUser(User user)
         {
             context.Users.Update(user);
+        }
+
+        public async Task<User?> FindAsync(int? id)
+        {
+            return await context.Users.FindAsync(id);
+        }
+
+        public async Task<User?> FirstOrDefaultAsync(int? id)
+        {
+            return await context.Users.FirstOrDefaultAsync(a => a.Id_user == id);
+        }
+
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        {
+            return await context.Users.ToListAsync();
         }
     }
 }

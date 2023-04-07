@@ -17,7 +17,8 @@ namespace ProjektTaiib.DAL.Repositories
         void DeleteInformationById(int id);
         bool ExistInformation(int id);
 
-       // Task<IEnumerable<DetailedInformation>> GetAllInformationAsync();
-
+        Task<IEnumerable<DetailedInformation>> GetAllInformationAsync();
+        Task<DetailedInformation?> FirstOrDefaultAsync(int? id);
+        Task<DetailedInformation?> FindAsync(int? id);
     }
 }

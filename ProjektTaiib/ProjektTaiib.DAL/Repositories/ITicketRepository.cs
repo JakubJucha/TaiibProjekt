@@ -16,5 +16,9 @@ namespace ProjektTaiib.DAL.Repositories
         void DeleteTicket(Ticket ticket);
         void DeleteTicketById(int id);
         bool ExistTicket(int id);
+
+        Task<IEnumerable<Ticket>> GetAllTicketAsync();
+        Task<Ticket?> FirstOrDefaultAsync(int? id);
+        Task<Ticket?> FindAsync(int? id);
     }
 }
