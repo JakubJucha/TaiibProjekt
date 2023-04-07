@@ -9,24 +9,38 @@ namespace ProjektTaiib.DAL.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public IUserRepository UserRepository => throw new NotImplementedException();
 
-        public IDetailedInformationRepository DetailedInformationRepository => throw new NotImplementedException();
+        private ProjektTaiibDbContext context;
 
-        public IEventRepository EventRepository => throw new NotImplementedException();
 
-        public ITicketRepository TicketRepository => throw new NotImplementedException();
+        public IUserRepository UserRepository { get; private set; }
 
-        public ISponsorRepository SponsorRepository => throw new NotImplementedException();
+        public IDetailedInformationRepository DetailedInformationRepository { get; private set; }
+
+        public IEventRepository EventRepository { get; private set; }
+
+        public ITicketRepository TicketRepository { get; private set; }
+
+        public ISponsorRepository SponsorRepository { get; private set; }
+
+        public UnitOfWork(ProjektTaiibDbContext context)
+        {
+            this.context = context;
+            UserRepository = new UserRepository(this.context);
+            DetailedInformationRepository = new DetailedInformationRepository(this.context);
+            EventRepository = new EventRepository(this.context);
+            TicketRepository = new TicketRepository(this.context);
+            SponsorRepository = new SponsorRepository(this.context);
+        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.context.Dispose();
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            this.context.SaveChanges();
         }
     }
 }

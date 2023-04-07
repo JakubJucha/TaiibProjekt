@@ -15,5 +15,6 @@ namespace ProjektTaiib.DAL.UnitOfWork
         ITicketRepository TicketRepository { get; }
         ISponsorRepository SponsorRepository { get; }
         void SaveChanges();
+        void Dispose();
     }
 }
