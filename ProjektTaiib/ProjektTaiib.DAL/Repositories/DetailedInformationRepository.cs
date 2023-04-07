@@ -30,8 +30,12 @@ namespace ProjektTaiib.DAL.Repositories
 
         public void DeleteInformationById(int id)
         {
+#pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
             DetailedInformation detailedInformation = context.DetailedInformation.FirstOrDefault(a => a.Id_information == id);
+#pragma warning restore CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
+#pragma warning disable CS8604 // Możliwy argument odwołania o wartości null.
             context.DetailedInformation.Remove(detailedInformation);
+#pragma warning restore CS8604 // Możliwy argument odwołania o wartości null.
         }
 
         public bool ExistInformation(int id)
@@ -61,7 +65,9 @@ namespace ProjektTaiib.DAL.Repositories
 
         public DetailedInformation GetInformationById(int id)
         {
+#pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.
             return context.DetailedInformation.FirstOrDefault(a => a.Id_information == id);
+#pragma warning restore CS8603 // Możliwe zwrócenie odwołania o wartości null.
         }
 
         public void UpdateInformation(DetailedInformation detailedInformation)

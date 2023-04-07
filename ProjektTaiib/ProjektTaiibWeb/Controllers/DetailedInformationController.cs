@@ -19,14 +19,14 @@ namespace ProjektTaiibWeb.Controllers
         public DetailedInformationController(ProjektTaiibDbContext context)
         {
             _context = context;
-            unitOfWork = new UnitOfWork(context);
+            unitOfWork = new UnitOfWork(_context);
         }
 
         // GET: DetailedInformation
         public async Task<IActionResult> Index()
         {
             return unitOfWork.DetailedInformationRepository != null ?
-                View(unitOfWork.DetailedInformationRepository.GetAllInformation()) :
+                View(await unitOfWork.DetailedInformationRepository.GetAllInformationAsync()) :
                 Problem("Entity set 'ProjektTaiibDbContext.DetailedInformation' is null");
         }
 
@@ -38,8 +38,8 @@ namespace ProjektTaiibWeb.Controllers
                 return NotFound();
             }
 
-            var detailedInformation = unitOfWork.DetailedInformationRepository
-                .GetInformationById(id);
+            var detailedInformation = await unitOfWork.DetailedInformationRepository
+                .FirstOrDefaultAsync(id);
 
             if (detailedInformation == null)
             {
@@ -66,27 +66,26 @@ namespace ProjektTaiibWeb.Controllers
             if (ModelState.IsValid)
             {
                 unitOfWork.DetailedInformationRepository.AddInformation(detailedInformation);
-                await _context.SaveChangesAsync();
+                await unitOfWork.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id_user", "Email", detailedInformation.UserId);
             return View(detailedInformation);
         }
 
         // GET: DetailedInformation/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.DetailedInformation == null)
+            if (id == null || unitOfWork.DetailedInformationRepository == null)
             {
                 return NotFound();
             }
 
-            var detailedInformation = await _context.DetailedInformation.FindAsync(id);
+            var detailedInformation = await unitOfWork.DetailedInformationRepository.FindAsync(id);
             if (detailedInformation == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id_user", "Email", detailedInformation.UserId);
+            //ViewData["UserId"] = new SelectList(_context.Users, "Id_user", "Email", detailedInformation.UserId);
             return View(detailedInformation);
         }
 
@@ -106,8 +105,8 @@ namespace ProjektTaiibWeb.Controllers
             {
                 try
                 {
-                    _context.Update(detailedInformation);
-                    await _context.SaveChangesAsync();
+                    unitOfWork.DetailedInformationRepository.UpdateInformation(detailedInformation);
+                    await unitOfWork.SaveAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -122,21 +121,20 @@ namespace ProjektTaiibWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id_user", "Email", detailedInformation.UserId);
+          //  ViewData["UserId"] = new SelectList(_context.Users, "Id_user", "Email", detailedInformation.UserId);
             return View(detailedInformation);
         }
 
         // GET: DetailedInformation/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.DetailedInformation == null)
+            if (id == null || unitOfWork.DetailedInformationRepository == null)
             {
                 return NotFound();
             }
 
-            var detailedInformation = await _context.DetailedInformation
-                .Include(d => d.User)
-                .FirstOrDefaultAsync(m => m.Id_information == id);
+            var detailedInformation = await unitOfWork.DetailedInformationRepository
+                .FirstOrDefaultAsync(id);
             if (detailedInformation == null)
             {
                 return NotFound();
@@ -150,23 +148,23 @@ namespace ProjektTaiibWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.DetailedInformation == null)
+            if (unitOfWork.DetailedInformationRepository == null)
             {
                 return Problem("Entity set 'ProjektTaiibDbContext.DetailedInformation'  is null.");
             }
-            var detailedInformation = await _context.DetailedInformation.FindAsync(id);
+            var detailedInformation = await unitOfWork.DetailedInformationRepository.FindAsync(id);
             if (detailedInformation != null)
             {
-                _context.DetailedInformation.Remove(detailedInformation);
+                unitOfWork.DetailedInformationRepository.DeleteInformation(detailedInformation);
             }
             
-            await _context.SaveChangesAsync();
+            await unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DetailedInformationExists(int id)
         {
-          return (_context.DetailedInformation?.Any(e => e.Id_information == id)).GetValueOrDefault();
+          return (unitOfWork.DetailedInformationRepository?.ExistInformation(id)).GetValueOrDefault();
         }
     }
 }

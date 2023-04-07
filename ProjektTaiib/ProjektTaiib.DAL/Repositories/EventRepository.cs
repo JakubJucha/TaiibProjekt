@@ -30,8 +30,12 @@ namespace ProjektTaiib.DAL.Repositories
 
         public void DeleteEventById(int id)
         {
+#pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
             Event @event = context.Events.FirstOrDefault(a => a.Id_event == id);
+#pragma warning restore CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
+#pragma warning disable CS8604 // Możliwy argument odwołania o wartości null.
             context.Events.Remove(@event);
+#pragma warning restore CS8604 // Możliwy argument odwołania o wartości null.
         }
 
         public bool ExistEvent(int id)
@@ -41,7 +45,9 @@ namespace ProjektTaiib.DAL.Repositories
 
         public Event GetEventById(int id)
         {
+#pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.
             return context.Events.FirstOrDefault(a => a.Id_event == id);
+#pragma warning restore CS8603 // Możliwe zwrócenie odwołania o wartości null.
         }
 
         public IEnumerable<Event> GetEvents()

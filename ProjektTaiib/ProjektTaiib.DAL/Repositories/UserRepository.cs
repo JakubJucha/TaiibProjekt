@@ -29,8 +29,12 @@ namespace ProjektTaiib.DAL.Repositories
 
         public void DeleteUserById(int id)
         {
+#pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
             User user = context.Users.FirstOrDefault(a => a.Id_user == id);
+#pragma warning restore CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
+#pragma warning disable CS8604 // Możliwy argument odwołania o wartości null.
             context.Users.Remove(user);
+#pragma warning restore CS8604 // Możliwy argument odwołania o wartości null.
         }
 
         public bool ExistUser(int id)
@@ -45,7 +49,9 @@ namespace ProjektTaiib.DAL.Repositories
 
         public User GetUserById(int id)
         {
+#pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.
             return context.Users.FirstOrDefault(a => a.Id_user == id);
+#pragma warning restore CS8603 // Możliwe zwrócenie odwołania o wartości null.
         }
 
         public void UpdateUser(User user)

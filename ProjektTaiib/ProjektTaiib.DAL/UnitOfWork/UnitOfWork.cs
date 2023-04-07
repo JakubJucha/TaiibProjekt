@@ -1,4 +1,5 @@
-﻿using ProjektTaiib.DAL.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjektTaiib.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,11 @@ namespace ProjektTaiib.DAL.UnitOfWork
         public void SaveChanges()
         {
             this.context.SaveChanges();
+        }
+
+        public async Task<int> SaveAsync()
+        {
+            return await context.SaveChangesAsync();
         }
     }
 }

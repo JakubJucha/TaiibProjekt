@@ -15,6 +15,9 @@ namespace ProjektTaiib.DAL.UnitOfWork
         ITicketRepository TicketRepository { get; }
         ISponsorRepository SponsorRepository { get; }
         void SaveChanges();
+        Task<int> SaveAsync();
+#pragma warning disable CS0108 // Składowa ukrywa dziedziczoną składową; brak słowa kluczowego new
         void Dispose();
+#pragma warning restore CS0108 // Składowa ukrywa dziedziczoną składową; brak słowa kluczowego new
     }
 }

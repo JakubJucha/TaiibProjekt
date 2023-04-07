@@ -30,8 +30,12 @@ namespace ProjektTaiib.DAL.Repositories
 
         public void DeleteSponsorById(int id)
         {
+#pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
             Sponsor sponsor = context.Sponsors.FirstOrDefault(a => a.Id_sponsor == id);
+#pragma warning restore CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
+#pragma warning disable CS8604 // Możliwy argument odwołania o wartości null.
             context.Sponsors.Remove(sponsor);
+#pragma warning restore CS8604 // Możliwy argument odwołania o wartości null.
         }
 
         public bool ExistSponsor(int id)
@@ -46,7 +50,9 @@ namespace ProjektTaiib.DAL.Repositories
 
         public Sponsor GetSponsorById(int id)
         {
+#pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.
             return context.Sponsors.FirstOrDefault(a => a.Id_sponsor == id);
+#pragma warning restore CS8603 // Możliwe zwrócenie odwołania o wartości null.
         }
 
         public void UpdateSponsor(Sponsor sponsor)

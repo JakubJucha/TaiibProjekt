@@ -30,8 +30,12 @@ namespace ProjektTaiib.DAL.Repositories
 
         public void DeleteTicketById(int id)
         {
+#pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
            Ticket ticket = context.Tickets.FirstOrDefault(a => a.Id_ticket == id);
+#pragma warning restore CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
+#pragma warning disable CS8604 // Możliwy argument odwołania o wartości null.
             context.Tickets.Remove(ticket);
+#pragma warning restore CS8604 // Możliwy argument odwołania o wartości null.
         }
 
         public bool ExistTicket(int id)
@@ -46,7 +50,9 @@ namespace ProjektTaiib.DAL.Repositories
 
         public Ticket GetTicketById(int id)
         {
+#pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.
             return context.Tickets.FirstOrDefault(a => a.Id_ticket == id);
+#pragma warning restore CS8603 // Możliwe zwrócenie odwołania o wartości null.
         }
 
         public void UpdateTicket(Ticket ticket)
