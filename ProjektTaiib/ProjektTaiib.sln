@@ -5,7 +5,13 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektTaiib.DAL", "ProjektTaiib.DAL\ProjektTaiib.DAL.csproj", "{9B1525FF-A073-45B0-AC8A-7CE381675079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektTaiibWeb", "ProjektTaiibWeb\ProjektTaiibWeb.csproj", "{0D6787B5-CE01-4682-A11E-2B723C0EC8E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektTaiibWeb", "ProjektTaiibWeb\ProjektTaiibWeb.csproj", "{0D6787B5-CE01-4682-A11E-2B723C0EC8E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL(Business Logic Layer)", "BLL(Business Logic Layer)\BLL(Business Logic Layer).csproj", "{6A6062A2-A6D2-41FC-A288-3D45ABCB56EC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0D6787B5-CE01-4682-A11E-2B723C0EC8E8} = {0D6787B5-CE01-4682-A11E-2B723C0EC8E8}
+		{9B1525FF-A073-45B0-AC8A-7CE381675079} = {9B1525FF-A073-45B0-AC8A-7CE381675079}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,10 @@ Global
 		{0D6787B5-CE01-4682-A11E-2B723C0EC8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6787B5-CE01-4682-A11E-2B723C0EC8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D6787B5-CE01-4682-A11E-2B723C0EC8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A6062A2-A6D2-41FC-A288-3D45ABCB56EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A6062A2-A6D2-41FC-A288-3D45ABCB56EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A6062A2-A6D2-41FC-A288-3D45ABCB56EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A6062A2-A6D2-41FC-A288-3D45ABCB56EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
