@@ -11,6 +11,7 @@ namespace ProjektTaiib.DAL.Repositories
 {
     public class ProjektTaiibDbContext : DbContext
     {
+       // public DbSet<BLL>
         public DbSet<DetailedInformation> DetailedInformation { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }

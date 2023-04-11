@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjektTaiib.DAL\ProjektTaiib.DAL.csproj" />
+    <ProjectReference Include="..\ProjektTaiibWeb\ProjektTaiibWeb.csproj" />
   </ItemGroup>
 
 </Project>
