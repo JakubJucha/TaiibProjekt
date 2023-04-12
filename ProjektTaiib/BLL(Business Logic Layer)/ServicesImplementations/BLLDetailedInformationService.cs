@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer_.Implementations
 {
-    public class BLLDetailedInformation
+    public class BLLDetailedInformationService
     {
         private UnitOfWork unitOfWork;
 
-        public BLLDetailedInformation(UnitOfWork unitOfWork)
+        public BLLDetailedInformationService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }

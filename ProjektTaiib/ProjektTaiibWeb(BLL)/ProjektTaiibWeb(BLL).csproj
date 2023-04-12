@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BLL(Business Logic Layer)\BLL(Business Logic Layer).csproj" />
-    <ProjectReference Include="..\ProjektTaiibWeb\ProjektTaiibWeb.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
 ﻿using BLL_Business_Logic_Layer_.Interfaces;
-using Microsoft.Extensions.Logging;
 using ProjektTaiib.DAL.Encje;
 using ProjektTaiib.DAL.UnitOfWork;
 using System;
@@ -10,21 +9,20 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer_.Implementations
 {
-    public class BLLSponsor : ISponsor
+    public class BLLEventService : IEventService
     {
-
         private UnitOfWork unitOfWork;
 
-        public BLLSponsor(UnitOfWork unitOfWork)
+        public BLLEventService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddSponsor(Sponsor sponsor)
+        public void AddEvent(Event @event)
         {
-            if (sponsor != null)
+            if(@event != null)
             {
-                unitOfWork.SponsorRepository.AddSponsor(sponsor);
+                unitOfWork.EventRepository.AddEvent(@event);
             }
             else
             {
@@ -32,11 +30,11 @@ namespace BLL_Business_Logic_Layer_.Implementations
             }
         }
 
-        public void DeleteSponsor(Sponsor sponsor)
+        public void DeleteEvent(Event @event)
         {
-            if (sponsor != null)
+            if (@event != null)
             {
-                unitOfWork.SponsorRepository.DeleteSponsor(sponsor);
+                unitOfWork.EventRepository.DeleteEvent(@event);
             }
             else
             {
@@ -44,41 +42,41 @@ namespace BLL_Business_Logic_Layer_.Implementations
             }
         }
 
-        public void DeleteSponsorById(int id)
+        public void DeleteEventById(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-            unitOfWork.SponsorRepository.DeleteSponsorById(id);
+            unitOfWork.EventRepository.DeleteEventById(id);
         }
 
-        public bool ExistSponsor(int id)
+        public bool ExistEvent(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-            bool ifExists = unitOfWork.SponsorRepository.ExistSponsor(id);
+           bool ifExists =  unitOfWork.EventRepository.ExistEvent(id);
             return ifExists;
         }
 
-        public IEnumerable<Sponsor> GetAllSponsors()
-        {
-            return unitOfWork.SponsorRepository.GetAllSponsors();
-        }
-
-        public Sponsor GetSponsorById(int id)
+        public Event GetEventById(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-            return unitOfWork.SponsorRepository.GetSponsorById(id);
+           return unitOfWork.EventRepository.GetEventById(id);
         }
 
-        public void UpdateSponsor(Sponsor sponsor)
+        public IEnumerable<Event> GetEvents()
         {
-            if (sponsor != null)
+            return unitOfWork.EventRepository.GetEvents();
+        }
+
+        public void UpdateEvent(Event @event)
+        {
+            if (@event != null)
             {
-                unitOfWork.SponsorRepository.UpdateSponsor(sponsor);
+                unitOfWork.EventRepository.UpdateEvent(@event);
             }
             else
             {

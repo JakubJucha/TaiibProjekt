@@ -1,4 +1,5 @@
 ﻿using BLL_Business_Logic_Layer_.Interfaces;
+using Microsoft.Extensions.Logging;
 using ProjektTaiib.DAL.Encje;
 using ProjektTaiib.DAL.UnitOfWork;
 using System;
@@ -9,20 +10,21 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer_.Implementations
 {
-    public class BLLEvent : IEvent
+    public class BLLTicketService : ITicketService
     {
+
         private UnitOfWork unitOfWork;
 
-        public BLLEvent(UnitOfWork unitOfWork)
+        public BLLTicketService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddEvent(Event @event)
+        public void AddTicket(Ticket ticket)
         {
-            if(@event != null)
+            if (ticket != null)
             {
-                unitOfWork.EventRepository.AddEvent(@event);
+                unitOfWork.TicketRepository.AddTicket(ticket);
             }
             else
             {
@@ -30,11 +32,11 @@ namespace BLL_Business_Logic_Layer_.Implementations
             }
         }
 
-        public void DeleteEvent(Event @event)
+        public void DeleteTicket(Ticket ticket)
         {
-            if (@event != null)
+            if (ticket != null)
             {
-                unitOfWork.EventRepository.DeleteEvent(@event);
+                unitOfWork.TicketRepository.DeleteTicket(ticket);
             }
             else
             {
@@ -42,41 +44,41 @@ namespace BLL_Business_Logic_Layer_.Implementations
             }
         }
 
-        public void DeleteEventById(int id)
+        public void DeleteTicketById(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-            unitOfWork.EventRepository.DeleteEventById(id);
+            unitOfWork.TicketRepository.DeleteTicketById(id);
         }
 
-        public bool ExistEvent(int id)
+        public bool ExistTicket(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-           bool ifExists =  unitOfWork.EventRepository.ExistEvent(id);
-            return ifExists;
+            bool ifExist = unitOfWork.TicketRepository.ExistTicket(id);
+            return ifExist;
         }
 
-        public Event GetEventById(int id)
+        public IEnumerable<Ticket> GetAllTickets()
+        {
+            return unitOfWork.TicketRepository.GetAllTickets();
+        }
+
+        public Ticket GetTicketById(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-           return unitOfWork.EventRepository.GetEventById(id);
+            return unitOfWork.TicketRepository.GetTicketById(id);
         }
 
-        public IEnumerable<Event> GetEvents()
+        public void UpdateTicket(Ticket ticket)
         {
-            return unitOfWork.EventRepository.GetEvents();
-        }
-
-        public void UpdateEvent(Event @event)
-        {
-            if (@event != null)
+            if (ticket != null)
             {
-                unitOfWork.EventRepository.UpdateEvent(@event);
+                unitOfWork.TicketRepository.UpdateTicket(ticket);
             }
             else
             {

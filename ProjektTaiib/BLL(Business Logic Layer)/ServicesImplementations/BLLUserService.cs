@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer_.Implementations
 {
-    public class BLLUser : IUser
+    public class BLLUserService : IUserService
     {
         private UnitOfWork unitOfWork;
 
-        public BLLUser(UnitOfWork unitOfWork)
+        public BLLUserService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }

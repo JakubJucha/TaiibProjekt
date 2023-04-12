@@ -9,7 +9,7 @@ using ProjektTaiib.DAL.UnitOfWork;
 
 namespace BLL_Business_Logic_Layer_.Interfaces
 {
-    public interface IDetailedInformation
+    public interface IDetailedInformationService
     {
         DetailedInformation GetInformationById(int id);
         IEnumerable<DetailedInformation> GetAllInformation();
@@ -21,7 +21,7 @@ namespace BLL_Business_Logic_Layer_.Interfaces
 
 
     }
-    public interface IEvent
+    public interface IEventService
     {
         Event GetEventById(int id);
         IEnumerable<Event> GetEvents();
@@ -32,7 +32,7 @@ namespace BLL_Business_Logic_Layer_.Interfaces
         bool ExistEvent(int id);
     }
 
-    public interface ISponsor
+    public interface ISponsorService
     {
         Sponsor GetSponsorById(int id);
         IEnumerable<Sponsor> GetAllSponsors();
@@ -42,7 +42,7 @@ namespace BLL_Business_Logic_Layer_.Interfaces
         void DeleteSponsorById(int id);
         bool ExistSponsor(int id);
     }
-    public interface ITicket
+    public interface ITicketService
     {
         Ticket GetTicketById(int id);
         IEnumerable<Ticket> GetAllTickets();
@@ -52,7 +52,7 @@ namespace BLL_Business_Logic_Layer_.Interfaces
         void DeleteTicketById(int id);
         bool ExistTicket(int id);
     }
-    public interface IUser
+    public interface IUserService
     {
         User GetUserById(int id);
 

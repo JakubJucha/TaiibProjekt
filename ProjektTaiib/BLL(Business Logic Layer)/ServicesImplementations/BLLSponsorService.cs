@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer_.Implementations
 {
-    public class BLLTicket : ITicket
+    public class BLLSponsorService : ISponsorService
     {
 
         private UnitOfWork unitOfWork;
 
-        public BLLTicket(UnitOfWork unitOfWork)
+        public BLLSponsorService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
 
-        public void AddTicket(Ticket ticket)
+        public void AddSponsor(Sponsor sponsor)
         {
-            if (ticket != null)
+            if (sponsor != null)
             {
-                unitOfWork.TicketRepository.AddTicket(ticket);
+                unitOfWork.SponsorRepository.AddSponsor(sponsor);
             }
             else
             {
@@ -32,11 +32,11 @@ namespace BLL_Business_Logic_Layer_.Implementations
             }
         }
 
-        public void DeleteTicket(Ticket ticket)
+        public void DeleteSponsor(Sponsor sponsor)
         {
-            if (ticket != null)
+            if (sponsor != null)
             {
-                unitOfWork.TicketRepository.DeleteTicket(ticket);
+                unitOfWork.SponsorRepository.DeleteSponsor(sponsor);
             }
             else
             {
@@ -44,41 +44,41 @@ namespace BLL_Business_Logic_Layer_.Implementations
             }
         }
 
-        public void DeleteTicketById(int id)
+        public void DeleteSponsorById(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-            unitOfWork.TicketRepository.DeleteTicketById(id);
+            unitOfWork.SponsorRepository.DeleteSponsorById(id);
         }
 
-        public bool ExistTicket(int id)
+        public bool ExistSponsor(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-            bool ifExist = unitOfWork.TicketRepository.ExistTicket(id);
-            return ifExist;
+            bool ifExists = unitOfWork.SponsorRepository.ExistSponsor(id);
+            return ifExists;
         }
 
-        public IEnumerable<Ticket> GetAllTickets()
+        public IEnumerable<Sponsor> GetAllSponsors()
         {
-            return unitOfWork.TicketRepository.GetAllTickets();
+            return unitOfWork.SponsorRepository.GetAllSponsors();
         }
 
-        public Ticket GetTicketById(int id)
+        public Sponsor GetSponsorById(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
-            return unitOfWork.TicketRepository.GetTicketById(id);
+            return unitOfWork.SponsorRepository.GetSponsorById(id);
         }
 
-        public void UpdateTicket(Ticket ticket)
+        public void UpdateSponsor(Sponsor sponsor)
         {
-            if (ticket != null)
+            if (sponsor != null)
             {
-                unitOfWork.TicketRepository.UpdateTicket(ticket);
+                unitOfWork.SponsorRepository.UpdateSponsor(sponsor);
             }
             else
             {
