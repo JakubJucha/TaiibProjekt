@@ -1,4 +1,6 @@
-﻿using ProjektTaiib.DAL.Encje;
+﻿using BLL_Business_Logic_Layer_.Interfaces;
+using Microsoft.EntityFrameworkCore.Design;
+using ProjektTaiib.DAL.Encje;
 using ProjektTaiib.DAL.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BLL_Business_Logic_Layer_.Implementations
 {
-    public class BLLDetailedInformationService
+    public class BLLDetailedInformationService : IDetailedInformationService
     {
         private UnitOfWork unitOfWork;
 

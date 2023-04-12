@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjektTaiibWeb_BLL_.Models;
 using System.Diagnostics;
-
+using BLL_Business_Logic_Layer_.Interfaces;
 namespace ProjektTaiibWeb_BLL_.Controllers
 {
-    public class HomeController : Controller
+    public class HomeControllerBLL : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeControllerBLL> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeControllerBLL(ILogger<HomeControllerBLL> logger)
         {
             _logger = logger;
         }
