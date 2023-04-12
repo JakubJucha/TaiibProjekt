@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjektTaiib.DAL.Encje;
-using BLL_Business_Logic_Layer_.Interfaces;
+using BLL_Business_Logic_Layer_.Services;
 namespace ProjektTaiibWeb_BLL_.Controllers
 {
     public class TicketControllerBLL : Controller

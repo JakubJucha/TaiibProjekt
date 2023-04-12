@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
-using ProjektTaiib.DAL.Repositories;
-using ProjektTaiib.DAL.UnitOfWork;
 
 namespace ProjektTaiibWeb.Controllers
 {

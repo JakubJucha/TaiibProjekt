@@ -1,14 +1,14 @@
-﻿using BLL_Business_Logic_Layer_.Interfaces;
+﻿using BLL_Business_Logic_Layer_.Services;
 using Microsoft.Extensions.Logging;
+using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
-using ProjektTaiib.DAL.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL_Business_Logic_Layer_.Implementations
+namespace BLL_Business_Logic_Layer_.ServicesImplementations
 {
     public class BLLTicketService : ITicketService
     {

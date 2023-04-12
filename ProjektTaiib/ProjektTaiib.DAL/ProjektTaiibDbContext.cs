@@ -7,11 +7,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ProjektTaiib.DAL.Repositories
+namespace ProjektTaiib.DAL
 {
     public class ProjektTaiibDbContext : DbContext
     {
-       // public DbSet<BLL>
+        // public DbSet<BLL>
         public DbSet<DetailedInformation> DetailedInformation { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }

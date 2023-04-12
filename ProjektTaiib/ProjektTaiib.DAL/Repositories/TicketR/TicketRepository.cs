@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjektTaiib.DAL.Repositories
+namespace ProjektTaiib.DAL.Repositories.TicketR
 {
     public class TicketRepository : ITicketRepository
     {
@@ -31,7 +31,7 @@ namespace ProjektTaiib.DAL.Repositories
         public void DeleteTicketById(int id)
         {
 #pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
-           Ticket ticket = context.Tickets.FirstOrDefault(a => a.Id_ticket == id);
+            Ticket ticket = context.Tickets.FirstOrDefault(a => a.Id_ticket == id);
 #pragma warning restore CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.
 #pragma warning disable CS8604 // Możliwy argument odwołania o wartości null.
             context.Tickets.Remove(ticket);

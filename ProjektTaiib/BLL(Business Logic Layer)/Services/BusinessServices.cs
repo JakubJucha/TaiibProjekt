@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjektTaiib.DAL.Repositories;
 using ProjektTaiib.DAL.Encje;
-using ProjektTaiib.DAL.UnitOfWork;
+using ProjektTaiib.DAL;
 
-namespace BLL_Business_Logic_Layer_.Interfaces
+namespace BLL_Business_Logic_Layer_.Services
 {
     public interface IDetailedInformationService
     {

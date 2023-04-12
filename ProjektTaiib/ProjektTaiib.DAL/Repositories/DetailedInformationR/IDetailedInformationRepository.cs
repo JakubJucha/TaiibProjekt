@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjektTaiib.DAL.Repositories
+namespace ProjektTaiib.DAL.Repositories.DetailedInformationR
 {
     public interface IDetailedInformationRepository
     {

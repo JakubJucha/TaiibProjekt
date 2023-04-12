@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjektTaiibWeb_BLL_.Models;
 using System.Diagnostics;
-using BLL_Business_Logic_Layer_.Interfaces;
+using BLL_Business_Logic_Layer_.Services;
 namespace ProjektTaiibWeb_BLL_.Controllers
 {
     public class HomeControllerBLL : Controller

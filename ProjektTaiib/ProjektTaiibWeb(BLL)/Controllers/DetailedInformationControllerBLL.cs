@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using BLL_Business_Logic_Layer_.Interfaces;
-using BLL_Business_Logic_Layer_.Implementations;
+using BLL_Business_Logic_Layer_.ServicesImplementations;
 using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
+using BLL_Business_Logic_Layer_.Services;
 
 namespace ProjektTaiibWeb_BLL_.Controllers
 {

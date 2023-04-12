@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjektTaiib.DAL.Repositories
+namespace ProjektTaiib.DAL.Repositories.UserR
 {
     public class UserRepository : IUserRepository
     {

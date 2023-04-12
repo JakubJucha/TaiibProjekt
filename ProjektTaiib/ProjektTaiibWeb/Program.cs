@@ -1,5 +1,4 @@
 using ProjektTaiib.DAL;
-using ProjektTaiib.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

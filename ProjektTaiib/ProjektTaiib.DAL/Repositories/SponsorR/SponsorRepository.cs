@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjektTaiib.DAL.Repositories
+namespace ProjektTaiib.DAL.Repositories.SponsorR
 {
     public class SponsorRepository : ISponsorRepository
     {
@@ -17,7 +17,7 @@ namespace ProjektTaiib.DAL.Repositories
         {
             this.context = context;
         }
-    
+
         public void AddSponsor(Sponsor sponsor)
         {
             context.Sponsors.Add(sponsor);

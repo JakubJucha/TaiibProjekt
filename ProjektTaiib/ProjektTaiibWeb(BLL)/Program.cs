@@ -1,8 +1,8 @@
-using BLL_Business_Logic_Layer_.Implementations;
-using BLL_Business_Logic_Layer_.Interfaces;
+using BLL_Business_Logic_Layer_.ServicesImplementations;
+using BLL_Business_Logic_Layer_.Services;
 using Microsoft.CodeAnalysis;
-using ProjektTaiib.DAL.Repositories;
-using ProjektTaiib.DAL.UnitOfWork;
+using ProjektTaiib.DAL;
+using ProjektTaiibWeb_BLL_.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 

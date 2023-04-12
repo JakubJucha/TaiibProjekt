@@ -1,6 +1,6 @@
-﻿using BLL_Business_Logic_Layer_.Interfaces;
+﻿using BLL_Business_Logic_Layer_.Services;
+using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
-using ProjektTaiib.DAL.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL_Business_Logic_Layer_.Implementations
+namespace BLL_Business_Logic_Layer_.ServicesImplementations
 {
     public class BLLUserService : IUserService
     {
