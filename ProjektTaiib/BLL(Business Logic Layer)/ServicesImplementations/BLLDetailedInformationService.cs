@@ -65,12 +65,22 @@ namespace BLL_Business_Logic_Layer_.ServicesImplementations
             return unitOfWork.DetailedInformationRepository.GetAllInformation();
         }
 
+        public IEnumerable<DetailedInformation> GetInformationByAlphabeticalSurnames()
+        {
+            return this.unitOfWork.DetailedInformationRepository.GetAllInformation().OrderBy(s => s.Surname);
+        }
+
         public DetailedInformation GetInformationById(int id)
         {
             if (id <= default(int))
                 throw new InvalidOperationException("Podane id nie jest poprawne");
 
             return unitOfWork.DetailedInformationRepository.GetInformationById(id);
+        }
+
+        public IEnumerable<DetailedInformation> GetInformationByPayment(string payment)
+        {
+            return this.unitOfWork.DetailedInformationRepository.GetAllInformation().Where(p => p.Payment == payment);
         }
 
         public void UpdateInformation(DetailedInformation detailedInformation)

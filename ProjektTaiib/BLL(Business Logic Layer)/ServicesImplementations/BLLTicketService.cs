@@ -74,6 +74,16 @@ namespace BLL_Business_Logic_Layer_.ServicesImplementations
             return unitOfWork.TicketRepository.GetTicketById(id);
         }
 
+        public int GetTicketCountOnEvent(int eventId)
+        {
+            return this.unitOfWork.TicketRepository.GetAllTickets().Where(e => e.Id_event == eventId).Count();
+        }
+
+        public IEnumerable<Ticket> GetTicketsByTypeonEvent(int eventId, string type)
+        {
+            return this.unitOfWork.TicketRepository.GetAllTickets().Where(e => e.Id_event == eventId).Where(t => t.Type == type);  
+        }
+
         public void UpdateTicket(Ticket ticket)
         {
             if (ticket != null)

@@ -19,6 +19,8 @@ namespace BLL_Business_Logic_Layer_.Services
         void DeleteInformationById(int id);
         bool ExistInformation(int id);
 
+        IEnumerable<DetailedInformation> GetInformationByAlphabeticalSurnames();
+        IEnumerable<DetailedInformation> GetInformationByPayment(string payment);
 
     }
     public interface IEventService
@@ -30,6 +32,12 @@ namespace BLL_Business_Logic_Layer_.Services
         void DeleteEvent(Event @event);
         void DeleteEventById(int id);
         bool ExistEvent(int id);
+
+        IEnumerable<Event> GetEventsByLocalization(string locale);
+        IEnumerable<Event> GetEventsByDate(DateTime date);
+        IEnumerable<Event> GetEventsByCategory(string category);
+
+
     }
 
     public interface ISponsorService
@@ -41,6 +49,11 @@ namespace BLL_Business_Logic_Layer_.Services
         void DeleteSponsor(Sponsor sponsor);
         void DeleteSponsorById(int id);
         bool ExistSponsor(int id);
+
+        IEnumerable<Sponsor> GetSponsorsByName(string name);
+        IEnumerable<Event> GetSponsoredEvents(int id);
+
+
     }
     public interface ITicketService
     {
@@ -51,6 +64,9 @@ namespace BLL_Business_Logic_Layer_.Services
         void DeleteTicket(Ticket ticket);
         void DeleteTicketById(int id);
         bool ExistTicket(int id);
+
+        int GetTicketCountOnEvent(int eventId);
+        IEnumerable<Ticket> GetTicketsByTypeonEvent(int eventId, string type);
     }
     public interface IUserService
     {
@@ -62,5 +78,11 @@ namespace BLL_Business_Logic_Layer_.Services
         void DeleteUserById(int id);
         void UpdateUser(User user);
         bool ExistUser(int id);
+
+        IEnumerable<Ticket> GetUsersTickets(int userId);
+        void AddRandomUsers(int count);
+
+        double GetUsersSpentMoney(int id);
+        User GetTheRichestUser();
     }
 }

@@ -74,6 +74,16 @@ namespace BLL_Business_Logic_Layer_.ServicesImplementations
             return unitOfWork.SponsorRepository.GetSponsorById(id);
         }
 
+        public IEnumerable<Event> GetSponsoredEvents(int id)
+        {
+            return this.unitOfWork.EventRepository.GetEvents().Where(s => s.Sponsors.Contains(GetSponsorById(id)));
+        }
+
+        public IEnumerable<Sponsor> GetSponsorsByName(string name)
+        {
+            return this.unitOfWork.SponsorRepository.GetAllSponsors().Where(n => n.Sponsor_name == name);
+        }
+
         public void UpdateSponsor(Sponsor sponsor)
         {
             if (sponsor != null)

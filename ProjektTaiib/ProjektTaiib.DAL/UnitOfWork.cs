@@ -18,25 +18,32 @@ namespace ProjektTaiib.DAL
         private ProjektTaiibDbContext context;
 
 
-        public IUserRepository UserRepository { get; private set; }
+        private IUserRepository userRepository;
 
-        public IDetailedInformationRepository DetailedInformationRepository { get; private set; }
+        private IDetailedInformationRepository detailedInformationRepository;
 
-        public IEventRepository EventRepository { get; private set; }
+        private IEventRepository eventRepository ;
 
-        public ITicketRepository TicketRepository { get; private set; }
+        private ITicketRepository ticketRepository;
 
-        public ISponsorRepository SponsorRepository { get; private set; }
+        private ISponsorRepository sponsorRepository;
 
-        public UnitOfWork(ProjektTaiibDbContext context)
+        public UnitOfWork(ProjektTaiibDbContext context, IUserRepository userRepository, IDetailedInformationRepository detailedInformation, 
+            IEventRepository eventRepository, ITicketRepository ticketRepository, ISponsorRepository sponsorRepository)
         {
             this.context = context;
-            UserRepository = new UserRepository(this.context);
-            DetailedInformationRepository = new DetailedInformationRepository(this.context);
-            EventRepository = new EventRepository(this.context);
-            TicketRepository = new TicketRepository(this.context);
-            SponsorRepository = new SponsorRepository(this.context);
+            this.userRepository = userRepository;
+            this.detailedInformationRepository = detailedInformation;
+            this.eventRepository = eventRepository;
+            this.ticketRepository = ticketRepository;
+            this.sponsorRepository = sponsorRepository;
         }
+
+        public IUserRepository UserRepository => this.userRepository;
+        public IDetailedInformationRepository DetailedInformationRepository => this.detailedInformationRepository;
+        public IEventRepository EventRepository => this.eventRepository;
+        public ITicketRepository TicketRepository => this.ticketRepository;
+        public ISponsorRepository SponsorRepository => this.sponsorRepository;
 
         public void Dispose()
         {

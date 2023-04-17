@@ -72,6 +72,21 @@ namespace BLL_Business_Logic_Layer_.ServicesImplementations
             return unitOfWork.EventRepository.GetEvents();
         }
 
+        public IEnumerable<Event> GetEventsByCategory(string category)
+        {
+            return this.unitOfWork.EventRepository.GetEvents().Where(e => e.Category == category);
+        }
+
+        public IEnumerable<Event> GetEventsByDate(DateTime date)
+        {
+            return this.unitOfWork.EventRepository.GetEvents().Where(d => d.Date == date);
+        }
+
+        public IEnumerable<Event> GetEventsByLocalization(string locale)
+        {
+            return this.unitOfWork.EventRepository.GetEvents().Where(l => l.Location == locale);
+        }
+
         public void UpdateEvent(Event @event)
         {
             if (@event != null)

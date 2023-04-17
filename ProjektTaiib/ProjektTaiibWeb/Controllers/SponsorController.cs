@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
+using ProjektTaiib.DAL.Repositories.DetailedInformationR;
+using ProjektTaiib.DAL.Repositories.EventR;
+using ProjektTaiib.DAL.Repositories.SponsorR;
+using ProjektTaiib.DAL.Repositories.TicketR;
+using ProjektTaiib.DAL.Repositories.UserR;
 
 namespace ProjektTaiibWeb.Controllers
 {
@@ -14,18 +19,22 @@ namespace ProjektTaiibWeb.Controllers
     {
         private readonly ProjektTaiibDbContext _context;
         private readonly UnitOfWork unitOfWork;
-
+        private readonly IUserRepository userRepository;
+        private readonly IDetailedInformationRepository detailedInformationRepository;
+        private readonly IEventRepository eventRepository;
+        private readonly ITicketRepository ticketRepository;
+        private readonly ISponsorRepository sponsorRepository;
         public SponsorController(ProjektTaiibDbContext context)
         {
             _context = context;
-            unitOfWork = new UnitOfWork(_context);
+            unitOfWork = new UnitOfWork(_context, userRepository, detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
         }
 
         // GET: Sponsor
         public async Task<IActionResult> Index()
         {
-              return unitOfWork.SponsorRepository!= null ? 
-                          View(await unitOfWork.SponsorRepository.GetAllSponsorsAsync()) :
+            return unitOfWork.SponsorRepository!= null ?
+            View(await unitOfWork.SponsorRepository.GetAllSponsorsAsync()) :
                           Problem("Entity set 'ProjektTaiibDbContext.Sponsors'  is null.");
         }
 
