@@ -15,18 +15,17 @@ namespace ProjektTaiib.DAL
     public class UnitOfWork : IUnitOfWork
     {
 
-        private ProjektTaiibDbContext context;
+        private ProjektTaiibDbContext? context;
 
+        private IUserRepository? userRepository;
 
-        private IUserRepository userRepository;
+        private IDetailedInformationRepository? detailedInformationRepository;
 
-        private IDetailedInformationRepository detailedInformationRepository;
+        private IEventRepository? eventRepository ;
 
-        private IEventRepository eventRepository ;
+        private ITicketRepository? ticketRepository;
 
-        private ITicketRepository ticketRepository;
-
-        private ISponsorRepository sponsorRepository;
+        private ISponsorRepository? sponsorRepository;
 
         public UnitOfWork(ProjektTaiibDbContext context, IUserRepository userRepository, IDetailedInformationRepository detailedInformation, 
             IEventRepository eventRepository, ITicketRepository ticketRepository, ISponsorRepository sponsorRepository)
@@ -37,6 +36,15 @@ namespace ProjektTaiib.DAL
             this.eventRepository = eventRepository;
             this.ticketRepository = ticketRepository;
             this.sponsorRepository = sponsorRepository;
+        }
+
+        public UnitOfWork(IUserRepository userRepo)
+        {
+            this.userRepository = userRepo;
+        }
+        public UnitOfWork(IEventRepository eventRepo)
+        {
+            this.eventRepository = eventRepo;
         }
 
         public IUserRepository UserRepository => this.userRepository;

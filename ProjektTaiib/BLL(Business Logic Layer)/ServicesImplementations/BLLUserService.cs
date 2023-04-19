@@ -27,7 +27,7 @@ namespace BLL_Business_Logic_Layer_.ServicesImplementations
                 User u = new User();
                 this.unitOfWork.UserRepository.AddUser(u);
             }
-            this.unitOfWork.SaveChanges();
+            //this.unitOfWork.SaveChanges();
         }
 
         public void AddUser(User user)
@@ -104,11 +104,12 @@ namespace BLL_Business_Logic_Layer_.ServicesImplementations
         public double GetUsersSpentMoney(int id)
         {
             double sum = 0;
-            foreach(Ticket i in unitOfWork.UserRepository.GetUserById(id).Tickets)
-            {
-                sum += i.Price;
-            }
-
+            
+                foreach (Ticket i in unitOfWork.UserRepository.GetUserById(id).Tickets)
+                {
+                    sum += i.Price;
+                }
+            
             return sum;
         }
 

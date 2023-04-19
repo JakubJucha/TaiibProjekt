@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL(Business Logic Layer)",
 		{9B1525FF-A073-45B0-AC8A-7CE381675079} = {9B1525FF-A073-45B0-AC8A-7CE381675079}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektTaiibWeb(BLL)", "ProjektTaiibWeb(BLL)\ProjektTaiibWeb(BLL).csproj", "{F6CC0627-F46D-490A-9FF7-A0FB9E9BAE92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektTaiibWeb(BLL)", "ProjektTaiibWeb(BLL)\ProjektTaiibWeb(BLL).csproj", "{F6CC0627-F46D-490A-9FF7-A0FB9E9BAE92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBLL", "TestBLL\TestBLL.csproj", "{0361EB38-BCEC-4E22-BDF5-490983E14947}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{F6CC0627-F46D-490A-9FF7-A0FB9E9BAE92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6CC0627-F46D-490A-9FF7-A0FB9E9BAE92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6CC0627-F46D-490A-9FF7-A0FB9E9BAE92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0361EB38-BCEC-4E22-BDF5-490983E14947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0361EB38-BCEC-4E22-BDF5-490983E14947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0361EB38-BCEC-4E22-BDF5-490983E14947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0361EB38-BCEC-4E22-BDF5-490983E14947}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
