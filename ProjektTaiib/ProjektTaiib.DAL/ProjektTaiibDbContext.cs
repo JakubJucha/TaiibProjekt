@@ -11,6 +11,7 @@ namespace ProjektTaiib.DAL
 {
     public class ProjektTaiibDbContext : DbContext
     {
+        public ProjektTaiibDbContext(DbContextOptions options) : base(options) { }
         // public DbSet<BLL>
         public DbSet<DetailedInformation> DetailedInformation { get; set; }
         public DbSet<Event> Events { get; set; }
@@ -20,7 +21,11 @@ namespace ProjektTaiib.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
-            optionBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ProjektTaiibDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            if (!optionBuilder.IsConfigured)
+            {
+                optionBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ProjektTaiibDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            }
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

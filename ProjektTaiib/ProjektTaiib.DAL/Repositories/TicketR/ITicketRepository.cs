@@ -20,5 +20,8 @@ namespace ProjektTaiib.DAL.Repositories.TicketR
         Task<IEnumerable<Ticket>> GetAllTicketAsync();
         Task<Ticket?> FirstOrDefaultAsync(int? id);
         Task<Ticket?> FindAsync(int? id);
+
+        public void Save();
+        
     }
 }

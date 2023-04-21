@@ -74,5 +74,9 @@ namespace ProjektTaiib.DAL.Repositories.DetailedInformationR
         {
             context.DetailedInformation.Update(detailedInformation);
         }
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

@@ -74,5 +74,10 @@ namespace ProjektTaiib.DAL.Repositories.SponsorR
         {
             return await context.Sponsors.ToListAsync();
         }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

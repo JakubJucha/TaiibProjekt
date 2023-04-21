@@ -73,5 +73,9 @@ namespace ProjektTaiib.DAL.Repositories.UserR
         {
             return await context.Users.ToListAsync();
         }
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

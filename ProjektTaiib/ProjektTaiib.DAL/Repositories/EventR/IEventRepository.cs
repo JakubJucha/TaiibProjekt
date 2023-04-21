@@ -20,5 +20,7 @@ namespace ProjektTaiib.DAL.Repositories.EventR
         Task<IEnumerable<Event>> GetAllEventsAsync();
         Task<Event?> FirstOrDefaultAsync(int? id);
         Task<Event?> FindAsync(int? id);
+
+        public void Save();
     }
 }

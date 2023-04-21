@@ -74,5 +74,10 @@ namespace ProjektTaiib.DAL.Repositories.TicketR
         {
             return await context.Tickets.ToListAsync();
         }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

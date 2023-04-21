@@ -74,5 +74,10 @@ namespace ProjektTaiib.DAL.Repositories.EventR
         {
             return await context.Events.ToListAsync();
         }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace ProjektTaiib.DAL.Repositories.UserR
         void DeleteUserById(int id);
         void UpdateUser(User user);
         bool ExistUser(int id);
+        void Save();
 
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User?> FirstOrDefaultAsync(int? id);

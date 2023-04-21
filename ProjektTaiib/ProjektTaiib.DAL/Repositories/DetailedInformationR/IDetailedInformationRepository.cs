@@ -20,5 +20,7 @@ namespace ProjektTaiib.DAL.Repositories.DetailedInformationR
         Task<IEnumerable<DetailedInformation>> GetAllInformationAsync();
         Task<DetailedInformation?> FirstOrDefaultAsync(int? id);
         Task<DetailedInformation?> FindAsync(int? id);
+
+        public void Save();
     }
 }

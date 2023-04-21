@@ -20,5 +20,7 @@ namespace ProjektTaiib.DAL.Repositories.SponsorR
         Task<IEnumerable<Sponsor>> GetAllSponsorsAsync();
         Task<Sponsor?> FirstOrDefaultAsync(int? id);
         Task<Sponsor?> FindAsync(int? id);
+
+        public void Save();
     }
 }
