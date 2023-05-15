@@ -11,7 +11,7 @@ namespace ProjektTaiibWeb_BLL_.Controllers
     {
         private readonly IUserService _userService;
 
-        UserControllerAPI(IUserService userService)
+        public UserControllerAPI(IUserService userService)
         {
             this._userService = userService;
         }

@@ -17,7 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektTaiibWeb(BLL)", "Pro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBLL", "TestBLL\TestBLL.csproj", "{0361EB38-BCEC-4E22-BDF5-490983E14947}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDAL", "TestDAL\TestDAL.csproj", "{B39F7EA9-2B82-4D3E-87FA-EDC2B8914424}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDAL", "TestDAL\TestDAL.csproj", "{B39F7EA9-2B82-4D3E-87FA-EDC2B8914424}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControllersMVC", "TestControllersMVC\TestControllersMVC.csproj", "{B0B9F39B-A159-4DB5-8CEB-ACD17113A924}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9B1525FF-A073-45B0-AC8A-7CE381675079} = {9B1525FF-A073-45B0-AC8A-7CE381675079}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +54,10 @@ Global
 		{B39F7EA9-2B82-4D3E-87FA-EDC2B8914424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39F7EA9-2B82-4D3E-87FA-EDC2B8914424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39F7EA9-2B82-4D3E-87FA-EDC2B8914424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0B9F39B-A159-4DB5-8CEB-ACD17113A924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0B9F39B-A159-4DB5-8CEB-ACD17113A924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0B9F39B-A159-4DB5-8CEB-ACD17113A924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0B9F39B-A159-4DB5-8CEB-ACD17113A924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

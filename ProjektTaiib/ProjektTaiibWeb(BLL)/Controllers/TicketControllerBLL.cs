@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjektTaiib.DAL.Encje;
 using BLL_Business_Logic_Layer_.Services;
+
 namespace ProjektTaiibWeb_BLL_.Controllers
 {
     public class TicketControllerBLL : Controller
@@ -20,9 +21,9 @@ namespace ProjektTaiibWeb_BLL_.Controllers
             return View();
         }
 
-        public IActionResult BiletyNaDanyTypEventu(int eventId,string type)
+        public IActionResult BiletyNaDanyTypEventu(int eventId, string type)
         {
-            ViewBag.Bilety = _ticketService.GetTicketsByTypeonEvent(eventId,type);
+            ViewBag.Bilety = _ticketService.GetTicketsByTypeonEvent(eventId, type);
             return View();
         }
 

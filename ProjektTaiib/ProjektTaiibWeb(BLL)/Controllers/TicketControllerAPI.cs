@@ -32,7 +32,7 @@ namespace ProjektTaiibWeb_BLL_.Controllers
         [HttpGet("count_async")]
         public async Task<int?> IloscBiletowDlaEventuAsync(int eventId)
         {
-            int? ilosc = null;
+            int? ilosc = 0;
 
             await Task.Factory.StartNew(() => { ilosc = _ticketService.GetTicketCountOnEvent(eventId); });
 
