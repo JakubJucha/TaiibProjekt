@@ -66,5 +66,10 @@ namespace TestBLL
         {
             throw new NotImplementedException();
         }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -19,11 +19,11 @@ namespace TestDAL
             var sponsorRepo = new SponsorRepoDummy();
             var ticketRepo = new TicketRepoDummy();
 
-            var unitOfWorkU = new UnitOfWork(userRepo);
-            var unitOfWorkD = new UnitOfWork(detailedInformationRepo);
-            var unitOfWorkE = new UnitOfWork(eventRepo);
-            var unitOfWorkS = new UnitOfWork(sponsorRepo);
-            var unitOfWorkT = new UnitOfWork(ticketRepo);
+            var unitOfWorkU = new UnitOfWork(null,userRepo,null,null,null,null);
+            var unitOfWorkD = new UnitOfWork(null,null,detailedInformationRepo,null,null,null);
+            var unitOfWorkE = new UnitOfWork(null,null,null,eventRepo,null,null);
+            var unitOfWorkS = new UnitOfWork(null,null,null,null,null,sponsorRepo);
+            var unitOfWorkT = new UnitOfWork(null,null,null,null,ticketRepo,null);
 
             Assert.Same(userRepo, unitOfWorkU.UserRepository);
         }

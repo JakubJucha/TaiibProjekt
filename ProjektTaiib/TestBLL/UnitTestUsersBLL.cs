@@ -17,7 +17,7 @@ namespace TestBLL
         public void TestAddRandomUsers()
         {
             var userRepo = new UserRepoFake();
-            var unitOfWork = new UnitOfWork(userRepo);
+            var unitOfWork = new UnitOfWork(null,userRepo, null, null, null,null);
             var usersBLL = new BLLUserService(unitOfWork);
 
             usersBLL.AddRandomUsers(5);
@@ -29,7 +29,7 @@ namespace TestBLL
         public void GetUsersSpentMoneyTest()
         {
             var userRepo = new UserRepoFake();
-            var unitOfWork = new UnitOfWork(userRepo);
+            var unitOfWork = new UnitOfWork(null, userRepo, null, null, null, null);
             var usersBLL = new BLLUserService(unitOfWork);
 
             List<Ticket> tickets = new List<Ticket>();
@@ -54,7 +54,7 @@ namespace TestBLL
         public void TestAddRandomUsersMoq()
         {
             Mock<IUserRepository> mockUserRepo = new Mock<IUserRepository>();
-            var unitOfWork = new UnitOfWork(mockUserRepo.Object);
+            var unitOfWork = new UnitOfWork(null,mockUserRepo.Object,null,null,null,null);
             var usersBLL = new BLLUserService(unitOfWork);
             
             usersBLL.AddRandomUsers(5);
@@ -76,7 +76,7 @@ namespace TestBLL
 
             mockUserRepo.Setup(x => x.GetUserById(user.Id_user)).Returns(user);
 
-            var unitOfWork = new UnitOfWork(mockUserRepo.Object);
+            var unitOfWork = new UnitOfWork(null, mockUserRepo.Object, null, null, null, null);
             var usersBLL = new BLLUserService(unitOfWork);
 
            Assert.Equal(20.99, usersBLL.GetUsersSpentMoney(user.Id_user));

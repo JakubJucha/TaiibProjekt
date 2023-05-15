@@ -18,7 +18,7 @@ namespace TestBLL
         public void GetEventsByCategoryTest()
         {
             var eventRepo = new EventRepoFake();
-            var unitOfWork = new UnitOfWork(eventRepo);
+            var unitOfWork = new UnitOfWork(null, null, null, eventRepo, null, null);
             var eventsBLL = new BLLEventService(unitOfWork);
 
             Event event1 = new Event();
@@ -40,7 +40,7 @@ namespace TestBLL
         public void GetEventsByDateTest()
         {
             var eventRepo = new EventRepoFake();
-            var unitOfWork = new UnitOfWork(eventRepo);
+            var unitOfWork = new UnitOfWork(null, null, null, eventRepo, null, null);
             var eventsBLL = new BLLEventService(unitOfWork);
 
             Event event1 = new Event();
@@ -73,7 +73,7 @@ namespace TestBLL
 
             mockEventRepo.Setup(x => x.GetEvents()).Returns(new List<Event> {event1,event2,event3 });
 
-            var unitOfWork = new UnitOfWork(mockEventRepo.Object);
+            var unitOfWork = new UnitOfWork(null, null, null,mockEventRepo.Object, null, null);
             var eventsBLL = new BLLEventService(unitOfWork);
 
             Assert.Equal(2, eventsBLL.GetEventsByCategory("Concert").Count());
@@ -94,7 +94,7 @@ namespace TestBLL
             mockEventRepo.Setup(x => x.GetEvents()).Returns(new List<Event> { event1, event2, event3 });
 
 
-            var unitOfWork = new UnitOfWork(mockEventRepo.Object);
+            var unitOfWork = new UnitOfWork(null, null, null, mockEventRepo.Object, null, null);
             var eventsBLL = new BLLEventService(unitOfWork);
 
             Assert.Equal(2, eventsBLL.GetEventsByDate(new DateTime(2022,11,11)).Count());

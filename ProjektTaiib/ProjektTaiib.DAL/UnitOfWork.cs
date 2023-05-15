@@ -38,26 +38,6 @@ namespace ProjektTaiib.DAL
             this.sponsorRepository = sponsorRepository;
         }
 
-        public UnitOfWork(IUserRepository userRepo)
-        {
-            this.userRepository = userRepo;
-        }
-        public UnitOfWork(IEventRepository eventRepo)
-        {
-            this.eventRepository = eventRepo;
-        }
-        public UnitOfWork(IDetailedInformationRepository infRepo)
-        {
-            this.detailedInformationRepository = infRepo;
-        }
-        public UnitOfWork(ISponsorRepository sponsorRepo)
-        {
-            this.sponsorRepository = sponsorRepo;
-        }
-        public UnitOfWork(ITicketRepository ticketRepo)
-        {
-            this.ticketRepository = ticketRepo;
-        }
 
         public IUserRepository UserRepository => this.userRepository;
         public IDetailedInformationRepository DetailedInformationRepository => this.detailedInformationRepository;
