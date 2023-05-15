@@ -12,6 +12,22 @@ namespace ProjektTaiibWeb_BLL_.Controllers
             _ticketService = ticketService;
         }
 
+
+
+        public IActionResult IloscBiletowDlaEventu(int eventId)
+        {
+            ViewBag.Ilosc = _ticketService.GetTicketCountOnEvent(eventId);
+            return View();
+        }
+
+        public IActionResult BiletyNaDanyTypEventu(int eventId,string type)
+        {
+            ViewBag.Bilety = _ticketService.GetTicketsByTypeonEvent(eventId,type);
+            return View();
+        }
+
+
+
         public IActionResult Index()
         {
             var tickets = _ticketService.GetAllTickets();

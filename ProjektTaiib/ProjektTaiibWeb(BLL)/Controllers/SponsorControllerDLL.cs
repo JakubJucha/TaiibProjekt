@@ -12,6 +12,25 @@ namespace ProjektTaiibWeb_BLL_.Controllers
             _sponsorService = sponsorService;
         }
 
+
+
+
+        public IActionResult SponsorowaneEventy(int id)
+        {
+            ViewBag.Events = _sponsorService.GetSponsoredEvents(id);
+            return View();
+        }
+
+        public IActionResult SponsorzyPoNazwie(string name)
+        {
+            ViewBag.Sponsors = _sponsorService.GetSponsorsByName(name);
+            return View();
+        }
+
+
+
+
+
         public IActionResult Index()
         {
             var sponsors = _sponsorService.GetAllSponsors();

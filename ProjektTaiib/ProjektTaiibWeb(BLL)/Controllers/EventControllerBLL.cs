@@ -13,6 +13,30 @@ namespace ProjektTaiibWeb_BLL_.Controllers
             _eventService = eventService;
         }
 
+
+
+        public IActionResult EventyPoKategorii(string category)
+        {
+            ViewBag.Events = _eventService.GetEventsByCategory(category);
+            return View();
+        }
+
+        public IActionResult EventyPoDacie(DateTime date)
+        {
+            ViewBag.Events = _eventService.GetEventsByDate(date);
+            return View();
+        }
+
+        public IActionResult EventyPoLokalizacji(string locale)
+        {
+            ViewBag.Events = _eventService.GetEventsByLocalization(locale);
+            return View();
+        }
+
+
+
+
+
         public IActionResult Index()
         {
             var events = _eventService.GetEvents();

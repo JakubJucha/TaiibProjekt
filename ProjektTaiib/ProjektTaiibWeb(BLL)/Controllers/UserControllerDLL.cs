@@ -13,6 +13,33 @@ namespace ProjektTaiibWeb_BLL_.Controllers
             _userService = userService;
         }
 
+
+
+
+
+        public IActionResult NajbogatszyUzytkownik()
+        {
+            var richest = _userService.GetTheRichestUser();
+            return View(richest);
+        }
+
+        public IActionResult DodajLosowo(int iluUzytkownikow)
+        {
+            _userService.AddRandomUsers(iluUzytkownikow);
+            return View();
+        }
+
+        public IActionResult WydanePieniadzeUzytkownika(int id)
+        {
+            ViewBag.Ilosc = _userService.GetUsersSpentMoney(id);
+            return View();
+        }
+
+
+
+
+
+
         public IActionResult Index()
         {
             var users = _userService.GetAllUsers();

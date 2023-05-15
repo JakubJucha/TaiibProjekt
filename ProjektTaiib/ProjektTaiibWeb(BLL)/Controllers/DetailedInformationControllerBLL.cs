@@ -15,6 +15,25 @@ namespace ProjektTaiibWeb_BLL_.Controllers
             _detailedInformationService = detailedInformationService;
         }
 
+
+
+       public IActionResult InformacjePoPlatnosci(string payment)
+        {
+            ViewBag.info = _detailedInformationService.GetInformationByPayment(payment);
+            return View();
+        }
+
+        public IActionResult InformacjePoNazwiskachAlfabetycznie()
+        {
+            ViewBag.info = _detailedInformationService.GetInformationByAlphabeticalSurnames();
+            return View();
+        }
+
+
+
+
+
+
         public IActionResult Index()
         {
             var detailedInformation = _detailedInformationService.GetAllInformation();
