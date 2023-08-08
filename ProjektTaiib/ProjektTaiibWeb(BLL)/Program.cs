@@ -16,6 +16,18 @@ builder.Services.AddScoped<IDetailedInformationService,BLLDetailedInformationSer
 builder.Services.AddScoped<IEventService, BLLEventService>();
 builder.Services.AddScoped<ISponsorService, BLLSponsorService>();
 builder.Services.AddScoped<ITicketService,BLLTicketService>();
+
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddDefaultPolicy(bld =>
+    {
+        bld.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +38,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors();
 
 app.UseAuthorization();
 
