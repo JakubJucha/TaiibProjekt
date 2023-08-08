@@ -1,0 +1,160 @@
+<div class="container" >
+    <form [formGroup]="form" (submit)="register()">
+    <div class="row " >
+        <div class="register-wrapper col-md-6 ">
+            <div class="row">
+                <div style="color: #00ADB5; font-size: 30px; margin: 1rem;">Zarejestruj się</div>
+                <div style="margin-top: 2rem; margin-left: 2rem;">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="email" class="">E-mail</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input [ngClass]="{'error': !isValid('email')}" type="email" name="email" id="email" formControlName="email" >
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-4">
+                            <label for="loginRegister">Login</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input [ngClass]="{'error': !isValid('loginRegister')}" type="text" name="loginRegister" id="loginRegister" formControlName="loginRegister">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-4">
+                            <label for="passwordRegister">Hasło</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input [ngClass]="{'error': !isValid('passwordRegister')}" type="password" name="passwordRegister" id="passwordRegister" formControlName="passwordRegister">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-lg-4">
+                            <label for="repeatPassword">Powtórz hasło</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input [ngClass]="{'error': !isValid('repeatPassword')}" type="password" name="repeatPassword" id="repeatPassword"
+                                formControlName="repeatPassword">
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <input type="checkbox" (click)="showAdditionalInfo()">
+                        <label>Uzupełnij dane szczegółowe</label>
+                    </div>
+
+                </div>
+
+                <div  class="row" style="margin-top: 30px;">
+                    <div class="col-lg-2" style=" margin-left: 16rem;">
+                        <button [ngClass]="{'move-button': isChecked}" [disabled]="!form.valid" [class.moved]="isChecked" type="submit" style="padding: 0.5rem; width: 120px; z-index: 3;">Zarejestruj się</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+<!-- TUTAJ SA RZECZY DO DANYCH SZCZEGOLOWYCH -->
+        
+        <div *ngIf="isChecked" class="register-wrapper col-md-6 " style="margin-left: 0; ">
+            <div class="row bordered">
+                
+                <div style="margin-top: 2rem; margin-left: 2rem; margin-top: 15px;">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="name" class="">Imie</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" name="name" id="name" formControlName="name">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4">
+                            <label for="surname">Nazwisko</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" name="surname" id="surname" formControlName="surname">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4">
+                            <label for="phoneNumber">Numer telefonu</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input [ngClass]="{'error': !isValid('phoneNumber')}" type="tel" name="phoneNumber" id="phoneNumber" formControlName="phoneNumber">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4">
+                            <label for="country">Państwo</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" name="country" id="country" formControlName="country">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4">
+                            <label for="city">Miasto</label>
+                        </div>
+                        <div class="col-lg-2">
+                            <input [ngClass]="{'error': !isValid('zipCode')}" style="width: 50px;" type="text" name="zipCode" id="zipCode" formControlName="zipCode">
+                        </div>
+                        <div class="col-lg-6">
+                            <input style="width:101px;" type="text" name="city" id="city" formControlName="city">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4">
+                            <label for="street">Ulica i numer</label>
+                        </div>
+                        <div class="col-lg-4">
+                            <input style="width:111px;" type="text" name="street" id="street" formControlName="street">
+                        </div>
+                        <div class="col-lg-1" style="margin-left: -5px;">
+                            <input style="width: 40px;" type="text" name="houseNumber" id="houseNumber" formControlName="houseNumber">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4">
+                            <label for="localNumber">Numer lokalu</label>
+                        </div>
+                        <div class="col-lg-1">
+                            <input style="width:40px;" type="text" name="localNumber" id="localNumber" formControlName="localNumber">
+                        </div>
+                        <div class="col-lg-3" style="margin-left: 10px;">
+                            <label for="payment">Płatność</label>
+                        </div>
+                        <div class="col-lg-1" style="margin-left: -25px;">
+                            <select style="width: 50px; height: 25px;" id="payment">
+                                    <option value="blik">Blik</option>
+                                    <option value="creditCard">Karta płatnicza</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-lg-4">
+                            <label for="additionalInformation">Uwagi</label>
+                        </div>
+                        <div class="col-lg-8">
+                            <textarea style="resize: none;" type="text" name="additionalInformation" id="additionalInformation" formControlName="additionalInformation"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+</div>

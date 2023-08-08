@@ -1,0 +1,53 @@
+.register-wrapper {
+    background-color: #393E46;
+    width: 25rem;
+    height: 26rem;
+    margin-top: 7rem;
+    margin-left: 3rem;
+    
+}
+
+label {
+    color: #EEEEEE;
+    margin: 3px;
+}
+
+button {
+    color: #EEEEEE;
+    background-color: #00ADB5;
+}
+
+.bordered {
+    padding: 10px 0;
+        position: relative;
+}
+
+.bordered::before {
+    content: "";
+    position: absolute;
+    left: -1px; /* Szerokość obramowania */
+    top: 20px; /* Odległość od góry */
+    bottom: 20px; /* Odległość od dołu */
+    width: 2px; /* Szerokość obramowania */
+    background-color: #00ADB5; /* Kolor obramowania */
+}
+
+.move-button {
+    transition: transform 1.5s ease-in-out;
+    z-index: 4;
+}
+
+.move-button.moved {
+    transform: translateX(400px);
+}
+
+  .error {
+    border: solid 2px red;
+  }
+
+  button:disabled {
+    background-color: lightgray;
+    color: darkgray;
+    cursor: not-allowed;
+    /* Dodaj inne style według potrzeb */
+  }
