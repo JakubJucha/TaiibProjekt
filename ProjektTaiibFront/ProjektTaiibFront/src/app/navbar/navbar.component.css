@@ -13,5 +13,7 @@
 a {
     margin: 1rem;
     font-size: larger;
+    text-decoration: none !important;
+    color: inherit !important;
 }
 

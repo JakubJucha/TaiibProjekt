@@ -11,6 +11,11 @@ import {MatIconModule} from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { LoginRegisterComponent } from './login-register/login-register.component';
+import { RouterModule } from '@angular/router';
+import { MainPageComponent } from './main-page/main-page.component';
+import { EventShowcaseComponent } from './event-showcase/event-showcase.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +24,10 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     LoginFormComponent,
     RegisterFormComponent,
     RegisterFormComponent,
+    LoginRegisterComponent,
+    MainPageComponent,
+    EventShowcaseComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

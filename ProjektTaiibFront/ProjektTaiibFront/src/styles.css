@@ -4,3 +4,9 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto; background-color:#222831; color:#EEEEEE; }
 
+:root {
+    --zielony: #00ADB5;
+    --bialy: #EEEEEE;
+    --jasny: #393E46;
+    --ciemny: #222831;
+}

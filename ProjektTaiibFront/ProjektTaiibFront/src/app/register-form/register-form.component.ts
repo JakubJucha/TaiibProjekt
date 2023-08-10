@@ -35,7 +35,6 @@ export class RegisterFormComponent implements AfterContentChecked {
   }
   
   ngAfterContentChecked(): void {
-    console.log('asd')
     this.isPasswordConfirmed();
   }
 
@@ -65,6 +64,18 @@ export class RegisterFormComponent implements AfterContentChecked {
   }
   showAdditionalInfo() {
     this.isChecked = !this.isChecked;
+    if (!this.isChecked) {
+     this.form.get('name')?.setValue(null);
+     this.form.get('surname')?.setValue(null);
+     this.form.get('phoneNumber')?.setValue(null);
+     this.form.get('country')?.setValue(null);
+     this.form.get('zipCode')?.setValue(null);
+     this.form.get('city')?.setValue(null);
+     this.form.get('street')?.setValue(null);
+     this.form.get('houseNumber')?.setValue(null);
+     this.form.get('localNumber')?.setValue(null);
+     this.form.get('additionalInformation')?.setValue(null);
+    }
   }
 
   isValid(name: string) : boolean {

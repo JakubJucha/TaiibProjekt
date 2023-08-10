@@ -1,0 +1,9 @@
+a {
+
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+div:has(a) {
+    margin:10px;
+  }
