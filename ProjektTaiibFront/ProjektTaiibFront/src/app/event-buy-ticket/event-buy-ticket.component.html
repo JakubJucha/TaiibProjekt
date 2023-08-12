@@ -1,0 +1,146 @@
+<div class="container">
+    <div class="row-margins mt-5" style="background-color: var(--jasny); padding: 10px; position: relative;;">
+
+        <div class="row" style="position: relative;">
+            <div class="col-9" style="font-weight: bold; font-size: 26px; margin-bottom: 20px">Super wypasiony
+                koncercik!!!</div>
+            <div class="col-3">Pozostało 69 biletów!</div>
+        </div>
+
+        <div style="margin-bottom: 10px;"> <a style="font-weight: bold; font-size: larger;">Miejsce:</a> Super
+            miejscówka auuuu</div>
+        <div style="margin-bottom: 10px"><a style="font-weight: bold;font-size: larger;">Data:</a> 06.09.2137r. 04:20
+        </div>
+
+        <div style=" margin-left: 150px; margin-top: 30px; margin-bottom: 50px;">
+            <div class="row" style=" width: auto;">
+                <div class="col-2" style="">Bilet normalny: </div>
+                <input class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="text">
+                <div class="col-1">w tym</div>    
+                <input class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="text">
+                <div class="col-3"  style="">biletów premium.<span style="font-size: 20px;padding: 4px; cursor: help;" matTooltip="Bilet premium zapewnia darmowe piwo piweczko kocham piwo ale kosztuje 2 miliardy pesos" class="material-icons">info</span></div>
+                <div class="col-3">Aktualna cena: 2ziko.</div>
+            </div>
+            <div class="row" style=" width: auto;">
+                <div class="col-2" style="">Bilet ulgowy:<span style="font-size: 20px;padding: 4px; cursor: help;" matTooltip="Bilet ulgowy obejmuje 50% ceny biletu normalnego. Ulga jest blablablalba" class="material-icons">info</span>  </div>
+                <input class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="text">
+                <div class="col-1">w tym</div>    
+                <input class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="text">
+                <div class="col-3"  style="">biletów premium. <span style="font-size: 20px;padding: 4px; cursor: help;" matTooltip="Bilet premium zapewnia darmowe piwo piweczko kocham piwo ale kosztuje 2 miliardy pesos" class="material-icons">info</span></div>
+                <div class="col-3">Aktualna cena: 2ziko.</div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; padding: 10px; margin-top: 30px; margin-left: 100px;">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Imię:
+                    </div>
+                    <div class="col-6">
+                        <input style="width: 300px;" type="text">
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Nazwisko:
+                    </div>
+                    <div class="col-6">
+                        <input style="width: 300px;" type="text">
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Numer telefonu:
+                    </div>
+                    <div class="col-6">
+                        <input style="width: 300px;" type="text">
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Państwo:
+                    </div>
+                    <div class="col-6">
+                        <input style="width: 300px;" type="text">
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Miasto:
+                    </div>
+                    <div class="col-1">
+                        <input style="width: 50px;" type="text">
+                    </div>
+                    <div class="col-2">
+                        <input style="width: 241px;" type="text">
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Ulica i numer:
+                    </div>
+                    <div class="col-3">
+                        <input style="width: 232px;" type="text">
+                    </div>
+                    <div class="col-1">
+                        <input style="width: 50px; margin-left: 72px;" type="text">
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Numer lokalu:
+                    </div>
+                    <div class="col-1">
+                        <input style="width: 50px;" type="text">
+                    </div>
+                    <div class="col-1" style="margin-left: 49px;">
+                        Płatność:
+                    </div>
+                    <select class="col-2" style="width: 115px; height: 25px; margin-left: 30px;" id="payment">
+                        <option value="blik">Blik</option>
+                        <option value="creditCard">Karta płatnicza</option>
+                </select>
+                </div>
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Uwagi:
+                    </div>
+                    <div class="col-6">
+                        <textarea style="resize: none; width: 300px;" type="text" name="additionalInformation" id="additionalInformation" formControlName="additionalInformation"></textarea>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Nr karty i CCV:
+                    </div>
+                    <div class="col-3">
+                        <input style="width: 232px;" type="text">
+                    </div>
+                    <div class="col-1">
+                        <input style="width: 50px; margin-left: 72px;" type="text">
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-2">
+                        Kod BLIK:
+                    </div>
+                    <div class="col-6">
+                        <input style="width: 300px;" type="text">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div style="position: absolute; bottom: 0; right: 0; padding: 20px;">
+            Kwota do zapłaty: 4000000 zł.
+            <button style="height: 30px; width: 90px; background-color: var(--zielony); margin-left: 20px;">Kup :D</button>
+        </div>
+
+
+    </div>
+
+</div>

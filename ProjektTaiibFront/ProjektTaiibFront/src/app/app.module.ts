@@ -16,6 +16,9 @@ import { RouterModule } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { EventShowcaseComponent } from './event-showcase/event-showcase.component';
 import { FooterComponent } from './footer/footer.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
+import { EventBuyTicketComponent } from './event-buy-ticket/event-buy-ticket.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { FooterComponent } from './footer/footer.component';
     MainPageComponent,
     EventShowcaseComponent,
     FooterComponent,
+    EventDetailsComponent,
+    EventBuyTicketComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

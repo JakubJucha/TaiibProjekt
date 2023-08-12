@@ -10,3 +10,8 @@ body { margin: 0; font-family: Roboto; background-color:#222831; color:#EEEEEE; 
     --jasny: #393E46;
     --ciemny: #222831;
 }
+
+.row-margins {
+    margin-right: 10rem;
+    margin-left: 10rem;
+}

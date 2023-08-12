@@ -5,7 +5,17 @@
     align-items: center;
     max-width: 300px;
     margin: 0 auto;
+    cursor: pointer;
   }
+
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  .event-card:hover {
+    box-shadow: 0px 5px 10px 0px var(--zielony); 
+}
   
   .event-card img {
     width: 100%;
