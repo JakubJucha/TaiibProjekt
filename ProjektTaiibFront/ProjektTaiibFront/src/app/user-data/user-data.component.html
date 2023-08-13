@@ -1,0 +1,89 @@
+<div
+    style="display: flex; flex-direction: column; padding: 10px; margin-top: 30px; margin-left: 180px; justify-content: center; position: relative;">
+        <div class="row" style="margin-bottom: 10px; ">
+            <div class="col-2">
+                Imię:
+            </div>
+            <div class="col-6">
+                <input style="width: 300px;" type="text">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-2">
+                Nazwisko:
+            </div>
+            <div class="col-6">
+                <input style="width: 300px;" type="text">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-2">
+                Numer telefonu:
+            </div>
+            <div class="col-6">
+                <input style="width: 300px;" type="text">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-2">
+                Państwo:
+            </div>
+            <div class="col-6">
+                <input style="width: 300px;" type="text">
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-2">
+                Miasto:
+            </div>
+            <div class="col-1">
+                <input style="width: 50px;" type="text">
+            </div>
+            <div class="col-2">
+                <input style="width: 235px;" type="text">
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-2">
+                Ulica i numer:
+            </div>
+            <div class="col-2">
+                <input style="width: 232px;" type="text">
+            </div>
+            <div class="col-2">
+                <input style="width: 60px; margin-left: 108px;" type="text">
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-2">
+                Numer lokalu:
+            </div>
+            <div class="col-1">
+                <input style="width: 50px;" type="text">
+            </div>
+            <div class="col-1" style="margin-left: 27px;">
+                Płatność:
+            </div>
+            <select class="col-2" style="width: 125px; height: 25px; margin-left: 30px;" id="payment">
+                <option value="blik">Blik</option>
+                <option value="creditCard">Karta płatnicza</option>
+            </select>
+        </div>
+
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col-2">
+                Uwagi:
+            </div>
+            <div class="col-6">
+                <textarea style="resize: none; width: 300px;" type="text" name="additionalInformation"
+                    id="additionalInformation" formControlName="additionalInformation"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <button style="background-color: var(--zielony);height: 60px; width: 100px; bottom: 0; right: 0; position: absolute;">Zapisz</button>
+
+        </div>
+</div>

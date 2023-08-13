@@ -19,6 +19,13 @@ import { FooterComponent } from './footer/footer.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { EventBuyTicketComponent } from './event-buy-ticket/event-buy-ticket.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { EventSearchComponent } from './event-search/event-search.component';
+import { UserMenuComponent } from './user-menu/user-menu.component';
+import { UserDataComponent } from './user-data/user-data.component';
+import { UserTicketsComponent } from './user-tickets/user-tickets.component';
+import { UserOptionsComponent } from './user-options/user-options.component';
+import { TicketShowcaseComponent } from './ticket-showcase/ticket-showcase.component';
+import { EventAddComponent } from './event-add/event-add.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +40,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FooterComponent,
     EventDetailsComponent,
     EventBuyTicketComponent,
+    EventSearchComponent,
+    UserMenuComponent,
+    UserDataComponent,
+    UserTicketsComponent,
+    UserOptionsComponent,
+    TicketShowcaseComponent,
+    EventAddComponent,
   ],
   imports: [
     BrowserModule,

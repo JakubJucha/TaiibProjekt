@@ -1,0 +1,19 @@
+<div class="container">
+<div class="row-margins mt-5" style="background-color: var(--jasny); padding: 10px; border-bottom: solid 2px var(--bialy);">
+
+    <div class="row row-margins" style="display: flex; justify-content: space-between; ;">
+        <div class="col-4">
+            <a routerLink="userData" style="color: var(--bialy); font-size: 24px;" mat-button>Moje dane</a>
+        </div>
+        <div class="col-4">
+            <a routerLink="userTickets" style="color: var(--bialy); font-size: 24px;" mat-button> Moje bilety</a>
+        </div>
+        <div class="col-4">
+            <a routerLink="userOptions" style="color: var(--bialy); font-size: 24px;" mat-button> Ustawienia</a>
+        </div> 
+    </div>
+</div>
+<div class="row-margins" style="background-color: var(--jasny); padding: 10px;">
+    <router-outlet></router-outlet>
+</div>
+</div>

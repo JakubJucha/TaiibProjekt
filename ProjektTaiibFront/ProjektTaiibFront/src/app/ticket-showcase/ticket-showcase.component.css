@@ -1,0 +1,48 @@
+.event-card {
+    border: 4px solid var(--zielony);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  .event-card:hover {
+    box-shadow: 0px 5px 10px 0px var(--zielony); 
+}
+  
+  .event-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .event-details {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .event-name {
+    font-weight: bold;
+  }
+  
+  .event-price {
+    background-color: var(--zielony);
+    padding-top: 5px;
+    align-self: flex-end;
+    width: calc(40% - 10px);
+    text-align:right;
+
+    clip-path: polygon(46% 19%, 100% 18%, 100% 100%, 0 100%);
+    overflow: hidden; 
+  }
+
+  

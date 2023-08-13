@@ -1,0 +1,65 @@
+<div class="container" style="position: relative;">
+
+    <div class="row" style="padding: 10px; margin-left: 100px; margin-bottom: 30px;">
+        <div class="col-3">
+            <button (click)="changeLogin()" style="background-color: var(--zielony); color: var(--bialy); height: 50px; width: 100px;">Zmień login</button>
+        </div>
+        <div *ngIf="isChangeLogin" class="col-2">
+            <div class="mb-1">Obecny login:</div>
+            <div>Nowy login:</div>
+        </div>
+        <div *ngIf="isChangeLogin" class="col-3">
+            <div class="mb-1"> Szczur112</div>
+            <div><input type="text"></div>
+        </div>
+        <div  *ngIf="isChangeLogin"class="col-3">
+            <div class="mb-4"> </div>
+            <div><button style="background-color: var(--zielony); color: var(--bialy);">Zapisz</button></div>
+        </div>
+    </div>
+
+    <div class="row" style="padding: 10px; margin-left: 100px;">
+        <div class="col-3">
+            <button (click)="changePassword()" style="background-color: var(--zielony); color: var(--bialy); height: 50px; width: 100px;">Zmień hasło</button>
+        </div>
+        <div *ngIf="isChangePassword" class="col-2">
+            <div class="mb-2">Obecne hasło:</div>
+            <div class="mb-2">Nowe hasło:</div>
+            <div>Powtórz hasło:</div>
+        </div>
+        <div *ngIf="isChangePassword" class="col-3">
+            <div class="mb-1"><input type="password"> </div>
+            <div class="mb-1"><input type="password"></div>
+            <div><input type="password"></div>
+        </div>
+        <div *ngIf="isChangePassword" class="col-3">
+            <div style="margin-top: 58px;"> </div>
+            <div><button style="background-color: var(--zielony); color: var(--bialy);">Zapisz</button></div>
+        </div>
+    </div>
+
+    <div class="row" style="padding: 10px; margin-left: 100px;">
+        <div class="col-3">
+            <button (click)="changeEmail()" style="background-color: var(--zielony); color: var(--bialy); height: 50px; width: 100px;">Zmień email</button>
+        </div>
+        <div *ngIf="isChangeEmail" class="col-2">
+            <div class="mb-2">Obecny email:</div>
+            <div class="mb-2">Nowy email:</div>
+            <div>Powtórz email:</div>
+        </div>
+        <div *ngIf="isChangeEmail" class="col-3">
+            <div class="mb-1"> szczurzyca@onet.pl</div>
+            <div class="mb-1"><input type="email"></div>
+            <div><input type="email"></div>
+        </div>
+        <div *ngIf="isChangeEmail" class="col-3">
+            <div style="margin-top: 52px;"> </div>
+            <div><button style="background-color: var(--zielony); color: var(--bialy);">Zapisz</button></div>
+        </div>
+    </div>
+
+    <div style="position: absolute; bottom: 0; right: 0;">
+        <button style="background-color: red;">Usuń konto</button>
+    </div>
+
+</div>
