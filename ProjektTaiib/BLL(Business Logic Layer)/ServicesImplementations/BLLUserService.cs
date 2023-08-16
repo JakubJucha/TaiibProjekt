@@ -1,4 +1,5 @@
 ﻿using BLL_Business_Logic_Layer_.Services;
+using Microsoft.CodeAnalysis.Scripting;
 using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
 using System;
@@ -40,6 +41,17 @@ namespace BLL_Business_Logic_Layer_.ServicesImplementations
             {
                 throw new InvalidOperationException("Error");
             }
+        }
+
+        public User Login(string username, string password)
+        {
+            var user = unitOfWork.UserRepository.GetUserByUsername(username);
+            if (user == null || user.Password != password)
+            {
+                throw new InvalidOperationException("Nieprawidłowa nazwa użytkownika lub hasło.");
+            }
+
+            return user;
         }
 
         public void DeleteUser(User user)

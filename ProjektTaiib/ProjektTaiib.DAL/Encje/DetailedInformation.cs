@@ -33,12 +33,7 @@ namespace ProjektTaiib.DAL.Encje
         public string Surname { get; set; }
 #pragma warning restore CS8618 // Pole niedopuszczające wartości null musi zawierać wartość inną niż null podczas kończenia działania konstruktora. Rozważ zadeklarowanie pola jako dopuszczającego wartość null.
 
-        [Required]
-        [EmailAddress]
-#pragma warning disable CS8618 // Pole niedopuszczające wartości null musi zawierać wartość inną niż null podczas kończenia działania konstruktora. Rozważ zadeklarowanie pola jako dopuszczającego wartość null.
-        public string Email { get; set; }
-#pragma warning restore CS8618 // Pole niedopuszczające wartości null musi zawierać wartość inną niż null podczas kończenia działania konstruktora. Rozważ zadeklarowanie pola jako dopuszczającego wartość null.
-
+       
         [Required]
         [RegularExpression(@"^\+48\d{9}$",
          ErrorMessage = "Wrong phone number!")]

@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.21" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ProjektTaiib.DAL\ProjektTaiib.DAL.csproj" />
     <ProjectReference Include="..\ProjektTaiibWeb\ProjektTaiibWeb.csproj" />
   </ItemGroup>

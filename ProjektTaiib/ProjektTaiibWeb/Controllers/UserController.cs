@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using NuGet.Protocol.Plugins;
 using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
 using ProjektTaiib.DAL.Repositories.DetailedInformationR;
@@ -12,9 +18,11 @@ using ProjektTaiib.DAL.Repositories.EventR;
 using ProjektTaiib.DAL.Repositories.SponsorR;
 using ProjektTaiib.DAL.Repositories.TicketR;
 using ProjektTaiib.DAL.Repositories.UserR;
+using ProjektTaiibWeb.DTO;
 
 namespace ProjektTaiibWeb.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly ProjektTaiibDbContext _context;
@@ -24,8 +32,37 @@ namespace ProjektTaiibWeb.Controllers
         private readonly IEventRepository eventRepository;
         private readonly ITicketRepository ticketRepository;
         private readonly ISponsorRepository sponsorRepository;
-        public UserController(ProjektTaiibDbContext context)
+
+
+
+        [AllowAnonymous]
+        private string GenerateJwtToken(User user)
         {
+            var claims = new List<Claim>
+    {
+        new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+       
+    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superTajneHasłosuperTajneHasłosuperTajneHasło")); 
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var expires = DateTime.Now.AddDays(1); 
+
+            var token = new JwtSecurityToken(
+               "http://localhost:5168", 
+               "http://localhost:4200", 
+                claims,
+                expires: expires,
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        private readonly IUserRepository _userRepository;
+        public UserController(IUserRepository userRepository, ProjektTaiibDbContext context)
+        {
+            _userRepository = userRepository;
             _context = context;
             unitOfWork = new UnitOfWork(_context, userRepository, detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
         }
@@ -77,6 +114,46 @@ namespace ProjektTaiibWeb.Controllers
             }
             return View(user);
         }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] User user)
+        {
+            
+            //var existingUser = unitOfWork.UserRepository.GetUserByUsername(user.Username);
+            //if (existingUser != null)
+            //{
+            //    return BadRequest("Użytkownik o podanej nazwie już istnieje.");
+            //}
+
+           
+            unitOfWork.UserRepository.AddUser(user);
+            unitOfWork.SaveChanges();
+
+            return Ok("Rejestracja zakończona pomyślnie.");
+        }
+        //[AllowAnonymous]
+        //[HttpPost("login")]
+        //public IActionResult Login(LoginRequest request)
+        //{
+        //    try
+        //    {
+        //        var user = _userRepository.GetUserByUsername(request.Username);
+
+        //        if (user == null || user.Password != request.Password)
+        //        {
+        //            throw new InvalidOperationException("Nieprawidłowa nazwa użytkownika lub hasło.");
+        //        }
+
+
+        //        var token = GenerateJwtToken(user);
+        //        return Ok(new { Token = token });
+        //    }
+        //    catch (InvalidOperationException ex)
+        //    {
+        //        return Unauthorized(ex.Message);
+        //    }
+        //}
 
         // GET: User/Edit/5
         public async Task<IActionResult> Edit(int? id)

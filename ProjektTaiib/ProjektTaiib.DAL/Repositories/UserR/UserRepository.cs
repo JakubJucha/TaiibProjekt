@@ -47,6 +47,11 @@ namespace ProjektTaiib.DAL.Repositories.UserR
             return context.Users.ToList();
         }
 
+        public User GetUserByUsername(string username)
+        {
+            return context.Users.FirstOrDefault(u => u.Username == username);
+        }
+
         public User GetUserById(int id)
         {
 #pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.

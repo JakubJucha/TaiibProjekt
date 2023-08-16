@@ -18,15 +18,6 @@ builder.Services.AddScoped<ISponsorService, BLLSponsorService>();
 builder.Services.AddScoped<ITicketService,BLLTicketService>();
 
 
-builder.Services.AddCors(opt =>
-{
-    opt.AddDefaultPolicy(bld =>
-    {
-        bld.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
-});
 
 var app = builder.Build();
 
@@ -38,8 +29,6 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseCors();
 
 app.UseAuthorization();
 

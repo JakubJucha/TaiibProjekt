@@ -26,6 +26,7 @@ import { UserTicketsComponent } from './user-tickets/user-tickets.component';
 import { UserOptionsComponent } from './user-options/user-options.component';
 import { TicketShowcaseComponent } from './ticket-showcase/ticket-showcase.component';
 import { EventAddComponent } from './event-add/event-add.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { EventAddComponent } from './event-add/event-add.component';
     MatIconModule,
     ReactiveFormsModule,
     MatTooltipModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

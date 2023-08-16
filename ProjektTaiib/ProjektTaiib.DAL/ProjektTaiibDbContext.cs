@@ -53,14 +53,13 @@ namespace ProjektTaiib.DAL
                 );
 
             modelBuilder.Entity<DetailedInformation>().HasData(
-                new DetailedInformation { Id_information = 1, UserId = 1, Name = "Jędrek", Surname = "Oskarowski", Email = "jedrek.oskarowski@gmail.com", Phone = "123123123", Payment = "Blik", Country = "Poland", City = "Katowice", Zip_code = "40-000", Street = "Francuska", House_number = 24, Local_number = 7 },
+                new DetailedInformation { Id_information = 1, UserId = 1, Name = "Jędrek", Surname = "Oskarowski", Phone = "123123123", Payment = "Blik", Country = "Poland", City = "Katowice", Zip_code = "40-000", Street = "Francuska", House_number = 24, Local_number = 7 },
                 new DetailedInformation
                 {
                     Id_information = 2,
                     UserId = 2,
                     Name = "Jan",
                     Surname = "Kowalski",
-                    Email = "kowalski@gmail.com",
                     Phone = "321321321",
                     Payment = "Blik",
                     Country = "Poland",

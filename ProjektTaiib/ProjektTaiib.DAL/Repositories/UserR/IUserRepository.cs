@@ -18,7 +18,7 @@ namespace ProjektTaiib.DAL.Repositories.UserR
         void UpdateUser(User user);
         bool ExistUser(int id);
         void Save();
-
+        User GetUserByUsername(string username);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User?> FirstOrDefaultAsync(int? id);
         Task<User?> FindAsync(int? id);

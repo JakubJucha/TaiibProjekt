@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, Component, OnChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
@@ -11,7 +11,7 @@ export class RegisterFormComponent implements AfterContentChecked {
   form: FormGroup
   isChecked: boolean = false;
   
-  constructor(formBuilder: FormBuilder) {
+  constructor(private http: HttpClient,formBuilder: FormBuilder,private router: Router) {
 
     this.form = formBuilder.group({
       email: formBuilder.control(null, [Validators.required, Validators.email]),
@@ -83,7 +83,19 @@ export class RegisterFormComponent implements AfterContentChecked {
   }
 
   register() {
-    //this._httpClient.post()
+    const formData = this.form.value;
+    console.log(formData);
+    this.http.post('http://localhost:5168/api/authorize/register', formData).subscribe(
+        response => {
+            console.log('Rejestracja zakończona pomyślnie!', response);
+
+
+        },
+        error => {
+            console.error('Błąd podczas rejestracji:', error);
+        
+        }
+    );
   }
 
 
