@@ -51,6 +51,7 @@ namespace ProjektTaiib.DAL.Repositories.UserR
         {
             return context.Users.FirstOrDefault(u => u.Username == username);
         }
+        
 
         public User GetUserById(int id)
         {
