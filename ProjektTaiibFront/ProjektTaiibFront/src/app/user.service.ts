@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,13 @@ export class UserService {
     return this.http.post<{ token: string }>(`${this.apiUrl}/api/authorize/login`, credentials);
   }
 
+  getDecodedToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch(error) {
+      console.error('Błąd podczas dekodowania tokena: ', error);
+      return null;
+    }
+  }
  
 }

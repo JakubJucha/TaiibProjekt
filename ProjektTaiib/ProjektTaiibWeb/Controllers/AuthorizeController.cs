@@ -38,7 +38,7 @@ namespace ProjektTaiibWeb.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            //
+
             try
             {
                 var user = _userRepository.GetUserByUsername(request.Username);
@@ -51,13 +51,18 @@ namespace ProjektTaiibWeb.Controllers
                 var klucz = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superTajneHasłosuperTajneHasłosuperTajneHasło"));
                 var podpisCyfrowy = new SigningCredentials(klucz, SecurityAlgorithms.HmacSha256);
 
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Role, user.Moderator ? "admin" : "user")
+        };
                 var parametryTokena = new JwtSecurityToken(
                     issuer: "http://localhost:5168",
                     audience: "http://localhost:4200",
-                    claims: new List<Claim>(),
+                    claims: claims,
                     expires: DateTime.Now.AddMinutes(10),
                     signingCredentials: podpisCyfrowy
-                    );
+                );
 
                 var token = new JwtSecurityTokenHandler().WriteToken(parametryTokena);
 

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, Component, OnChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {Payment} from 'src/app/enums/payment'
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
@@ -10,6 +11,8 @@ import { Router } from '@angular/router';
 export class RegisterFormComponent implements AfterContentChecked {
   form: FormGroup
   isChecked: boolean = false;
+  selectedPayment: Payment = Payment.BLIK; // Wybrana opcja
+  paymentOptions = Object.values(Payment); // Tablica z opcjami
   
   constructor(private http: HttpClient,formBuilder: FormBuilder,private router: Router) {
 

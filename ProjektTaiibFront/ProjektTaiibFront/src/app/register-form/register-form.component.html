@@ -135,9 +135,8 @@
                             <label for="payment">Płatność</label>
                         </div>
                         <div class="col-lg-1" style="margin-left: -25px;">
-                            <select style="width: 50px; height: 25px;" id="payment">
-                                    <option value="blik">Blik</option>
-                                    <option value="creditCard">Karta płatnicza</option>
+                            <select style="width: 50px; height: 25px;" id="payment" formControlName="payment">
+                                    <option *ngFor="let option of paymentOptions" [value]="option">{{option}}</option>
                             </select>
                         </div>
                     </div>

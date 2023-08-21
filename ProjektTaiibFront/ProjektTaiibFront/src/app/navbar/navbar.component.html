@@ -3,7 +3,8 @@
         <a routerLink="eventSearch" mat-button>Sport</a>
         <a routerLink="eventSearch" mat-button>Muzyka</a>
         <div class="spacer"></div>
-        <a routerLink="addEvent" mat-raised-button>Dodaj wydarzenie</a>
-        <a routerLink="login" mat-raised-button>Zaloguj się</a>
-        <a routerLink="userMenu" matTooltip="Moje konto"><mat-icon style="font-size: 48px; width: 48px; height: 48px; padding: 2px; cursor: pointer;">account_circle</mat-icon></a>
+        <a *ngIf="isAdmin" routerLink="addEvent" mat-raised-button>Dodaj wydarzenie</a>
+        <a *ngIf="!isLoggedIn" routerLink="login" mat-raised-button>Zaloguj się</a>
+        <a *ngIf="isLoggedIn" routerLink="login" (click)="logOut()" mat-raised-button>Wyloguj się</a>
+        <a *ngIf="isLoggedIn" routerLink="userMenu" matTooltip="Moje konto"><mat-icon style="font-size: 48px; width: 48px; height: 48px; padding: 2px; cursor: pointer;">account_circle</mat-icon></a>
   </mat-toolbar>
