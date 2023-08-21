@@ -23,12 +23,14 @@ using ProjektTaiibWeb.DTO;
 namespace ProjektTaiibWeb.Controllers
 {
     [Authorize]
+    [ApiController]
+    [Route("api/user")] 
     public class UserController : Controller
     {
         private readonly ProjektTaiibDbContext _context;
         private readonly UnitOfWork unitOfWork;
         private readonly IUserRepository userRepository;
-        private readonly IDetailedInformationRepository detailedInformationRepository;
+        private readonly IDetailedInformationRepository _detailedInformationRepository;
         private readonly IEventRepository eventRepository;
         private readonly ITicketRepository ticketRepository;
         private readonly ISponsorRepository sponsorRepository;
@@ -60,11 +62,12 @@ namespace ProjektTaiibWeb.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository, ProjektTaiibDbContext context)
+        public UserController(IUserRepository userRepository,IDetailedInformationRepository detailedInformationRepository, ProjektTaiibDbContext context)
         {
+            _detailedInformationRepository = detailedInformationRepository;
             _userRepository = userRepository;
             _context = context;
-            unitOfWork = new UnitOfWork(_context, userRepository, detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
+            unitOfWork = new UnitOfWork(_context, userRepository, _detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
         }
 
         // GET: User
@@ -131,6 +134,55 @@ namespace ProjektTaiibWeb.Controllers
             unitOfWork.SaveChanges();
 
             return Ok("Rejestracja zakończona pomyślnie.");
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("detailed-information/{username}")]
+        public IActionResult GetUserWithDetailedInfo(string username)
+        {
+            try
+            {
+                var user = _userRepository.GetUserByUsername(username);
+
+                if (user == null)
+                {
+                    return NotFound("Użytkownik nie znaleziony.");
+                }
+
+                var detailedInfo = _detailedInformationRepository.GetInformationById(user.Id_user);
+
+                if (detailedInfo == null)
+                {
+                    return NotFound("Brak informacji szczegółowych dla użytkownika.");
+                }
+
+                var response = new
+                {
+                    UserId = user.Id_user,
+                    Username = user.Username,
+                    Email = user.Email,
+                    Login = user.Username,
+                    
+                    Name = detailedInfo.Name,
+                    Surname = detailedInfo.Surname,
+                    LocalNumber = detailedInfo.Local_number,
+                    HouseNumber = detailedInfo.House_number,
+                    Phone = detailedInfo.Phone,
+                    Street = detailedInfo.Street,
+                    Country = detailedInfo.Country,
+                    ZIPCode = detailedInfo.Zip_code,
+                    City = detailedInfo.City,
+                    Payment = detailedInfo.Payment,
+                    AdditionalInformation = detailedInfo.Additional_information
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
+            }
         }
         //[AllowAnonymous]
         //[HttpPost("login")]

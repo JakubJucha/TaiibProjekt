@@ -25,6 +25,7 @@ export class LoginFormComponent {
           if (response && response.token) {
               localStorage.setItem('token', response.token); 
               this.router.navigate(['/mainPage']);
+              
           } else {
 
               console.error('Nie otrzymano tokena!');

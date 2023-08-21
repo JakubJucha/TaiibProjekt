@@ -65,9 +65,9 @@ namespace ProjektTaiib.DAL.Repositories.DetailedInformationR
 
         public DetailedInformation GetInformationById(int id)
         {
-#pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.
+
             return context.DetailedInformation.FirstOrDefault(a => a.Id_information == id);
-#pragma warning restore CS8603 // Możliwe zwrócenie odwołania o wartości null.
+
         }
 
         public void UpdateInformation(DetailedInformation detailedInformation)

@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjektTaiib.DAL.Encje;
+using ProjektTaiib.DAL.Repositories.DetailedInformationR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace ProjektTaiib.DAL.Repositories.UserR
 {
@@ -12,11 +15,14 @@ namespace ProjektTaiib.DAL.Repositories.UserR
     {
 
         private ProjektTaiibDbContext context;
+        private readonly IUserRepository _userRepository;
+        private readonly IDetailedInformationRepository _detailedInformationRepository;
+
         public UserRepository(ProjektTaiibDbContext context)
         {
             this.context = context;
         }
-
+        
         public void AddUser(User user)
         {
             context.Users.Add(user);
@@ -55,9 +61,7 @@ namespace ProjektTaiib.DAL.Repositories.UserR
 
         public User GetUserById(int id)
         {
-#pragma warning disable CS8603 // Możliwe zwrócenie odwołania o wartości null.
             return context.Users.FirstOrDefault(a => a.Id_user == id);
-#pragma warning restore CS8603 // Możliwe zwrócenie odwołania o wartości null.
         }
 
         public void UpdateUser(User user)

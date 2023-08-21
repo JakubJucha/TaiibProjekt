@@ -32,10 +32,10 @@ namespace ProjektTaiibWeb.Controllers
         }
 
         // GET: DetailedInformation
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return unitOfWork.DetailedInformationRepository != null ?
-                View(await unitOfWork.DetailedInformationRepository.GetAllInformationAsync()) :
+                View(unitOfWork.DetailedInformationRepository.GetAllInformation()) :
                 Problem("Entity set 'ProjektTaiibDbContext.DetailedInformation' is null");
         }
 
