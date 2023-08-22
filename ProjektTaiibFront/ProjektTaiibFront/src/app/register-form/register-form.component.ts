@@ -65,6 +65,7 @@ export class RegisterFormComponent implements AfterContentChecked {
   
     return pass === confirmPass ? null : { notSame: true };
   }
+  
   showAdditionalInfo() {
     this.isChecked = !this.isChecked;
     if (!this.isChecked) {

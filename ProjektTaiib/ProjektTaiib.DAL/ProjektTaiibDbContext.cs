@@ -23,7 +23,7 @@ namespace ProjektTaiib.DAL
         {
             if (!optionBuilder.IsConfigured)
             {
-                optionBuilder.UseSqlServer("Data Source=DESKTOP-2SV7FKE\\SQLEXPRESS01;Initial Catalog=ProjektTaiibDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ProjektTaiibDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
             }
 
         }
@@ -53,7 +53,7 @@ namespace ProjektTaiib.DAL
                 );
 
             modelBuilder.Entity<DetailedInformation>().HasData(
-                new DetailedInformation { Id_information = 1, UserId = 1, Name = "Jędrek", Surname = "Oskarowski", Phone = "123123123", Payment = "Blik", Country = "Poland", City = "Katowice", Zip_code = "40-000", Street = "Francuska", House_number = 24, Local_number = 7 },
+                new DetailedInformation { Id_information = 1, UserId = 1, Name = "Jędrek", Surname = "Oskarowski", Phone = "123123123", Payment = "BLIK", Country = "Poland", City = "Katowice", Zip_code = "40-000", Street = "Francuska", House_number = 24, Local_number = 7 },
                 new DetailedInformation
                 {
                     Id_information = 2,

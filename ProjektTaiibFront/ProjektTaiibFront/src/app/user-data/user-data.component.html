@@ -1,11 +1,12 @@
 <div
     style="display: flex; flex-direction: column; padding: 10px; margin-top: 30px; margin-left: 180px; justify-content: center; position: relative;">
+    <form [formGroup]="form" (submit)="updateUserData()">
         <div class="row" style="margin-bottom: 10px; ">
             <div class="col-2">
                 Imię:
             </div>
             <div class="col-6">
-                <input style="width: 300px;" type="text">
+                <input style="width: 300px;" type="text" formControlName="name">
             </div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
@@ -13,7 +14,7 @@
                 Nazwisko:
             </div>
             <div class="col-6">
-                <input style="width: 300px;" type="text">
+                <input style="width: 300px;" type="text" formControlName="surname">
             </div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
@@ -21,7 +22,7 @@
                 Numer telefonu:
             </div>
             <div class="col-6">
-                <input style="width: 300px;" type="text">
+                <input style="width: 300px;" type="text" formControlName="phoneNumber">
             </div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
@@ -29,7 +30,7 @@
                 Państwo:
             </div>
             <div class="col-6">
-                <input style="width: 300px;" type="text">
+                <input style="width: 300px;" type="text" formControlName="country">
             </div>
         </div>
         <div class="row" style="margin-bottom: 10px;">
@@ -37,10 +38,10 @@
                 Miasto:
             </div>
             <div class="col-1">
-                <input style="width: 50px;" type="text">
+                <input style="width: 50px;" type="text" formControlName="zipCode">
             </div>
             <div class="col-2">
-                <input style="width: 235px;" type="text">
+                <input style="width: 235px;" type="text" formControlName="city">
             </div>
         </div>
 
@@ -49,10 +50,10 @@
                 Ulica i numer:
             </div>
             <div class="col-2">
-                <input style="width: 232px;" type="text">
+                <input style="width: 232px;" type="text" formControlName="street">
             </div>
             <div class="col-2">
-                <input style="width: 60px; margin-left: 108px;" type="text">
+                <input style="width: 60px; margin-left: 108px;" type="text" formControlName="houseNumber">
             </div>
         </div>
 
@@ -61,14 +62,13 @@
                 Numer lokalu:
             </div>
             <div class="col-1">
-                <input style="width: 50px;" type="text">
+                <input style="width: 50px;" type="text" formControlName="localNumber">
             </div>
             <div class="col-1" style="margin-left: 27px;">
                 Płatność:
             </div>
-            <select class="col-2" style="width: 125px; height: 25px; margin-left: 30px;" id="payment">
-                <option value="blik">Blik</option>
-                <option value="creditCard">Karta płatnicza</option>
+            <select class="col-2" style="width: 125px; height: 25px; margin-left: 30px;" id="payment" formControlName="payment">
+                <option *ngFor="let option of paymentOptions" [value]="option">{{option}}</option>
             </select>
         </div>
 
@@ -83,7 +83,8 @@
         </div>
 
         <div class="row">
-            <button style="background-color: var(--zielony);height: 60px; width: 100px; bottom: 0; right: 0; position: absolute;">Zapisz</button>
+            <button type="submit" style="background-color: var(--zielony);height: 60px; width: 100px; bottom: 0; right: 0; position: absolute;">Zapisz</button>
 
         </div>
+    </form>
 </div>

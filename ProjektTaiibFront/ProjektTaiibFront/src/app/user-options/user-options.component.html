@@ -9,7 +9,7 @@
             <div>Nowy login:</div>
         </div>
         <div *ngIf="isChangeLogin" class="col-3">
-            <div class="mb-1"> Szczur112</div>
+            <div class="mb-1">{{userLogin}}</div>
             <div><input type="text"></div>
         </div>
         <div  *ngIf="isChangeLogin"class="col-3">
@@ -48,7 +48,7 @@
             <div>Powtórz email:</div>
         </div>
         <div *ngIf="isChangeEmail" class="col-3">
-            <div class="mb-1"> szczurzyca@onet.pl</div>
+            <div class="mb-1">{{userEmail}}</div>
             <div class="mb-1"><input type="email"></div>
             <div><input type="email"></div>
         </div>
