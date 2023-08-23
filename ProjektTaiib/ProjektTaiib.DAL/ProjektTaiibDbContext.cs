@@ -18,7 +18,7 @@ namespace ProjektTaiib.DAL
         public DbSet<Sponsor> Sponsors { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
-
+        //
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
             if (!optionBuilder.IsConfigured)

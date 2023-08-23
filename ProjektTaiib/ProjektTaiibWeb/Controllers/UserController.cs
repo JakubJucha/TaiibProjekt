@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -187,7 +188,7 @@ namespace ProjektTaiibWeb.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpPost("{id}/update")]
         public async Task<IActionResult> Edit(int id, [FromBody] UserSettings updatedSettings)
         {
@@ -198,10 +199,22 @@ namespace ProjektTaiibWeb.Controllers
                 return NotFound();
             }
 
-            user.Username = updatedSettings.NewLogin ?? user.Username;
+            if (updatedSettings.NewLogin != null)
+            {
+                var existingUser = _userRepository.GetUserByUsername(updatedSettings.NewLogin);
+                if (existingUser != null)
+                {
+                    return BadRequest("Użytkownik o tej nazwie już istnieje.");
+                }
+                user.Username = updatedSettings.NewLogin;
+            }
             user.Email = updatedSettings.NewEmail ?? user.Email;
+            if(updatedSettings.CurrentPassword == user.Password)
             user.Password = updatedSettings.NewPassword ?? user.Password;
-
+            else
+            {
+                return BadRequest("Obence hasło jest nieprawidłowe.");
+            }
             unitOfWork.UserRepository.UpdateUser(user);
             unitOfWork.SaveChanges();
             return Ok("Pomyślnie zaktualizowano ustawienia użytkownika.");

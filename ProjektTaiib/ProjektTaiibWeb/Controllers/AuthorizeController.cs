@@ -79,23 +79,20 @@ namespace ProjektTaiibWeb.Controllers
         {
             try
             {
-                // Sprawdź, czy użytkownik o podanej nazwie użytkownika już istnieje
+           
                 var existingUser = _userRepository.GetUserByUsername(request.LoginRegister);
                 if (existingUser != null)
                 {
                     return BadRequest("Użytkownik o tej nazwie już istnieje.");
                 }
 
-                // Możesz dodać tutaj inne sprawdzanie i walidację danych rejestracyjnych
-
-                // Tworzenie nowego użytkownika na podstawie danych z requesta
+               
                 var newUser = new User
                 {
                     Username = request.LoginRegister,
                     Email = request.Email,
                     Password = request.PasswordRegister,
-                    Moderator = false // Ustawienie moderatora w zależności od potrzeb
-                                      // Dodaj inne pola w zależności od potrzeb
+                    Moderator = false 
                 };
                 var newDetailedInfo = new DetailedInformation
                 {
@@ -115,14 +112,12 @@ namespace ProjektTaiibWeb.Controllers
 
 
                 };
-                // Dodanie nowego użytkownika do bazy danych
+            
                 _userRepository.AddUser(newUser);
                 unitOfWork.SaveChanges();
                 _detailedInformationRepository.AddInformation(newDetailedInfo);
                 unitOfWork.SaveChanges();
 
-                // Możesz tutaj również generować token JWT i zwracać go w odpowiedzi,
-                // podobnie jak w metodzie Login
 
                 return Ok(new RegisterResponse("Rejestracja udana. Możesz teraz się zalogować."));
             }
