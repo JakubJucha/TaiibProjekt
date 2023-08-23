@@ -209,7 +209,8 @@ namespace ProjektTaiibWeb.Controllers
                 user.Username = updatedSettings.NewLogin;
             }
             user.Email = updatedSettings.NewEmail ?? user.Email;
-            if(updatedSettings.CurrentPassword == user.Password)
+
+            if(updatedSettings.CurrentPassword !=null && updatedSettings.CurrentPassword == user.Password)
             user.Password = updatedSettings.NewPassword ?? user.Password;
             else
             {
