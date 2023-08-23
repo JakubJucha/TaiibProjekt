@@ -12,7 +12,7 @@ namespace ProjektTaiib.DAL
     public class ProjektTaiibDbContext : DbContext
     {
         public ProjektTaiibDbContext(DbContextOptions options) : base(options) { }
-        // test2
+        // test3
         public DbSet<DetailedInformation> DetailedInformation { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }
