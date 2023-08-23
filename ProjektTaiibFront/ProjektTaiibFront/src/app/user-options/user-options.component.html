@@ -2,10 +2,11 @@
     <form [formGroup]="formLogin" (submit)="changeToNewLogin()">
         <div class="row" style="padding: 10px; margin-left: 100px; margin-bottom: 30px;">
             <div class="col-3">
-                <button (click)="changeLogin()"
+                <button (click)="changeLogin()" type="button"
                     style="background-color: var(--zielony); color: var(--bialy); height: 50px; width: 100px;">Zmień
                     login</button>
             </div>
+
             <div *ngIf="isChangeLogin" class="col-2">
                 <div class="mb-1">Obecny login:</div>
                 <div>Nowy login:</div>
@@ -24,7 +25,7 @@
     <form [formGroup]="formPassword" (submit)="changeToNewPassword()">
         <div class="row" style="padding: 10px; margin-left: 100px;">
             <div class="col-3">
-                <button (click)="changePassword()"
+                <button (click)="changePassword()" type="button"
                     style="background-color: var(--zielony); color: var(--bialy); height: 50px; width: 100px;">Zmień
                     hasło</button>
             </div>
@@ -48,7 +49,7 @@
     <form [formGroup]="formEmail" (submit)="changeToNewEmail()">
         <div class="row" style="padding: 10px; margin-left: 100px;">
             <div class="col-3">
-                <button (click)="changeEmail()"
+                <button (click)="changeEmail()" type="button"
                     style="background-color: var(--zielony); color: var(--bialy); height: 50px; width: 100px;">Zmień
                     email</button>
             </div>
@@ -64,12 +65,13 @@
             </div>
             <div *ngIf="isChangeEmail" class="col-3">
                 <div style="margin-top: 52px;"> </div>
-                <div><button type="submit" style="background-color: var(--zielony); color: var(--bialy);">Zapisz</button></div>
+                <div><button type="submit"
+                        style="background-color: var(--zielony); color: var(--bialy);">Zapisz</button></div>
             </div>
         </div>
     </form>
     <div style="position: absolute; bottom: 0; right: 0;">
-        <button style="background-color: red;">Usuń konto</button>
+        <button (click)="deleteUser()" style="background-color: red;">Usuń konto</button>
     </div>
 
 </div>

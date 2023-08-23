@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-options',
@@ -22,7 +23,8 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
 
   constructor(private _http: HttpClient,
     private _userService: UserService,
-    private _fb: FormBuilder) {
+    private _fb: FormBuilder,
+    private _router: Router) {
 
       this.formLogin = _fb.group({
         newLogin: _fb.control(null),
@@ -66,13 +68,14 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
 
   changeToNewLogin() {
     const formData = this.formLogin.value;
-    this._http.post(`http://localhost:5168/api/user/${this._userService.getUserId()}/update`, formData).subscribe(
-        response => {
+    this._http.put(`http://localhost:5168/api/user/${this._userService.getUserId()}`, formData).subscribe(
+        (response: any) => {
             console.log('Pomyślnie zmodyfikowano login!', response);
+            localStorage.removeItem('token');
+          this._router.navigateByUrl('/login');
         },
-        error => {
+        (error: any) => {
             console.error('Błąd podczas nadpisywania loginu:', error);
-        
         }
     );
   }
@@ -82,9 +85,11 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
     let email = this.formEmail.controls['newEmail'].value;
     let repeatEmail= this.formEmail.controls['repeatNewEmail'].value;
     if ( email === repeatEmail) {
-      this._http.post(`http://localhost:5168/api/user/${this._userService.getUserId()}/update`, formData).subscribe(
+      this._http.put(`http://localhost:5168/api/user/${this._userService.getUserId()}`, formData).subscribe(
         response => {
             console.log('Pomyślnie zmodyfikowano email!', response);
+            localStorage.removeItem('token');
+          this._router.navigateByUrl('/login');
         },
         error => {
             console.error('Błąd podczas nadpisywania emaila:', error);
@@ -101,9 +106,11 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
     let password = this.formPassword.controls['newPassword'].value;
     let repeatPassword = this.formPassword.controls['repeatNewPassword'].value;
     if ( password === repeatPassword) {
-      this._http.post(`http://localhost:5168/api/user/${this._userService.getUserId()}/update`, formData).subscribe(
+      this._http.put(`http://localhost:5168/api/user/${this._userService.getUserId()}`, formData).subscribe(
         response => {
             console.log('Pomyślnie zmodyfikowano hasła!', response);
+            localStorage.removeItem('token');
+          this._router.navigateByUrl('/login');
         },
         error => {
             console.error('Błąd podczas nadpisywania hasła:', error);
@@ -136,6 +143,19 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
     );
   }
 
+  deleteUser() {
+    this._http.delete(`http://localhost:5168/api/user/${this._userService.getUserId()}`).subscribe(
+      response => {
+          console.log('Pomyślnie usunięto użytkownika!', response);
+          localStorage.removeItem('token');
+          this._router.navigateByUrl('/login');
+      },
+      error => {
+          console.error('Błąd podczas usuwania użytkownika:', error);
+      
+      }
+  );
+  }
 
   changeLogin() {
     this.isChangeLogin = !this.isChangeLogin;
