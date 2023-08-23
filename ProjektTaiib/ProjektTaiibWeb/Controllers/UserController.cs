@@ -134,7 +134,7 @@ namespace ProjektTaiibWeb.Controllers
             unitOfWork.UserRepository.AddUser(user);
             unitOfWork.SaveChanges();
 
-            return Ok("Rejestracja zakończona pomyślnie.");
+            return Ok(new RegisterResponse("Rejestracja zakończona pomyślnie."));
         }
 
 
@@ -221,7 +221,7 @@ namespace ProjektTaiibWeb.Controllers
             }
             unitOfWork.UserRepository.UpdateUser(user);
             unitOfWork.SaveChanges();
-            return Ok("Pomyślnie zaktualizowano ustawienia użytkownika.");
+            return Ok(new RegisterResponse("Pomyślnie zaktualizowano ustawienia użytkownika."));
         }
 
         // GET: User/Delete/5

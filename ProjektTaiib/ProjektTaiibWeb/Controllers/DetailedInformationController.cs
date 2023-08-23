@@ -112,7 +112,7 @@ namespace ProjektTaiibWeb.Controllers
             unitOfWork.DetailedInformationRepository.UpdateInformation(detailedInfo);
             unitOfWork.SaveChanges();
 
-            return Ok("Pomyślnie zaktualizowano dane użytkownika.");
+            return Ok(new RegisterResponse("Pomyślnie zaktualizowano dane użytkownika."));
         }
 
         // POST: DetailedInformation/Edit/5
