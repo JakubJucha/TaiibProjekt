@@ -30,5 +30,18 @@ export class UserService {
       return null;
     }
   }
+
+  getUserId(): number | null {
+    const token = localStorage.getItem('token');
+    let userId: number;
+    if (token) {
+      const tokenPayload = this.getDecodedToken(token);
+      console.log('payload ',tokenPayload)
+      userId = tokenPayload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+      console.log('userID: ', userId);
+      return userId;
+    }
+    return null;
+  }
  
 }
