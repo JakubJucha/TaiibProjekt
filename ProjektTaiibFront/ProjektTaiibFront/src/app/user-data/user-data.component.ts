@@ -49,7 +49,7 @@ export class UserDataComponent implements OnInit {
 
   updateUserData() {
     const formData = this.form.value;
-    this.http.post(`http://localhost:5168/api/user/${this._userId}/update`, formData).subscribe(
+    this.http.post(`http://localhost:5168/api/detailedInformation/${this._userId}/update`, formData).subscribe(
         response => {
             console.log('Pomyślnie zmodyfikowano dane!', response);
         },

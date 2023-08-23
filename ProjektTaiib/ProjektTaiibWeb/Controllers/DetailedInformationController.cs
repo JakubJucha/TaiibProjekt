@@ -12,9 +12,12 @@ using ProjektTaiib.DAL.Repositories.EventR;
 using ProjektTaiib.DAL.Repositories.SponsorR;
 using ProjektTaiib.DAL.Repositories.TicketR;
 using ProjektTaiib.DAL.Repositories.UserR;
+using ProjektTaiibWeb.DTO;
 
 namespace ProjektTaiibWeb.Controllers
 {
+    [ApiController]
+    [Route("api/detailedInformation")]
     public class DetailedInformationController : Controller
     {
         private readonly ProjektTaiibDbContext _context;
@@ -25,10 +28,11 @@ namespace ProjektTaiibWeb.Controllers
         private readonly ITicketRepository ticketRepository;
         private readonly ISponsorRepository sponsorRepository;
 
-        public DetailedInformationController(ProjektTaiibDbContext context)
+        public DetailedInformationController(ProjektTaiibDbContext context, IDetailedInformationRepository detailedInformationRepository)
         {
+            this.detailedInformationRepository = detailedInformationRepository;
             _context = context;
-            unitOfWork = new UnitOfWork(_context, userRepository, detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
+            unitOfWork = new UnitOfWork(_context, userRepository, this.detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
         }
 
         // GET: DetailedInformation
@@ -82,20 +86,33 @@ namespace ProjektTaiibWeb.Controllers
         }
 
         // GET: DetailedInformation/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpPost("{id}/update")]
+        public async Task<IActionResult> UpdateDetailedInfo(int id, [FromBody] UserDetails updatedDetails)
         {
-            if (id == null || unitOfWork.DetailedInformationRepository == null)
+            
+            var detailedInfo = await unitOfWork.DetailedInformationRepository.FindAsync(detailedInformationRepository
+                .getInformationIdByUserId(id));
+            if (detailedInfo == null)
             {
                 return NotFound();
             }
 
-            var detailedInformation = await unitOfWork.DetailedInformationRepository.FindAsync(id);
-            if (detailedInformation == null)
-            {
-                return NotFound();
-            }
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id_user", "Email", detailedInformation.UserId);
-            return View(detailedInformation);
+            detailedInfo.Street = updatedDetails.Street;
+            detailedInfo.City = updatedDetails.City;
+            detailedInfo.Surname = updatedDetails.Surname;
+            detailedInfo.House_number = updatedDetails.HouseNumber;
+            detailedInfo.Local_number = updatedDetails.LocalNumber;
+            detailedInfo.Country = updatedDetails.Country;
+            detailedInfo.Additional_information = updatedDetails.AdditionalInformation;
+            detailedInfo.Name = updatedDetails.Name;
+            detailedInfo.Phone = updatedDetails.PhoneNumber;
+            detailedInfo.Zip_code = updatedDetails.ZipCode;
+            detailedInfo.Payment = updatedDetails.Payment;
+
+            unitOfWork.DetailedInformationRepository.UpdateInformation(detailedInfo);
+            unitOfWork.SaveChanges();
+
+            return Ok("Pomyślnie zaktualizowano dane użytkownika.");
         }
 
         // POST: DetailedInformation/Edit/5

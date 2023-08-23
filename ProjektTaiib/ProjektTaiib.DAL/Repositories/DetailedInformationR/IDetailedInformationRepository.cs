@@ -16,8 +16,9 @@ namespace ProjektTaiib.DAL.Repositories.DetailedInformationR
         void DeleteInformation(DetailedInformation detailedInformation);
         void DeleteInformationById(int id);
         bool ExistInformation(int id);
+        int getInformationIdByUserId(int userId);
 
-        
+
         Task<DetailedInformation?> FirstOrDefaultAsync(int? id);
         Task<DetailedInformation?> FindAsync(int? id);
 

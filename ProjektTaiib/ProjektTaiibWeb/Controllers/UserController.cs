@@ -150,7 +150,8 @@ namespace ProjektTaiibWeb.Controllers
                     return NotFound("Użytkownik nie znaleziony.");
                 }
 
-                var detailedInfo = _detailedInformationRepository.GetInformationById(user.Id_user);
+                var detailedInfo = _detailedInformationRepository
+                    .GetInformationById(_detailedInformationRepository.getInformationIdByUserId(user.Id_user));
 
                 if (detailedInfo == null)
                 {
@@ -184,44 +185,8 @@ namespace ProjektTaiibWeb.Controllers
                 return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
             }
         }
-        //[AllowAnonymous]
-        //[HttpPost("login")]
-        //public IActionResult Login(LoginRequest request)
-        //{
-        //    try
-        //    {
-        //        var user = _userRepository.GetUserByUsername(request.Username);
 
-        //        if (user == null || user.Password != request.Password)
-        //        {
-        //            throw new InvalidOperationException("Nieprawidłowa nazwa użytkownika lub hasło.");
-        //        }
-
-
-        //        var token = GenerateJwtToken(user);
-        //        return Ok(new { Token = token });
-        //    }
-        //    catch (InvalidOperationException ex)
-        //    {
-        //        return Unauthorized(ex.Message);
-        //    }
-        //}
-
-        // GET: User/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || unitOfWork.UserRepository== null)
-            {
-                return NotFound();
-            }
-
-            var user = await unitOfWork.UserRepository.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
-        }
+       
 
         // POST: User/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.

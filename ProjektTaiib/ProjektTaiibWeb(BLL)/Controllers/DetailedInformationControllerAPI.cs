@@ -16,6 +16,8 @@ namespace ProjektTaiibWeb_BLL_.Controllers
             this._detailedInformationService = detailedInformationService;
         }
 
+
+
         [HttpGet("payment")]
         public IEnumerable<DetailedInformation> InformacjePoPlatnosci(string payment)
         {

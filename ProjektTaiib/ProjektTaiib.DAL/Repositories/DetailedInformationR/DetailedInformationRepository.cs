@@ -63,10 +63,18 @@ namespace ProjektTaiib.DAL.Repositories.DetailedInformationR
             return context.DetailedInformation.ToList();
         }
 
+        public int getInformationIdByUserId(int userId)
+        {
+            var id = context.DetailedInformation
+            .Where(a => a.UserId == userId)
+            .Select(a => a.Id_information)
+            .FirstOrDefault();
+            return id;
+        }
         public DetailedInformation GetInformationById(int id)
         {
-
-            return context.DetailedInformation.FirstOrDefault(a => a.Id_information == id);
+            var result = context.DetailedInformation.FirstOrDefault(a => a.Id_information == id);
+            return result;
 
         }
 
