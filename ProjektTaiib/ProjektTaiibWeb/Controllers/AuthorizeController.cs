@@ -54,7 +54,8 @@ namespace ProjektTaiibWeb.Controllers
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Moderator ? "admin" : "user")
+            new Claim(ClaimTypes.Role, user.Moderator ? "admin" : "user"),
+            new Claim(ClaimTypes.NameIdentifier, user.Id_user.ToString()),
         };
                 var parametryTokena = new JwtSecurityToken(
                     issuer: "http://localhost:5168",

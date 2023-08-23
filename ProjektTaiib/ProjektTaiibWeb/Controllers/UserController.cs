@@ -186,41 +186,25 @@ namespace ProjektTaiibWeb.Controllers
             }
         }
 
-       
 
-        // POST: User/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_user,Username,Email,Password,Moderator")] User user)
+
+        [HttpPost("{id}/update")]
+        public async Task<IActionResult> Edit(int id, [FromBody] UserSettings updatedSettings)
         {
+            var user = await unitOfWork.UserRepository.FindAsync(id);
+
             if (id != user.Id_user)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    unitOfWork.UserRepository.UpdateUser(user);
-                    await unitOfWork.SaveAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id_user))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+            user.Username = updatedSettings.NewLogin ?? user.Username;
+            user.Email = updatedSettings.NewEmail ?? user.Email;
+            user.Password = updatedSettings.NewPassword ?? user.Password;
+
+            unitOfWork.UserRepository.UpdateUser(user);
+            unitOfWork.SaveChanges();
+            return Ok("Pomyślnie zaktualizowano ustawienia użytkownika.");
         }
 
         // GET: User/Delete/5
