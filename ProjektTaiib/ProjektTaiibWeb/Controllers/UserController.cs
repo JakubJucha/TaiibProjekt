@@ -134,7 +134,7 @@ namespace ProjektTaiibWeb.Controllers
             unitOfWork.UserRepository.AddUser(user);
             unitOfWork.SaveChanges();
 
-            return Ok(new RegisterResponse("Rejestracja zakończona pomyślnie."));
+            return Ok(new { Message = "Rejestracja zakończona pomyślnie." });
         }
 
 
@@ -189,7 +189,7 @@ namespace ProjektTaiibWeb.Controllers
 
 
         [AllowAnonymous]
-        [HttpPost("{id}/update")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Edit(int id, [FromBody] UserSettings updatedSettings)
         {
             var user = await unitOfWork.UserRepository.FindAsync(id);
@@ -221,25 +221,36 @@ namespace ProjektTaiibWeb.Controllers
             }
             unitOfWork.UserRepository.UpdateUser(user);
             unitOfWork.SaveChanges();
-            return Ok(new RegisterResponse("Pomyślnie zaktualizowano ustawienia użytkownika."));
+            return Ok(new { Message = "Pomyślnie zaktualizowano ustawienia użytkownika." });
         }
 
-        // GET: User/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        
+        [AllowAnonymous]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || unitOfWork.UserRepository== null)
-            {
-                return NotFound();
-            }
+           
 
-            var user = await unitOfWork.UserRepository
-                .FirstOrDefaultAsync(id);
+            var user = await unitOfWork.UserRepository.FirstOrDefaultAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+
+            var detailedInfo = await unitOfWork.DetailedInformationRepository.FindAsync(user.Id_user);
+            if (detailedInfo != null)
+            {
+                unitOfWork.DetailedInformationRepository.DeleteInformation(detailedInfo);
+                unitOfWork.SaveChanges();
+            }
+
+
+            unitOfWork.UserRepository.DeleteUser(user);
+            unitOfWork.SaveChanges();
+
+
+            return Ok(new { Message = "Pomyślnie usunięto konto użytkownika." }); 
         }
 
         // POST: User/Delete/5

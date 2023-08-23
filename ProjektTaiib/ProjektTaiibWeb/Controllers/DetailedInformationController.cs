@@ -86,7 +86,7 @@ namespace ProjektTaiibWeb.Controllers
         }
 
         // GET: DetailedInformation/Edit/5
-        [HttpPost("{id}/update")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDetailedInfo(int id, [FromBody] UserDetails updatedDetails)
         {
             
@@ -112,7 +112,10 @@ namespace ProjektTaiibWeb.Controllers
             unitOfWork.DetailedInformationRepository.UpdateInformation(detailedInfo);
             unitOfWork.SaveChanges();
 
-            return Ok(new RegisterResponse("Pomyślnie zaktualizowano dane użytkownika."));
+            return Ok(new
+            {
+                Message = "Pomyślnie zaktualizowano dane użytkownika."
+            });
         }
 
         // POST: DetailedInformation/Edit/5
