@@ -210,11 +210,14 @@ namespace ProjektTaiibWeb.Controllers
             }
             user.Email = updatedSettings.NewEmail ?? user.Email;
 
-            if(updatedSettings.CurrentPassword !=null && updatedSettings.CurrentPassword == user.Password)
-            user.Password = updatedSettings.NewPassword ?? user.Password;
-            else
+            if (updatedSettings.CurrentPassword != null)
             {
-                return BadRequest("Obence hasło jest nieprawidłowe.");
+                if (updatedSettings.CurrentPassword == user.Password)
+                    user.Password = updatedSettings.NewPassword ?? user.Password;
+                else
+                {
+                    return BadRequest("Obence hasło jest nieprawidłowe.");
+                }
             }
             unitOfWork.UserRepository.UpdateUser(user);
             unitOfWork.SaveChanges();
