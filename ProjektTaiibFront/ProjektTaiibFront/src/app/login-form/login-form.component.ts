@@ -38,5 +38,9 @@ export class LoginFormComponent {
       }
   );
 }
+
+back() {
+  console.log('guzik co nic nie robi lmao')
+}
  
 }
