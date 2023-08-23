@@ -71,6 +71,7 @@ namespace ProjektTaiib.DAL.Repositories.DetailedInformationR
             .FirstOrDefault();
             return id;
         }
+        //test commit
         public DetailedInformation GetInformationById(int id)
         {
             var result = context.DetailedInformation.FirstOrDefault(a => a.Id_information == id);
