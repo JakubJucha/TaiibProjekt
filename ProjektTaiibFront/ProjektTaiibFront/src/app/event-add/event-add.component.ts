@@ -19,16 +19,16 @@ this.addEventForm = this._fb.group({
   date: this._fb.control(null,[Validators.required]),
   description: this._fb.control(null,[Validators.required]),
   category: this._fb.control(null,[Validators.required]),
-  amountTickt: this._fb.control(null,[Validators.required,]),
-  ticketPrice: this._fb.control(null,[Validators.required,]),
-  sponsor: this._fb.control(null,[Validators.required]),
+  amountTicket: this._fb.control(null,[Validators.required, Validators.pattern(/^[0-9]+$/)]),
+  ticketPrice: this._fb.control(null,[Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]),
+  sponsors: this._fb.control(null,[Validators.required]),
 });
 }
 
 addEvent() {
   const formData = this.addEventForm.value;
   console.log(formData);
-  this.http.post('http://localhost:5168/api/event', formData).subscribe(
+  this.http.post('http://localhost:5168/api/event/add', formData).subscribe(
       response => {
           console.log('Dodano nowe wydarzenie!', response);
           this.addEventForm.reset();
@@ -40,6 +40,9 @@ addEvent() {
   );
 }
 
+isValid(name: string) : boolean {
+  return this.addEventForm.controls[name].valid || !this.addEventForm.controls[name].dirty;
+}
 
 
 }

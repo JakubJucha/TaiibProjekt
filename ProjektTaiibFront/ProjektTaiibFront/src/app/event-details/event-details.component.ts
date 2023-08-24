@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class EventDetailsComponent {
 
+  get isLoggedIn() : boolean {
+    const token = localStorage.getItem('token');
+    console.log('token ',token)
+    return token != null && token.length > 0;
+  }
 }

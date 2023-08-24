@@ -9,7 +9,7 @@
                         Nazwa wydarzenia:
                     </div>
                     <div class="col-6">
-                        <input id="eventName" style="width: 300px;" type="text" formControlName="eventName">
+                        <input [ngClass]="{'error': !isValid('eventName')}" id="eventName" style="width: 300px;" type="text" formControlName="eventName">
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
                         Miejsce
                     </div>
                     <div class="col-6">
-                        <input id="location" style="width: 300px;" type="text" formControlName="location">
+                        <input [ngClass]="{'error': !isValid('location')}" id="location" style="width: 300px;" type="text" formControlName="location">
                     </div>
                 </div>
 
@@ -27,7 +27,7 @@
                         Data:
                     </div>
                     <div class="col-6 custom-datepicker">
-                        <input matInput type="datetime-local" placeholder="MM/DD/YYYY" formControlName="date"
+                        <input [ngClass]="{'error': !isValid('date')}" matInput type="datetime-local" placeholder="MM/DD/YYYY" formControlName="date"
                             style="width: 300px;">
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                         Opis:
                     </div>
                     <div class="col-6">
-                        <textarea style="resize: none; width: 300px;" type="text" name="description" id="description"
+                        <textarea [ngClass]="{'error': !isValid('description')}" style="resize: none; width: 300px;" type="text" name="description" id="description"
                             formControlName="description"></textarea>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                         Ilość biletów:
                     </div>
                     <div class="col-6">
-                        <input type="number" min="1" id="amountTickt" style="width: 300px;"
-                            formControlName="amountTickt">
+                        <input [ngClass]="{'error': !isValid('amountTicket')}" type="number" min="1" id="amountTicket" style="width: 300px;"
+                            formControlName="amountTicket">
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                         Kategoria:
                     </div>
                     <div class="col-6">
-                        <input id="category" style="width: 300px;" type="text" formControlName="category">
+                        <input [ngClass]="{'error': !isValid('category')}" id="category" style="width: 300px;" type="text" formControlName="category">
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@
                         Cena biletu normalnego:
                     </div>
                     <div class="col-6">
-                        <input style="width: 300px;" type="number" formControlName="ticketPrice">
+                        <input [ngClass]="{'error': !isValid('ticketPrice')}"style="width: 300px;" type="number" formControlName="ticketPrice">
                     </div>
                 </div>
 
@@ -75,8 +75,8 @@
                         Sponsorzy:
                     </div>
                     <div class="col-6">
-                        <textarea style="resize: none; width: 300px;" type="text" name="sponsor" id="sponsor"
-                            formControlName="sponsor"></textarea>
+                        <textarea [ngClass]="{'error': !isValid('sponsors')}" style="resize: none; width: 300px;" type="text" name="sponsors" id="sponsors"
+                            formControlName="sponsors"></textarea>
                     </div>
                 </div>
 

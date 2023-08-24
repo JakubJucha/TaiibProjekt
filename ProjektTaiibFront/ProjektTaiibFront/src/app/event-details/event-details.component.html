@@ -28,9 +28,10 @@
             <div style="margin-bottom: 10px"> <a style="font-weight: bold;font-size: larger;">Sponsorzy:</a> oni nwm jak beda wyswietlani</div>
         </div>
         <div style="position: absolute; bottom: 0; right: 0; padding: 10px;">
-            <button routerLink="buyTicket" style="background-color: var(--zielony); width: 100px; height: 60px;">
+            <button *ngIf="isLoggedIn" routerLink="buyTicket" style="background-color: var(--zielony); width: 100px; height: 60px;">
                 <div>Kup teraz</div>
                 <mat-icon>add_shopping_cart</mat-icon></button>
+                <div *ngIf="!isLoggedIn">Zaloguj się aby kupić bilet!</div>
         </div>
     </div>
 </div>
