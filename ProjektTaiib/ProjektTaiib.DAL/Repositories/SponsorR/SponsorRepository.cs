@@ -38,6 +38,11 @@ namespace ProjektTaiib.DAL.Repositories.SponsorR
 #pragma warning restore CS8604 // Możliwy argument odwołania o wartości null.
         }
 
+        public Sponsor GetSponsorByName(string name)
+        {
+            return context.Sponsors.FirstOrDefault(a => a.Sponsor_name == name);
+        }
+
         public bool ExistSponsor(int id)
         {
             return context.Sponsors.Any(a => a.Id_sponsor == id);

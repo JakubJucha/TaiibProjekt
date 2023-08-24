@@ -10,6 +10,7 @@ namespace ProjektTaiib.DAL.Repositories.SponsorR
     public interface ISponsorRepository
     {
         Sponsor GetSponsorById(int id);
+        Sponsor GetSponsorByName(string name);
         IEnumerable<Sponsor> GetAllSponsors();
         void AddSponsor(Sponsor sponsor);
         void UpdateSponsor(Sponsor sponsor);

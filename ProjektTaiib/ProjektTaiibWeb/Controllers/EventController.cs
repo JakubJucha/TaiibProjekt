@@ -12,9 +12,12 @@ using ProjektTaiib.DAL.Repositories.EventR;
 using ProjektTaiib.DAL.Repositories.SponsorR;
 using ProjektTaiib.DAL.Repositories.TicketR;
 using ProjektTaiib.DAL.Repositories.UserR;
+using ProjektTaiibWeb.DTO;
 
 namespace ProjektTaiibWeb.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class EventController : Controller
     {
         private readonly ProjektTaiibDbContext _context;
@@ -25,7 +28,7 @@ namespace ProjektTaiibWeb.Controllers
         private readonly ITicketRepository ticketRepository;
         private readonly ISponsorRepository sponsorRepository;
 
-        public EventController(ProjektTaiibDbContext context)
+        public EventController(ProjektTaiibDbContext context, IEventRepository eventRepository, ITicketRepository ticketRepository, ISponsorRepository sponsorRepository)
         {
             _context = context;
             unitOfWork = new UnitOfWork(_context, userRepository, detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
@@ -58,15 +61,60 @@ namespace ProjektTaiibWeb.Controllers
         }
 
         // GET: Event/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Event/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        public IActionResult Create([FromBody] EventInformation eventInfo)
+        {
+            if (eventInfo == null)
+            {
+                return BadRequest("Nieprawidłowe dane wydarzenia.");
+            }
+
+            var newEvent = new Event
+            {
+                Event_name = eventInfo.EventName,
+                Date = eventInfo.Datetime,
+                Location = eventInfo.Location,
+                Description = eventInfo.Description,
+                Category = eventInfo.Category,
+                TicketPrice = eventInfo.TicketPrice,
+                AmountTicket = eventInfo.TicketAmount,
+            };
+
+            string[] sponsorNames = eventInfo.Sponsors.Split(';');
+            List<Sponsor> sponsors = new List<Sponsor>();
+            foreach (string sponsorName in sponsorNames)
+            {
+                Sponsor existingSponsor = unitOfWork.SponsorRepository.GetSponsorByName(sponsorName);
+                if (existingSponsor != null)
+                {
+                    existingSponsor.Events.Add(newEvent);
+                    sponsors.Add(existingSponsor);
+                    
+                }
+                else
+                {
+                    List<Event> sponsorEvents = new List<Event>() { newEvent };
+                    Sponsor newSponsor = new Sponsor { Sponsor_name = sponsorName,Events=sponsorEvents};
+                    sponsors.Add(newSponsor);
+                    sponsorRepository.AddSponsor(newSponsor);
+                }
+            }
+            newEvent.Sponsors = sponsors;
+
+            unitOfWork.SaveChanges();
+
+
+            eventRepository.AddEvent(newEvent);
+            unitOfWork.SaveChanges();
+
+            return Ok("Wydarzenie zostało utworzone.");
+        }
+    
+
+    // POST: Event/Create
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id_event,Event_name,Date,Location,Description,Category")] Event @event)
         {
