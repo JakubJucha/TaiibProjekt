@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -61,53 +62,61 @@ namespace ProjektTaiibWeb.Controllers
         }
 
         // GET: Event/Create
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Create([FromBody] EventInformation eventInfo)
         {
-            if (eventInfo == null)
+            try
             {
-                return BadRequest("Nieprawidłowe dane wydarzenia.");
-            }
-
-            var newEvent = new Event
-            {
-                Event_name = eventInfo.EventName,
-                Date = eventInfo.Datetime,
-                Location = eventInfo.Location,
-                Description = eventInfo.Description,
-                Category = eventInfo.Category,
-                TicketPrice = eventInfo.TicketPrice,
-                AmountTicket = eventInfo.TicketAmount,
-            };
-
-            string[] sponsorNames = eventInfo.Sponsors.Split(';');
-            List<Sponsor> sponsors = new List<Sponsor>();
-            foreach (string sponsorName in sponsorNames)
-            {
-                Sponsor existingSponsor = unitOfWork.SponsorRepository.GetSponsorByName(sponsorName);
-                if (existingSponsor != null)
+                if (eventInfo == null)
                 {
-                    existingSponsor.Events.Add(newEvent);
-                    sponsors.Add(existingSponsor);
-                    
+                    return BadRequest("Nieprawidłowe dane wydarzenia.");
                 }
-                else
+
+                var newEvent = new Event
                 {
-                    List<Event> sponsorEvents = new List<Event>() { newEvent };
-                    Sponsor newSponsor = new Sponsor { Sponsor_name = sponsorName,Events=sponsorEvents};
-                    sponsors.Add(newSponsor);
-                    sponsorRepository.AddSponsor(newSponsor);
+                    Event_name = eventInfo.EventName,
+                    Date = eventInfo.Datetime,
+                    Location = eventInfo.Location,
+                    Description = eventInfo.Description,
+                    Category = eventInfo.Category,
+                    TicketPrice = eventInfo.TicketPrice,
+                    AmountTicket = eventInfo.TicketAmount,
+                };
+
+                string[] sponsorNames = eventInfo.Sponsors.Split(';');
+                List<Sponsor> sponsors = new List<Sponsor>();
+                foreach (string sponsorName in sponsorNames)
+                {
+                    Sponsor existingSponsor = unitOfWork.SponsorRepository.GetSponsorByName(sponsorName);
+                    if (existingSponsor != null)
+                    {
+                        existingSponsor.Events.Add(newEvent);
+                        sponsors.Add(existingSponsor);
+
+                    }
+                    else
+                    {
+                        List<Event> sponsorEvents = new List<Event>() { newEvent };
+                        Sponsor newSponsor = new Sponsor { Sponsor_name = sponsorName, Events = sponsorEvents };
+                        sponsors.Add(newSponsor);
+                        sponsorRepository.AddSponsor(newSponsor);
+                    }
                 }
+                newEvent.Sponsors = sponsors;
+
+                unitOfWork.SaveChanges();
+
+
+                eventRepository.AddEvent(newEvent);
+                unitOfWork.SaveChanges();
+
+                return Ok(new { Message = "Wydarzenie zostało utworzone." });
             }
-            newEvent.Sponsors = sponsors;
-
-            unitOfWork.SaveChanges();
-
-
-            eventRepository.AddEvent(newEvent);
-            unitOfWork.SaveChanges();
-
-            return Ok("Wydarzenie zostało utworzone.");
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
+            }
         }
     
 
