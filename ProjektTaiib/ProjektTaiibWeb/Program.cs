@@ -7,6 +7,9 @@ using ProjektTaiib.DAL.Repositories.UserR;
 using ProjektTaiib.DAL.Repositories.DetailedInformationR;
 using System.Text;
 using System.Text.Json.Serialization;
+using ProjektTaiib.DAL.Repositories.EventR;
+using ProjektTaiib.DAL.Repositories.SponsorR;
+using ProjektTaiib.DAL.Repositories.TicketR;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(opt =>
@@ -33,6 +36,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ProjektTaiibDbContext>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDetailedInformationRepository, DetailedInformationRepository>();
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+builder.Services.AddScoped<ISponsorRepository, SponsorRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -17,8 +18,8 @@ using ProjektTaiibWeb.DTO;
 
 namespace ProjektTaiibWeb.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/event")]
     public class EventController : Controller
     {
         private readonly ProjektTaiibDbContext _context;
@@ -31,6 +32,9 @@ namespace ProjektTaiibWeb.Controllers
 
         public EventController(ProjektTaiibDbContext context, IEventRepository eventRepository, ITicketRepository ticketRepository, ISponsorRepository sponsorRepository)
         {
+            this.eventRepository = eventRepository;
+            this.ticketRepository = ticketRepository;
+            this.sponsorRepository = sponsorRepository;
             _context = context;
             unitOfWork = new UnitOfWork(_context, userRepository, detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
         }
@@ -62,8 +66,8 @@ namespace ProjektTaiibWeb.Controllers
         }
 
         // GET: Event/Create
-        [AllowAnonymous]
-        [HttpPost]
+   
+        [HttpPost("add")]
         public IActionResult Create([FromBody] EventInformation eventInfo)
         {
             try
@@ -76,12 +80,12 @@ namespace ProjektTaiibWeb.Controllers
                 var newEvent = new Event
                 {
                     Event_name = eventInfo.EventName,
-                    Date = eventInfo.Datetime,
+                    Date = eventInfo.Date,
                     Location = eventInfo.Location,
                     Description = eventInfo.Description,
                     Category = eventInfo.Category,
-                    TicketPrice = eventInfo.TicketPrice,
-                    AmountTicket = eventInfo.TicketAmount,
+                    Ticket_price = eventInfo.TicketPrice,
+                    Amount_ticket = eventInfo.AmountTicket,
                 };
 
                 string[] sponsorNames = eventInfo.Sponsors.Split(';');
@@ -100,16 +104,19 @@ namespace ProjektTaiibWeb.Controllers
                         List<Event> sponsorEvents = new List<Event>() { newEvent };
                         Sponsor newSponsor = new Sponsor { Sponsor_name = sponsorName, Events = sponsorEvents };
                         sponsors.Add(newSponsor);
-                        sponsorRepository.AddSponsor(newSponsor);
+                        unitOfWork.SponsorRepository.AddSponsor(newSponsor);
                     }
                 }
                 newEvent.Sponsors = sponsors;
 
+                unitOfWork.EventRepository.AddEvent(newEvent);
                 unitOfWork.SaveChanges();
 
 
-                eventRepository.AddEvent(newEvent);
                 unitOfWork.SaveChanges();
+
+
+                
 
                 return Ok(new { Message = "Wydarzenie zostało utworzone." });
             }
