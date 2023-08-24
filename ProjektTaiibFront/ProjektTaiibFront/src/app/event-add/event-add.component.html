@@ -1,94 +1,91 @@
 <div class="container" style="padding: 10px;">
     <div class="row-margins mt-5" style="background-color: var(--jasny); padding: 100xp;">
         <div style="padding: 10px; font-weight: bold; font-size: 24px;">Dodaj wydarzenie</div>
-        <div style="display: flex; flex-direction: column; padding: 20px; margin-top: 30px; margin-left: 180px; justify-content: center; position: relative;">
-            
-            <div class="row" style="margin-bottom: 10px; ">
-                <div class="col-3">
-                    Nazwa wydarzenia:
+        <div
+            style="display: flex; flex-direction: column; padding: 20px; margin-top: 30px; margin-left: 180px; justify-content: center; position: relative;">
+            <form [formGroup]="addEventForm" (submit)="addEvent()">
+                <div class="row" style="margin-bottom: 10px; ">
+                    <div class="col-3">
+                        Nazwa wydarzenia:
+                    </div>
+                    <div class="col-6">
+                        <input id="eventName" style="width: 300px;" type="text" formControlName="eventName">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 10px; ">
-                <div class="col-3">
-                    Miejsce
+                <div class="row" style="margin-bottom: 10px; ">
+                    <div class="col-3">
+                        Miejsce
+                    </div>
+                    <div class="col-6">
+                        <input id="location" style="width: 300px;" type="text" formControlName="location">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 10px; ">
-                <div class="col-3">
-                    Data:
+                <div class="row" style="margin-bottom: 10px; ">
+                    <div class="col-3">
+                        Data:
+                    </div>
+                    <div class="col-6 custom-datepicker">
+                        <input matInput type="datetime-local" placeholder="MM/DD/YYYY" formControlName="date"
+                            style="width: 300px;">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 10px; ">
-                <div class="col-3">
-                    Godzina:
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-3">
+                        Opis:
+                    </div>
+                    <div class="col-6">
+                        <textarea style="resize: none; width: 300px;" type="text" name="description" id="description"
+                            formControlName="description"></textarea>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 10px;">
-                <div class="col-3">
-                    Opis:
+                <div class="row" style="margin-bottom: 10px; ">
+                    <div class="col-3">
+                        Ilość biletów:
+                    </div>
+                    <div class="col-6">
+                        <input type="number" min="1" id="amountTickt" style="width: 300px;"
+                            formControlName="amountTickt">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <textarea style="resize: none; width: 300px;" type="text" name="additionalInformation"
-                        id="additionalInformation" formControlName="additionalInformation"></textarea>
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 10px; ">
-                <div class="col-3">
-                    Ilość biletów:
+                <div class="row" style="margin-bottom: 10px; ">
+                    <div class="col-3">
+                        Kategoria:
+                    </div>
+                    <div class="col-6">
+                        <input id="category" style="width: 300px;" type="text" formControlName="category">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 10px; ">
-                <div class="col-3">
-                    Kategoria:
+                <div class="row" style="margin-bottom: 10px; ">
+                    <div class="col-3">
+                        Cena biletu normalnego:
+                    </div>
+                    <div class="col-6">
+                        <input style="width: 300px;" type="number" formControlName="ticketPrice">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 10px; ">
-                <div class="col-3">
-                    Cena biletu normalnego:
+                <div class="row" style="margin-bottom: 30px; ">
+                    <div class="col-3">
+                        Sponsorzy:
+                    </div>
+                    <div class="col-6">
+                        <textarea style="resize: none; width: 300px;" type="text" name="sponsor" id="sponsor"
+                            formControlName="sponsor"></textarea>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
 
-            <div class="row" style="margin-bottom: 30px; ">
-                <div class="col-3">
-                    Sponsorzy:
+                <div>
+                    <button type="submit" [disabled]="!addEventForm.valid"
+                        style="background-color: var(--zielony); height: 30px; position: absolute; bottom: 0; right: 0; margin-bottom: 10px; margin-right: 10px;">Dodaj
+                        wydarzenie</button>
                 </div>
-                <div class="col-6">
-                    <input style="width: 300px;" type="text">
-                </div>
-            </div>
-
-            <div>
-                <button style="background-color: var(--zielony); height: 30px; position: absolute; bottom: 0; right: 0; margin-bottom: 10px; margin-right: 10px;">Dodaj wydarzenie</button>
-            </div>
-
+            </form>
         </div>
     </div>
 

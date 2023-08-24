@@ -1,7 +1,6 @@
 <mat-toolbar >
         <span style="margin-right: 5rem;"><a routerLink="mainPage"><mat-icon style="padding-top: 10px; height: 30px;">local_activity</mat-icon>BiletPol</a></span>
-        <a routerLink="eventSearch" mat-button>Sport</a>
-        <a routerLink="eventSearch" mat-button>Muzyka</a>
+        <a routerLink="eventSearch" mat-button>Wydarzenia</a>
         <div class="spacer"></div>
         <a *ngIf="isAdmin" routerLink="addEvent" mat-raised-button>Dodaj wydarzenie</a>
         <a *ngIf="!isLoggedIn" routerLink="login" mat-raised-button>Zaloguj się</a>

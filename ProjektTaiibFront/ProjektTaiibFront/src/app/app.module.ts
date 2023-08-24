@@ -27,6 +27,9 @@ import { UserOptionsComponent } from './user-options/user-options.component';
 import { TicketShowcaseComponent } from './ticket-showcase/ticket-showcase.component';
 import { EventAddComponent } from './event-add/event-add.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
