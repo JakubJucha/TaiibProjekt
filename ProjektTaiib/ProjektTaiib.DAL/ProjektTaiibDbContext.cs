@@ -30,6 +30,8 @@ namespace ProjektTaiib.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
             modelBuilder.Entity<Event>().HasData(
                 new Event { Id_event = 1, Event_name = "Wystawa obrazów Beksińskiego", Date = new DateTime(2024, 10, 23, 18, 00, 00), Location = "Warsaw Art Gallery", Description = "Obrazy hehe", Category = "Wystawa" },
                 new Event { Id_event = 2, Event_name = "Pokaz sztucznych ogni", Date = new DateTime(2024, 12, 31, 23, 45, 00), Location = "Rynek Katowice", Category = "Pokaz" },

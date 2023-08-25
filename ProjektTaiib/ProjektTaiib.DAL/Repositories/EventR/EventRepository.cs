@@ -72,7 +72,16 @@ namespace ProjektTaiib.DAL.Repositories.EventR
 
         public async Task<IEnumerable<Event>> GetAllEventsAsync()
         {
-            return await context.Events.ToListAsync();
+            try
+            {
+                return await context.Events.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+             
+                Console.WriteLine("TO TUTAAAAAJ:       " + ex.Message);
+                return null;
+            }
         }
 
         public void Save()

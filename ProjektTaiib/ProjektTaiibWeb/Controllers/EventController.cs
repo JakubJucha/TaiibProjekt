@@ -65,8 +65,47 @@ namespace ProjektTaiibWeb.Controllers
             return View(@event);
         }
 
-        // GET: Event/Create
-   
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAllEvents()
+        {
+            try
+            {
+                var events = await unitOfWork.EventRepository.GetAllEventsAsync();
+
+                if (events == null)
+                {
+                    return StatusCode(500, "events is null");
+                }
+
+                var eventDtos = events.Select(e => {
+                    if (e == null)
+                    {
+                        throw new Exception("An event in events is null");
+                    }
+
+                    var sponsors = e.Sponsors?.Select(s => s.Sponsor_name);
+                return new EventInformation
+                {
+                    EventName = e.Event_name,
+                    Date = e.Date,
+                    Location = e.Location,
+                    Description = e.Description,
+                    Category = e.Category,
+                    TicketPrice = e.Ticket_price,
+                    AmountTicket = e.Amount_ticket,
+                    Sponsors = sponsors != null ? string.Join(";", sponsors) : "Brak sponsorów"
+                };
+                }).ToList();
+
+                return Ok(eventDtos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
+            }
+        }
+
+
         [HttpPost("add")]
         public IActionResult Create([FromBody] EventInformation eventInfo)
         {
