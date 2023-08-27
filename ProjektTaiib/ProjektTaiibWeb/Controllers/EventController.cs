@@ -49,22 +49,52 @@ namespace ProjektTaiibWeb.Controllers
                           Problem("Entity set 'ProjektTaiibDbContext.Events'  is null.");
         }
 
-        // GET: Event/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            if (id == null || unitOfWork.EventRepository == null)
+            try
             {
-                return NotFound();
-            }
 
-            var @event = await unitOfWork.EventRepository
-                .FirstOrDefaultAsync(id);
-            if (@event == null)
+                var @event = unitOfWork.EventRepository.GetEventById(id);
+
+                if(@event == null)
+                {
+                    return BadRequest("Nie ma wydarzenia z podanym id!");
+                }
+
+                var eventDtos = new EventsResponse
+                {
+                    Id = @event.Id_event,
+                    EventName = @event.Event_name,
+                    Date = @event.Date,
+                    Location = @event.Location,
+                    Description = @event.Description,
+                    Category = @event.Category,
+                    TicketPrice = @event.Ticket_price,
+                    AmountTicket = @event.Amount_ticket,
+
+                };
+
+
+                List<string> sponsors = new List<string>();
+              
+
+                    var query = $"SELECT s.Sponsor_name FROM Sponsors s INNER JOIN EventSponsor es ON s.Id_sponsor = es.SponsorsId_sponsor WHERE es.EventsId_event = {@event.Id_event}";
+
+                    sponsors = _context.Sponsors.FromSqlRaw(query).Select(s => s.Sponsor_name).ToList();
+                    eventDtos.Sponsors = sponsors;
+                    
+                
+
+
+
+
+                return Ok(eventDtos);
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
             }
-
-            return View(@event);
         }
 
         [HttpGet("getAll")]
@@ -112,6 +142,69 @@ namespace ProjektTaiibWeb.Controllers
             }
         }
 
+        [HttpGet("getNewest")]
+        public async Task<IActionResult> GetNewestEvents()
+        {
+            try
+            {
+                DateTime now = DateTime.Now;
+                var events = await unitOfWork.EventRepository.GetAllEventsAsync();
+
+                var upcomingEvents = new List<EventsResponse>();
+
+                foreach (var e in events)
+                {
+                    if (e.Date >= now)
+                    {
+                        var eventDto = new EventsResponse
+                        {
+                            Id = e.Id_event,
+                            EventName = e.Event_name,
+                            Date = e.Date,
+                            Location = e.Location,
+                            Description = e.Description,
+                            Category = e.Category,
+                            TicketPrice = e.Ticket_price,
+                            AmountTicket = e.Amount_ticket,
+                        };
+
+                        upcomingEvents.Add(eventDto);
+                    }
+                }
+
+                upcomingEvents = upcomingEvents.OrderBy(e => e.Date).Take(3).ToList();
+                List<string> sponsors = new List<string>();
+                int counter = 0;
+                foreach (Event ev in events)
+                {
+                   
+                    foreach (EventsResponse er in upcomingEvents)
+                    {
+                     
+                        if (ev.Id_event == er.Id) 
+                        {
+                           
+                            var query = $"SELECT s.Sponsor_name FROM Sponsors s INNER JOIN EventSponsor es ON s.Id_sponsor = es.SponsorsId_sponsor WHERE es.EventsId_event = {upcomingEvents.ElementAt(counter).Id}";
+
+                            sponsors = _context.Sponsors.FromSqlRaw(query).Select(s => s.Sponsor_name).ToList();
+                            upcomingEvents.ElementAt(counter).Sponsors = sponsors; counter++;
+                          
+                        }
+                       
+                    }
+           
+
+                }
+
+
+
+                return Ok(upcomingEvents);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
+            }
+        }
 
         [HttpPost("add")]
         public IActionResult Create([FromBody] EventInformation eventInfo)
