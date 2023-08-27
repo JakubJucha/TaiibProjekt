@@ -27,7 +27,7 @@ namespace ProjektTaiib.DAL.Repositories.EventR
         {
             context.Events.Remove(@event);
         }
-
+       
         public void DeleteEventById(int id)
         {
 #pragma warning disable CS8600 // Konwertowanie literału null lub możliwej wartości null na nienullowalny typ.

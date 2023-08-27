@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
 using ProjektTaiib.DAL.Repositories.DetailedInformationR;
@@ -70,22 +72,12 @@ namespace ProjektTaiibWeb.Controllers
         {
             try
             {
+               
                 var events = await unitOfWork.EventRepository.GetAllEventsAsync();
 
-                if (events == null)
+                var eventDtos = events.Select(e => new EventsResponse
                 {
-                    return StatusCode(500, "events is null");
-                }
-
-                var eventDtos = events.Select(e => {
-                    if (e == null)
-                    {
-                        throw new Exception("An event in events is null");
-                    }
-
-                    var sponsors = e.Sponsors?.Select(s => s.Sponsor_name);
-                return new EventInformation
-                {
+                    Id = e.Id_event,
                     EventName = e.Event_name,
                     Date = e.Date,
                     Location = e.Location,
@@ -93,9 +85,24 @@ namespace ProjektTaiibWeb.Controllers
                     Category = e.Category,
                     TicketPrice = e.Ticket_price,
                     AmountTicket = e.Amount_ticket,
-                    Sponsors = sponsors != null ? string.Join(";", sponsors) : "Brak sponsorów"
-                };
+
                 }).ToList();
+
+
+                List<string> sponsors = new List<string>();
+                int counter = 0;
+                foreach (Event ev in events)
+                {
+                    
+                    var query = $"SELECT s.Sponsor_name FROM Sponsors s INNER JOIN EventSponsor es ON s.Id_sponsor = es.SponsorsId_sponsor WHERE es.EventsId_event = {ev.Id_event}";
+
+                    sponsors = _context.Sponsors.FromSqlRaw(query).Select(s => s.Sponsor_name).ToList();
+                    eventDtos.ElementAt(counter).Sponsors = sponsors;
+                    counter++;
+                }
+                
+                
+
 
                 return Ok(eventDtos);
             }
@@ -134,6 +141,7 @@ namespace ProjektTaiibWeb.Controllers
                     Sponsor existingSponsor = unitOfWork.SponsorRepository.GetSponsorByName(sponsorName);
                     if (existingSponsor != null)
                     {
+                        existingSponsor.Events = new List<Event>();
                         existingSponsor.Events.Add(newEvent);
                         sponsors.Add(existingSponsor);
 

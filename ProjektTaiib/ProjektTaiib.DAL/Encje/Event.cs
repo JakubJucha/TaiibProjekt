@@ -42,4 +42,6 @@ namespace ProjektTaiib.DAL.Encje
         public int Amount_ticket{get;set;}
         public decimal Ticket_price{get;set;}
     }
+
+
 }
