@@ -21,5 +21,10 @@ export class EventsService {
     return this._http.get<Events[]>(apiUrl);
   }
 
+  getEventById(eventId: number): Observable<Events> {
+    const apiUrl = `http://localhost:5168/api/event/${eventId}`;
+    return this._http.get<Events>(apiUrl);
+  }
+
 
 }

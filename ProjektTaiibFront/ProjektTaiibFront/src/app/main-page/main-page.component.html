@@ -35,27 +35,9 @@
     </div>
 
     <div class="row row-margins mb-3" style="margin-top: 2rem;">
-        <div class="col-4">
-            <app-event-showcase></app-event-showcase>
-        </div>
-        <div class="col-4">
-            <app-event-showcase></app-event-showcase>
-        </div>
-        <div class="col-4">
-            <app-event-showcase></app-event-showcase>
+        <div *ngFor="let event of newestEvents" class="col-4 mb-3">
+            <app-event-showcase [event]="event"></app-event-showcase>
         </div>
     </div>
-
-    <div class="row row-margins mb-3" style="margin-top: 2rem;">
-        <div class="col-4">
-            <app-event-showcase></app-event-showcase>
-        </div>
-        <div class="col-4">
-            <app-event-showcase></app-event-showcase>
-        </div>
-        <div class="col-4">
-            <app-event-showcase></app-event-showcase>
-        </div>
-    </div>
-
+    
 </div>

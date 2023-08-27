@@ -14,7 +14,9 @@ export class RegisterFormComponent implements AfterContentChecked {
   selectedPayment: Payment = Payment.BLIK; // Wybrana opcja
   paymentOptions = Object.values(Payment); // Tablica z opcjami
   
-  constructor(private http: HttpClient,formBuilder: FormBuilder,private router: Router) {
+  constructor(private http: HttpClient,
+              formBuilder: FormBuilder,
+              private router: Router) {
 
     this.form = formBuilder.group({
       email: formBuilder.control(null, [Validators.required, Validators.email]),

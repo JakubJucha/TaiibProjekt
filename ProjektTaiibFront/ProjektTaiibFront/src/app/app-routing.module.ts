@@ -14,8 +14,8 @@ import { EventAddComponent } from './event-add/event-add.component';
 const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
   { path: 'mainPage', component: MainPageComponent },
-  { path: 'mainPage/eventDetails', component: EventDetailsComponent }, 
-  { path: 'mainPage/eventDetails/buyTicket', component: EventBuyTicketComponent }, 
+  { path: 'event/:eventId', component: EventDetailsComponent }, 
+  { path: 'event/:eventId/buyTicket', component: EventBuyTicketComponent }, 
   { path: 'eventSearch', component: EventSearchComponent},
   { path: 'addEvent', component: EventAddComponent},
   { path: 'userMenu', component: UserMenuComponent,

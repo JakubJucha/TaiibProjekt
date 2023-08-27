@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Events } from '../models/event';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-showcase',
@@ -8,4 +9,14 @@ import { Events } from '../models/event';
 })
 export class EventShowcaseComponent {
   @Input() event: Events = new Events();
+
+  constructor(private _router: Router){
+
+  }
+
+
+  navigateToEventDetails(eventId: number) {
+    this._router.navigate(['event', eventId]);
+    
+  }
 }

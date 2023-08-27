@@ -3,7 +3,7 @@
         <div class="row-margins mt-5" style="background-color: var(--jasny); padding: 10px;">
             <div class="row" style="display: flex; justify-content: center; justify-content: space-between;">
                 <div class="col-2">
-                    <div>Miasto</div>
+                    <div>Miejsce</div>
                     <div><select [(ngModel)]="selectedLocation" style="width: 140px; height: 25px;" id="location"
                             formControlName="location">
                             <option value="">Wszystkie</option>
@@ -25,10 +25,10 @@
                 </div>
                 <div class="col-2">
                     <div>Sponsor</div>
-                    <div><select [(ngModel)]="selectedSponsor" id="sponsor" style="width: 140px; height: 25px;"
-                            formControlName="sponsor">
-                            <option value="">Wszystkie</option>
-                            <option *ngFor="let sponsor of uniqueSponsors" [value]="sponsor">{{ sponsor }}</option>
+                    <div><select [(ngModel)]="selectedSponsor" id="sponsors" style="width: 140px; height: 25px;"
+                            formControlName="sponsors">
+                            <option value="">Wszyscy</option>
+                            <option *ngFor="let sponsors of uniqueSponsors" [value]="sponsors">{{ sponsors }}</option>
                         </select></div>
                 </div>
                 <div class="col-2">

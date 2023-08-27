@@ -15,7 +15,7 @@ filterForm: FormGroup;
 
 uniqueLocations: Set<string> = new Set();
 uniqueCategories: Set<string> = new Set();
-uniqueSponsors: Set<string> = new Set();
+uniqueSponsors: string[] = [];
 
 selectedLocation: string = '';
 selectedDate: string = '';
@@ -30,7 +30,7 @@ this.filterForm = this._fb.group({
   location: this._fb.control(null),
   date: this._fb.control(null),
   category: this._fb.control(null),
-  sponsor: this._fb.control(null)
+  sponsors: this._fb.control(null)
   
 })
 }
@@ -40,7 +40,7 @@ ngOnInit() {
     next: res => {
       this.allEvents = res;
       this.filteredEvents = this.allEvents;
-
+      console.log(res);
       this.allEvents.forEach(event => {
         if (event.location) {
           this.uniqueLocations.add(event.location);
@@ -50,11 +50,8 @@ ngOnInit() {
           this.uniqueCategories.add(event.category);
         }
 
-        if(event.sponsor) {
-          this.uniqueSponsors.add(event.sponsor);
-        }
+        this.generateUniqueSponsorsList();
       });
-      console.log(res)
     },
     error: err => {
       console.log('Błąd pobierania wydarzeń.')
@@ -70,7 +67,11 @@ applyFilters() {
        dateMatches = this.selectedDate === '' || this.compareDates(event.date, this.selectedDate);
     }
     const categoryMatches = this.selectedCategory === '' || event.category === this.selectedCategory;
-    const sponsorMatches = this.selectedSponsor === '' || event.sponsor === this.selectedSponsor;
+    let sponsorMatches;
+    if(event.sponsors) {
+      sponsorMatches = this.selectedSponsor === '' || event.sponsors.includes(this.selectedSponsor);
+    }
+    
 
     return locationMatches && dateMatches && categoryMatches && sponsorMatches;
 });
@@ -81,6 +82,20 @@ compareDates(eventDate: string, selectedDate: string): boolean {
   const selectedDateOnly = new Date(selectedDate).toISOString().split('T')[0]; 
 
   return eventDateOnly === selectedDateOnly; 
+}
+
+generateUniqueSponsorsList() {
+  const sponsorsSet = new Set<string>(); 
+
+  this.allEvents.forEach(event => {
+    if (event.sponsors) {
+      event.sponsors.forEach(sponsor => {
+        sponsorsSet.add(sponsor);
+    });
+    }
+  });
+
+  this.uniqueSponsors = Array.from(sponsorsSet.values());
 }
 
 }
