@@ -38,7 +38,7 @@
     background-color: var(--zielony);
     padding-top: 5px;
     align-self: flex-end;
-    width: calc(40% - 10px);
+    width: calc(45% - 5px);
     text-align:right;
 
     clip-path: polygon(46% 19%, 100% 18%, 100% 100%, 0 100%);

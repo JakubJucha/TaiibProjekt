@@ -1,10 +1,86 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventsService } from '../events.service';
+import { Events } from '../models/event';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-event-search',
   templateUrl: './event-search.component.html',
   styleUrls: ['./event-search.component.css']
 })
-export class EventSearchComponent {
+export class EventSearchComponent implements OnInit {
+allEvents: Events[] = []
+filteredEvents: any[] = [];
+filterForm: FormGroup;
+
+uniqueLocations: Set<string> = new Set();
+uniqueCategories: Set<string> = new Set();
+uniqueSponsors: Set<string> = new Set();
+
+selectedLocation: string = '';
+selectedDate: string = '';
+selectedCategory: string = '';
+selectedSponsor: string = '';
+
+
+
+constructor(private _eventsService: EventsService,
+            private _fb: FormBuilder){
+this.filterForm = this._fb.group({
+  location: this._fb.control(null),
+  date: this._fb.control(null),
+  category: this._fb.control(null),
+  sponsor: this._fb.control(null)
+  
+})
+}
+
+ngOnInit() {
+  this._eventsService.getAllEvents().subscribe({
+    next: res => {
+      this.allEvents = res;
+      this.filteredEvents = this.allEvents;
+
+      this.allEvents.forEach(event => {
+        if (event.location) {
+          this.uniqueLocations.add(event.location);
+        }
+
+        if (event.category) {
+          this.uniqueCategories.add(event.category);
+        }
+
+        if(event.sponsor) {
+          this.uniqueSponsors.add(event.sponsor);
+        }
+      });
+      console.log(res)
+    },
+    error: err => {
+      console.log('Błąd pobierania wydarzeń.')
+    }
+  })
+}
+
+applyFilters() {
+  this.filteredEvents = this.allEvents.filter(event => {
+    const locationMatches = this.selectedLocation === '' || event.location === this.selectedLocation;
+    let dateMatches;
+    if ( event.date) {
+       dateMatches = this.selectedDate === '' || this.compareDates(event.date, this.selectedDate);
+    }
+    const categoryMatches = this.selectedCategory === '' || event.category === this.selectedCategory;
+    const sponsorMatches = this.selectedSponsor === '' || event.sponsor === this.selectedSponsor;
+
+    return locationMatches && dateMatches && categoryMatches && sponsorMatches;
+});
+}
+
+compareDates(eventDate: string, selectedDate: string): boolean {
+  const eventDateOnly = new Date(eventDate).toISOString().split('T')[0];
+  const selectedDateOnly = new Date(selectedDate).toISOString().split('T')[0]; 
+
+  return eventDateOnly === selectedDateOnly; 
+}
 
 }

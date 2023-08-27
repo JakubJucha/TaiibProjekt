@@ -1,47 +1,58 @@
 <div class="container">
-    <div class="row-margins mt-5" style="background-color: var(--jasny); padding: 10px;">
-        <div class="row" style="display: flex; justify-content: center; justify-content: space-between;">
-            <div class="col-2">
-                <div>Miasto</div>
-                <div><input style="width: 140px;" type="text"></div>
-            </div>
-            <div class="col-2">
-                <div>Data</div>
-                <div><input style="width: 140px;" type="text"></div>
-            </div>
-            <div class="col-2">
-                <div>Typ wydarzenia</div>
-                <div><input style="width: 140px;" type="text"></div>
-            </div>
-            <div class="col-2">
-                <div>Sponsor</div>
-                <div><input style="width: 140px;" type="text"></div>
-            </div>
-            <div class="col-2">
-                <div><button style="height: 40px; width: 100%; margin-top: 7px; background-color: var(--zielony);">Szukaj</button></div>
+    <form [formGroup]="filterForm" (submit)="applyFilters()">
+        <div class="row-margins mt-5" style="background-color: var(--jasny); padding: 10px;">
+            <div class="row" style="display: flex; justify-content: center; justify-content: space-between;">
+                <div class="col-2">
+                    <div>Miasto</div>
+                    <div><select [(ngModel)]="selectedLocation" style="width: 140px; height: 25px;" id="location"
+                            formControlName="location">
+                            <option value="">Wszystkie</option>
+                            <option *ngFor="let location of uniqueLocations" [value]="location">{{ location }}</option>
+                        </select></div>
+                </div>
+                <div class="col-2">
+                    <div>Data</div>
+                    <div><input [(ngModel)]="selectedDate" style="width: 140px;" type="date" formControlName="date">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div>Typ wydarzenia</div>
+                    <div><select [(ngModel)]="selectedCategory" id="category" style="width: 140px; height: 25px;"
+                            formControlName="category">
+                            <option value="">Wszystkie</option>
+                            <option *ngFor="let category of uniqueCategories" [value]="category">{{ category }}</option>
+                        </select></div>
+                </div>
+                <div class="col-2">
+                    <div>Sponsor</div>
+                    <div><select [(ngModel)]="selectedSponsor" id="sponsor" style="width: 140px; height: 25px;"
+                            formControlName="sponsor">
+                            <option value="">Wszystkie</option>
+                            <option *ngFor="let sponsor of uniqueSponsors" [value]="sponsor">{{ sponsor }}</option>
+                        </select></div>
+                </div>
+                <div class="col-2">
+                    <div><button type="submit"
+                            style="height: 40px; width: 100%; margin-top: 7px; background-color: var(--zielony);">Szukaj</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
+    </form>
     <div class="row row-margins margins mt-3" style="background-color: var(--jasny); padding: 10px; ">
 
         <div class="row mb-3 " style="display: flex; justify-content: center; justify-content: space-between;">
-            <div class="col-4 mb-3">
-                <app-event-showcase></app-event-showcase>
-            </div>
-            <div class="col-4">
-                <app-event-showcase></app-event-showcase>
-            </div>
-            <div class="col-4">
-                <app-event-showcase></app-event-showcase>
-            </div>
-            <div class="col-4">
-                <app-event-showcase></app-event-showcase>
-            </div>
-
-
+            <ng-container *ngIf="filteredEvents.length > 0; else noEvents">
+                <div *ngFor="let event of filteredEvents" class="col-4 mb-3">
+                    <app-event-showcase [event]="event"></app-event-showcase>
+                </div>
+            </ng-container>
         </div>
-
+        <ng-template #noEvents>
+            <div class="col-12 text-center" style="font-size: 24px;">
+                Brak dostępnych wydarzeń spełniających wybrane kryteria.
+            </div>
+        </ng-template>
     </div>
 
 </div>
