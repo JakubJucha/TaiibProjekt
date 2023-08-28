@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using ProjektTaiib.DAL;
 using ProjektTaiib.DAL.Encje;
 using ProjektTaiib.DAL.Repositories.DetailedInformationR;
@@ -12,9 +13,12 @@ using ProjektTaiib.DAL.Repositories.EventR;
 using ProjektTaiib.DAL.Repositories.SponsorR;
 using ProjektTaiib.DAL.Repositories.TicketR;
 using ProjektTaiib.DAL.Repositories.UserR;
+using ProjektTaiibWeb.DTO;
 
 namespace ProjektTaiibWeb.Controllers
 {
+    [ApiController]
+    [Route("api/ticket")]
     public class TicketController : Controller
     {
         private readonly ProjektTaiibDbContext _context;
@@ -24,10 +28,165 @@ namespace ProjektTaiibWeb.Controllers
         private readonly IEventRepository eventRepository;
         private readonly ITicketRepository ticketRepository;
         private readonly ISponsorRepository sponsorRepository;
-        public TicketController(ProjektTaiibDbContext context)
+        public TicketController(ProjektTaiibDbContext context, IEventRepository eventRepository, ITicketRepository ticketRepository, IUserRepository userRepository)
         {
+            this.eventRepository = eventRepository;
+            this.ticketRepository = ticketRepository;
+            this.userRepository = userRepository;
             _context = context;
             unitOfWork = new UnitOfWork(_context, userRepository, detailedInformationRepository, eventRepository, ticketRepository, sponsorRepository);
+        }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetTicketsByUserId(int userId)
+        {
+            try
+            {
+                var user = unitOfWork.UserRepository.GetUserById(userId);
+
+                if (user == null)
+                {
+                    return BadRequest("Nieprawidłowy użytkownik.");
+                }
+
+                var tickets = unitOfWork.TicketRepository.GetTicketsByUserId(userId);
+
+                var groupedTickets = tickets.GroupBy(ticket => ticket.Event)
+                    .Select(group => new
+                    {
+                        Event = group.Key,
+                        TotalNormalTickets = group.Sum(ticket => (ticket.Type == "normal" && ticket.Premium.HasValue && !ticket.Premium.Value) ? 1 : 0),
+                        TotalNormalPremiumTickets = group.Sum(ticket => (ticket.Type == "normal" && ticket.Premium.HasValue && ticket.Premium.Value) ? 1 : 0),
+                        TotalReducedTickets = group.Sum(ticket => (ticket.Type == "reduced" && ticket.Premium.HasValue && !ticket.Premium.Value) ? 1 : 0),
+                        TotalReducedPremiumTickets = group.Sum(ticket => (ticket.Type == "reduced" && ticket.Premium.HasValue && ticket.Premium.Value) ? 1 : 0)
+                    })
+                    .ToList();
+
+                var userTicketsOnEvents = groupedTickets.Select(groupedTicket => new TicketsOnEvent
+                {
+                    ticketInfo = new ticketInfo
+                    {
+                        NormalTicket = groupedTicket.TotalNormalTickets,
+                        NormalPremiumTicket = groupedTicket.TotalNormalPremiumTickets,
+                        ReducedTicket = groupedTicket.TotalReducedTickets,
+                        ReducedPremiumTicket = groupedTicket.TotalReducedPremiumTickets
+                    },
+                    events = new EventsResponse
+                    {
+                        Id = groupedTicket.Event.Id_event,
+                        EventName = groupedTicket.Event.Event_name,
+                        Date = groupedTicket.Event.Date,
+                        Location = groupedTicket.Event.Location,
+                        Description = groupedTicket.Event.Description,
+                        Category = groupedTicket.Event.Category,
+                        TicketPrice = groupedTicket.Event.Ticket_price,
+                        AmountTicket = groupedTicket.Event.Amount_ticket,
+                        Sponsors = groupedTicket.Event.Sponsors?.Select(s => s.Sponsor_name).ToList() ?? new List<string>()
+                    }
+                }).ToList();
+
+                return Ok(userTicketsOnEvents);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
+            }
+        }
+
+        [HttpPost("{eventId}/{userId}/buy")]
+        public async Task<IActionResult> Buy(int eventId, int userId, [FromBody] TicketInfo ticketInfo)
+        {
+            try
+            {
+
+                var user = unitOfWork.UserRepository.GetUserById(userId);
+                var ev = unitOfWork.EventRepository.GetEventById(eventId);
+
+                if (user == null || ev == null)
+                {
+                    return BadRequest("Nieprawidłowe dane użytkownika lub wydarzenia.");
+                }
+
+                var tickets = new List<Ticket>();
+                var normalAmount = ticketInfo.ticketInfo.NormalTicket - ticketInfo.ticketInfo.NormalPremiumTicket;
+                var reducedAmount = ticketInfo.ticketInfo.ReducedTicket - ticketInfo.ticketInfo.ReducedPremiumTicket;
+
+                if (normalAmount > 0)
+                {
+                    for (int i = 0; i < normalAmount; i++)
+                    {
+                        var normalTicket = new Ticket
+                        {
+                            UserId_user = userId,
+                            Id_event = eventId,
+                            Type = "normal",
+                            Price = ticketInfo.TicketPrice,
+                            Premium = false
+                        };
+                        tickets.Add(normalTicket);
+                    }
+                }
+
+                if (ticketInfo.ticketInfo.NormalPremiumTicket > 0)
+                {
+                    for (int i = 0; i < ticketInfo.ticketInfo.NormalPremiumTicket; i++)
+                    {
+                        var normalPremiumTicket = new Ticket
+                        {
+                            UserId_user = userId,
+                            Id_event = eventId,
+                            Type = "normal",
+                            Price = ticketInfo.TicketPrice * 2,
+                            Premium = true
+                        };
+                        tickets.Add(normalPremiumTicket);
+                    }
+                }
+
+                if (reducedAmount > 0)
+                {
+                    for (int i = 0; i < reducedAmount; i++) { 
+                        var reducedTicket = new Ticket
+                        {
+                            UserId_user = userId,
+                            Id_event = eventId,
+                            Type = "reduced",
+                            Price = ticketInfo.TicketPrice * 0.5,
+                            Premium = false
+                        };
+                    tickets.Add(reducedTicket);
+                    }
+                }
+
+                if (ticketInfo.ticketInfo.ReducedPremiumTicket > 0)
+                {
+                    for (int i = 0; i < ticketInfo.ticketInfo.ReducedPremiumTicket; i++)
+                    {
+                        var reducedPremiumTicket = new Ticket
+                        {
+                            UserId_user = userId,
+                            Id_event = eventId,
+                            Type = "reduced",
+                            Price = ticketInfo.TicketPrice,
+                            Premium = true
+                        };
+                        tickets.Add(reducedPremiumTicket);
+                    }
+                }
+
+                foreach (Ticket t in tickets)
+                {
+                    unitOfWork.TicketRepository.AddTicket(t);
+                    unitOfWork.SaveChanges();
+                }
+
+                ev.Amount_ticket -= ticketInfo.ticketInfo.NormalTicket + ticketInfo.ticketInfo.ReducedTicket;
+                unitOfWork.SaveChanges();
+                return Ok(new { Message = "Bilety zostały zakupione pomyślnie." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Wystąpił błąd: {ex.Message}");
+            }
         }
 
         // GET: Ticket

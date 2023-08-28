@@ -49,6 +49,8 @@ namespace ProjektTaiibWeb.Controllers
                           Problem("Entity set 'ProjektTaiibDbContext.Events'  is null.");
         }
 
+      
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

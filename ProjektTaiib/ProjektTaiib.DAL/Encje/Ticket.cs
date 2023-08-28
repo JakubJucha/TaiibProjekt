@@ -31,6 +31,7 @@ namespace ProjektTaiib.DAL.Encje
 #pragma warning restore CS8618 // Pole niedopuszczające wartości null musi zawierać wartość inną niż null podczas kończenia działania konstruktora. Rozważ zadeklarowanie pola jako dopuszczającego wartość null.
         [Required]
         public double Price { get; set; }
+        public int UserId_user { get; set; }
         public bool? Premium { get; set; }
     }
 }

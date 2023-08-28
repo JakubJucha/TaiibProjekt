@@ -18,7 +18,7 @@
                     <div class="col-2">Bilet normalny: </div>
                     <input [(ngModel)]="normalTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="number" formControlName="normalTicket">
                     <div class="col-1">w tym</div>
-                    <input [(ngModel)]="normalPremiumTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="text" formControlName="normalPremiumTicket">
+                    <input [(ngModel)]="normalPremiumTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="number" formControlName="normalPremiumTicket">
                     <div class="col-3">biletów premium.<span style="font-size: 20px;padding: 4px; cursor: help;"
                             matTooltip="Bilet premium zapewnia darmowe piwo piweczko kocham piwo ale kosztuje 2 miliardy pesos"
                             class="material-icons">info</span></div>
@@ -28,9 +28,9 @@
                     <div class="col-2">Bilet ulgowy:<span style="font-size: 20px;padding: 4px; cursor: help;"
                             matTooltip="Bilet ulgowy obejmuje 50% ceny biletu normalnego. Ulga jest blablablalba"
                             class="material-icons">info</span> </div>
-                    <input [(ngModel)]="reducedTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="text" formControlName="reducedTicket">
+                    <input [(ngModel)]="reducedTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="number" formControlName="reducedTicket">
                     <div class="col-1">w tym</div>
-                    <input [(ngModel)]="reducedPremiumTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="text" formControlName="reducedPremiumTicket">
+                    <input [(ngModel)]="reducedPremiumTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="number" formControlName="reducedPremiumTicket">
                     <div class="col-3">biletów premium. <span style="font-size: 20px;padding: 4px; cursor: help;"
                             matTooltip="Bilet premium zapewnia darmowe piwo piweczko kocham piwo ale kosztuje 2 miliardy pesos"
                             class="material-icons">info</span></div>

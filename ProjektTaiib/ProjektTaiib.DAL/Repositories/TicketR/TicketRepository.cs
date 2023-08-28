@@ -17,7 +17,13 @@ namespace ProjektTaiib.DAL.Repositories.TicketR
         {
             this.context = context;
         }
-
+        public IEnumerable<Ticket> GetTicketsByUserId(int userId)
+        {
+            return context.Tickets
+                .Include(t => t.Event) 
+                .Where(t => t.UserId_user == userId)
+                .ToList();
+        }
         public void AddTicket(Ticket ticket)
         {
             context.Tickets.Add(ticket);

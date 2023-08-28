@@ -143,9 +143,13 @@ export class EventBuyTicketComponent implements OnInit {
     const userId = this._userId;
     const eventId = this.currentEvent.id;
     const formdata = this.ticketForm.value;
-
+    const ticketPrice = this.currentEvent.ticketPrice;
+    const requestData = {
+    ticketPrice: ticketPrice,
+    ticketInfo: formdata
+  };
     const apiUrl = `http://localhost:5168/api/ticket/${eventId}/${userId}/buy`;
-    this.http.post(apiUrl, formdata).subscribe({
+    this.http.post(apiUrl, requestData).subscribe({
       next: res => {
         console.log('Pomyślnie kupiono bilet');
       },
