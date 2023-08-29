@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Payment } from '../enums/payment';
 
 @Component({
@@ -23,9 +23,9 @@ export class UserDataComponent implements OnInit {
       this.form = _formBuilder.group({
         name: _formBuilder.control(this.detailedInfo?.name),
         surname: _formBuilder.control(this.detailedInfo?.surname),
-        phoneNumber: _formBuilder.control(this.detailedInfo?.phoneNumber),
+        phoneNumber: _formBuilder.control(this.detailedInfo?.phoneNumber, Validators.pattern(/^[0-9]{9}$/)),
         country: _formBuilder.control(this.detailedInfo?.country),
-        zipCode: _formBuilder.control(this.detailedInfo?.zipCode),
+        zipCode: _formBuilder.control(this.detailedInfo?.zipCode, Validators.pattern(/^\d{2}-\d{3}$/)),
         city: _formBuilder.control(this.detailedInfo?.city),
         street: _formBuilder.control(this.detailedInfo?.street),
         houseNumber: _formBuilder.control(this.detailedInfo?.houseNumber),

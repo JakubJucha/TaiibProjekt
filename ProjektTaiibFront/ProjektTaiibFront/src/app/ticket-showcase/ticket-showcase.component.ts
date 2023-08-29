@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-showcase',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./ticket-showcase.component.css']
 })
 export class TicketShowcaseComponent {
+
+  @Input() ticketData: any;
+
+  constructor(private _router: Router) {}
+
+  navigateToEvent(eventId: number) {
+    this._router.navigate(['event', eventId]);
+  }
 
 }

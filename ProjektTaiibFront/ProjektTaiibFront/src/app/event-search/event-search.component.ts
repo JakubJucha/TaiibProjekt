@@ -38,9 +38,17 @@ this.filterForm = this._fb.group({
 ngOnInit() {
   this._eventsService.getAllEvents().subscribe({
     next: res => {
-      this.allEvents = res;
+      console.log(res)
+      const today = new Date();
+      this.allEvents = res.filter(event => {
+        let eventDate: Date = new Date();
+        if (event.date) {
+          eventDate = new Date(event.date); 
+        }
+        return eventDate > today;
+      });
+
       this.filteredEvents = this.allEvents;
-      console.log(res);
       this.allEvents.forEach(event => {
         if (event.location) {
           this.uniqueLocations.add(event.location);

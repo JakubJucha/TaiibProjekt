@@ -83,7 +83,7 @@
         </div>
 
         <div class="row">
-            <button type="submit" style="background-color: var(--zielony);height: 60px; width: 100px; bottom: 0; right: 0; position: absolute;">Zapisz</button>
+            <button [disabled]="!form.valid" type="submit" style="background-color: var(--zielony);height: 60px; width: 100px; bottom: 0; right: 0; position: absolute;">Zapisz</button>
 
         </div>
     </form>

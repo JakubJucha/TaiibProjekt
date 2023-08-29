@@ -8,7 +8,8 @@
       <div class="mb-2"><a style="font-weight: bold;">Data:</a> {{event.date | date:'dd/MM/yy HH:mm'}} </div>
     </div>
     <div class="event-price p-3">
-      <div style="margin-top: 10px;">{{event.ticketPrice | currency: 'zł'}}</div>
+      <div *ngIf="isSoldOut()" style="margin-top: 10px; color: red;">SOLD OUT</div>
+      <div *ngIf="!isSoldOut()" style="margin-top: 10px;">{{event.ticketPrice | currency: 'zł'}}</div>
     </div>
 </div>
 </a>

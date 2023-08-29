@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Events } from '../models/event';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from '../events.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
@@ -42,7 +42,8 @@ export class EventBuyTicketComponent implements OnInit {
               private _eventsService: EventsService,
               private _formBuilder: FormBuilder,
               private _userService: UserService,
-              private http: HttpClient,){
+              private http: HttpClient,
+              private _router: Router){
                 this.userInfoForm = _formBuilder.group({
                   name: _formBuilder.control(this.detailedInfo?.name, [Validators.required]),
                   surname: _formBuilder.control(this.detailedInfo?.surname, [Validators.required]),
@@ -152,6 +153,7 @@ export class EventBuyTicketComponent implements OnInit {
     this.http.post(apiUrl, requestData).subscribe({
       next: res => {
         console.log('Pomyślnie kupiono bilet');
+        this._router.navigateByUrl('/userMenu/userTickets');
       },
       error: err => {
         console.log('Błąd podczas kupowania.');

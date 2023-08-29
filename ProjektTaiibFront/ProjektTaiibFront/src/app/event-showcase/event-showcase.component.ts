@@ -17,6 +17,15 @@ export class EventShowcaseComponent {
 
   navigateToEventDetails(eventId: number) {
     this._router.navigate(['event', eventId]);
-    
   }
+
+  isSoldOut(): boolean {
+    if (Number(this.event.amountTicket) == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  
 }

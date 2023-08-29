@@ -18,7 +18,6 @@ export class MainPageComponent implements OnInit {
     this._eventsService.getNewestEvents().subscribe({
       next: res => {
         this.newestEvents = res;
-        console.log(res);
       },
       error: err => {
         console.log('Błąd pobierania wydarzeń.')
