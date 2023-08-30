@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-options',
@@ -24,19 +25,20 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
   constructor(private _http: HttpClient,
     private _userService: UserService,
     private _fb: FormBuilder,
-    private _router: Router) {
+    private _router: Router,
+    private _toastrService: ToastrService) {
 
       this.formLogin = _fb.group({
         newLogin: _fb.control(null),
       });
       this.formPassword = _fb.group({
-        currentPassword: _fb.control(null),
-        newPassword: _fb.control(null),
-        repeatNewPassword: _fb.control(null),
+        currentPassword: _fb.control(null, Validators.required),
+        newPassword: _fb.control(null, [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/)]),
+        repeatNewPassword: _fb.control(null, [Validators.required, Validators.pattern(/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/)]),
       });
       this.formEmail = _fb.group({
-        newEmail: _fb.control(null),
-        repeatNewEmail: _fb.control(null),
+        newEmail: _fb.control(null, [Validators.required,Validators.email]),
+        repeatNewEmail: _fb.control(null, [Validators.required,Validators.email]),
       });
 
   }
@@ -71,11 +73,13 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
     this._http.put(`http://localhost:5168/api/user/${this._userService.getUserId()}`, formData).subscribe(
         (response: any) => {
             console.log('Pomyślnie zmodyfikowano login!', response);
+            this._toastrService.success("Pomyślnie zmodyfikowano login!");
             localStorage.removeItem('token');
           this._router.navigateByUrl('/login');
         },
         (error: any) => {
             console.error('Błąd podczas nadpisywania loginu:', error);
+            this._toastrService.error(error.error, "Błąd podczas próby zmiany loginu!");
         }
     );
   }
@@ -88,16 +92,18 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
       this._http.put(`http://localhost:5168/api/user/${this._userService.getUserId()}`, formData).subscribe(
         response => {
             console.log('Pomyślnie zmodyfikowano email!', response);
+            this._toastrService.success("Pomyślnie zmodyfikowano adres e-mail!");
             localStorage.removeItem('token');
           this._router.navigateByUrl('/login');
         },
         error => {
             console.error('Błąd podczas nadpisywania emaila:', error);
-        
+            this._toastrService.error(error.error, "Błąd podczas próby zmiany adresu e-mail!");
         }
     );
     } else {
       console.log('Emaile nie sa takie same');
+      this._toastrService.error("Podane adresy e-mail nie są identyczne!");
     }
   }
 
@@ -109,16 +115,18 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
       this._http.put(`http://localhost:5168/api/user/${this._userService.getUserId()}`, formData).subscribe(
         response => {
             console.log('Pomyślnie zmodyfikowano hasła!', response);
+            this._toastrService.success("Pomyślnie zmodyfikowano hasło!");
             localStorage.removeItem('token');
           this._router.navigateByUrl('/login');
         },
         error => {
             console.error('Błąd podczas nadpisywania hasła:', error);
-        
+            this._toastrService.error(error.error, "Błąd podczas próby zmiany hasła!");
         }
     );
     } else {
       console.log('Hasla nie sa takie same');
+      this._toastrService.error("Podane hasła nie są identyczne!");
     }
   }
 
@@ -147,12 +155,13 @@ export class UserOptionsComponent implements OnInit, AfterContentChecked {
     this._http.delete(`http://localhost:5168/api/user/${this._userService.getUserId()}`).subscribe(
       response => {
           console.log('Pomyślnie usunięto użytkownika!', response);
+          this._toastrService.success("Pomyślnie usunięto konto!");
           localStorage.removeItem('token');
           this._router.navigateByUrl('/login');
       },
       error => {
           console.error('Błąd podczas usuwania użytkownika:', error);
-      
+          this._toastrService.error(error.error, "Błąd podczas usuwania konta!");
       }
   );
   }

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { HttpClient } from '@angular/common/http';
 import { Payment } from '../enums/payment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-buy-ticket',
@@ -43,7 +44,8 @@ export class EventBuyTicketComponent implements OnInit {
               private _formBuilder: FormBuilder,
               private _userService: UserService,
               private http: HttpClient,
-              private _router: Router){
+              private _router: Router,
+              private _toastrService: ToastrService){
                 this.userInfoForm = _formBuilder.group({
                   name: _formBuilder.control(this.detailedInfo?.name, [Validators.required]),
                   surname: _formBuilder.control(this.detailedInfo?.surname, [Validators.required]),
@@ -153,10 +155,12 @@ export class EventBuyTicketComponent implements OnInit {
     this.http.post(apiUrl, requestData).subscribe({
       next: res => {
         console.log('Pomyślnie kupiono bilet');
+        this._toastrService.success("Zostanie on wysłany na Twój adres email ;)", "Pomyślnie zakupiono bilet!" )
         this._router.navigateByUrl('/userMenu/userTickets');
       },
       error: err => {
         console.log('Błąd podczas kupowania.');
+        this._toastrService.error(err.error, "Błąd podczas kupowania biletu!");
       }
     })
 

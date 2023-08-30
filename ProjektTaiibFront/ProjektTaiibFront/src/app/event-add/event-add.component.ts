@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-add',
@@ -12,7 +13,8 @@ export class EventAddComponent {
 addEventForm: FormGroup;
 
 constructor(private _fb: FormBuilder,
-            private http: HttpClient) {
+            private http: HttpClient,
+            private _toastrService: ToastrService) {
 this.addEventForm = this._fb.group({
   eventName: this._fb.control(null,[Validators.required]),
   location: this._fb.control(null,[Validators.required]),
@@ -31,11 +33,12 @@ addEvent() {
   this.http.post('http://localhost:5168/api/event/add', formData).subscribe(
       response => {
           console.log('Dodano nowe wydarzenie!', response);
+          this._toastrService.success("Pomyślnie dodano nowe wydarzenie!")
           this.addEventForm.reset();
       },
       error => {
           console.error('Błąd dodawania wydarzenia!:', error);
-      
+          this._toastrService.error(error.error, "Błąd podczas dodawania wydarzenia!")
       }
   );
 }

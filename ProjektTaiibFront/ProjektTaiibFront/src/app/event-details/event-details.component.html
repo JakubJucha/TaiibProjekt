@@ -1,9 +1,30 @@
 <div class="container">
     <div class="row-margins mt-5" style="background-color: var(--jasny); padding: 10px; position: relative;">
         <div class="row">
-            <div class="col-5">
-                <img style="width: 400px; height: 100%;" src="assets/images/concert.jpg" alt="Zdjęcie wydarzenia"
-                    class="img-fluid mb-4">
+            <div [ngSwitch]="currentEvent.category" class="col-5">
+                        <img *ngSwitchCase="'Piłka nożna'" style="width: 400px; height: 100%;"
+                          src="assets/images/football.jpg" alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Piłka siatkowa'" style="width: 400px; height: 100%;"
+                          src="assets/images/volleyball.jpg" alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Koszykówka'" style="width: 400px; height: 100%;"
+                          src="assets/images/basketball.jpg" alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Dart'" style="width: 400px; height: 100%;" src="assets/images/dart.jpg"
+                          alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Curling'" style="width: 400px; height: 100%;" src="assets/images/curling.jpg"
+                          alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Koncert POP'" style="width: 400px; height: 100%;"
+                          src="assets/images/concert.jpg" alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Koncert rockowy'" style="width: 400px; height: 100%;"
+                          src="assets/images/rockConcert.jpg" alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Koncert rapowy'" style="width: 400px; height: 100%;" src="assets/images/rap.jpg"
+                          alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Impreza techno'" style="width: 400px; height: 100%;"
+                          src="assets/images/wixa.jpg" alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Wystawa sztuki'" style="width: 400px; height: 100%;"
+                          src="assets/images/wystawa.jpg" alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchCase="'Teatr'" style="width: 400px; height: 100%;" src="assets/images/teatr.jpg"
+                          alt="Zdjęcie wydarzenia" class="img-fluid mb-4">
+                        <img *ngSwitchDefault src="assets/images/default.jpg" style="width: 400px; height: 100%;" alt="Zdjęcie domyślne" class="img-fluid mb-4">
             </div>
             <div style="padding: 10px; position: relative;" class="col-7">
                 <div style="margin-bottom: 30px;">{{currentEvent.description}}</div>

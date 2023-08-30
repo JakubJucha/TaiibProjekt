@@ -41,7 +41,7 @@
             </div>
             <div *ngIf="isChangePassword" class="col-3">
                 <div style="margin-top: 58px;"> </div>
-                <div><button type="submit"
+                <div><button type="submit" [disabled]="!formPassword.valid"
                         style="background-color: var(--zielony); color: var(--bialy);">Zapisz</button></div>
             </div>
         </div>
@@ -65,7 +65,7 @@
             </div>
             <div *ngIf="isChangeEmail" class="col-3">
                 <div style="margin-top: 52px;"> </div>
-                <div><button type="submit"
+                <div><button type="submit" [disabled]="!formEmail.valid"
                         style="background-color: var(--zielony); color: var(--bialy);">Zapisz</button></div>
             </div>
         </div>

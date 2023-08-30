@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,8 @@ import { UserService } from '../user.service';
 })
 export class NavbarComponent {
 
-  constructor( private _userService: UserService){
+  constructor( private _userService: UserService,
+              private _toastrService: ToastrService){
 
   }
 
@@ -19,6 +21,7 @@ export class NavbarComponent {
 
   logOut() {
     localStorage.removeItem('token');
+    this._toastrService.success("Pomyślnie wylogowano!");
   }
 
   get isAdmin() : boolean {

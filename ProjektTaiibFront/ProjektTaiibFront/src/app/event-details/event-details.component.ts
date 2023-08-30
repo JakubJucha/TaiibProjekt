@@ -27,6 +27,7 @@ export class EventDetailsComponent implements OnInit {
             },
             error: err => {
               console.log('Błąd pobierania wydarzenia.');
+              
             }
           })
         } else {

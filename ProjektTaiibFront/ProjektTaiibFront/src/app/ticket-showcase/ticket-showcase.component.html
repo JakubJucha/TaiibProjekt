@@ -1,7 +1,30 @@
 <a (click)="navigateToEvent(ticketData.events.id)">
   <div class="event-card">
-    <img style="border-bottom: 4px solid var(--zielony);" src="assets/images/concert.jpg" alt="Zdjęcie wydarzenia"
+    <div [ngSwitch]="ticketData.events.category">
+      <img *ngSwitchCase="'Piłka nożna'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/football.jpg" alt="Zdjęcie wydarzenia"
       class="img-fluid mb-4">
+      <img *ngSwitchCase="'Piłka siatkowa'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/volleyball.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Koszykówka'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/basketball.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Dart'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/dart.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Curling'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/curling.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Koncert POP'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/concert.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Koncert rockowy'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/rockConcert.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Koncert rapowy'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/rap.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Impreza techno'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/wixa.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Wystawa sztuki'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/wystawa.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchCase="'Teatr'" style="border-bottom: 4px solid var(--zielony);" src="assets/images/teatr.jpg" alt="Zdjęcie wydarzenia"
+      class="img-fluid mb-4">
+      <img *ngSwitchDefault src="assets/images/default.jpg" style="border-bottom: 4px solid var(--zielony);" alt="Zdjęcie domyślne" class="img-fluid mb-4">
+  </div>
     <div class="event-details">
       <div class="event-name font-weight-bold mb-4">{{ticketData.events.eventName}}</div>
       <div class="mb-2"><a style="font-weight: bold;">Miejsce: </a>{{ticketData.events.location}}</div>

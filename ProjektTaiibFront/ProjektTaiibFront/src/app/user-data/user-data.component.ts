@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Payment } from '../enums/payment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-data',
@@ -18,7 +19,8 @@ export class UserDataComponent implements OnInit {
 
   constructor(private http: HttpClient,
      private _userService: UserService,
-     private _formBuilder: FormBuilder,) { 
+     private _formBuilder: FormBuilder,
+     private _toastrService: ToastrService) { 
 
       this.form = _formBuilder.group({
         name: _formBuilder.control(this.detailedInfo?.name),
@@ -51,11 +53,12 @@ export class UserDataComponent implements OnInit {
     const formData = this.form.value;
     this.http.put(`http://localhost:5168/api/detailedInformation/${this._userId}`, formData).subscribe(
         response => {
+          this._toastrService.success("Pomyślnie zaktualizowano dane użytkownika!");
             console.log('Pomyślnie zmodyfikowano dane!', response);
         },
         error => {
             console.error('Błąd podczas nadpisywanai danych:', error);
-        
+            this._toastrService.error(error.error, "Błąd podczas aktualizowania danych użytkownika");
         }
     );
   }

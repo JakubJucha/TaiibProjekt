@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterContentChecked, Component, OnChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import {Payment} from 'src/app/enums/payment'
 @Component({
   selector: 'app-register-form',
@@ -16,7 +17,8 @@ export class RegisterFormComponent implements AfterContentChecked {
   
   constructor(private http: HttpClient,
               formBuilder: FormBuilder,
-              private router: Router) {
+              private router: Router,
+              private _toastrService: ToastrService) {
 
     this.form = formBuilder.group({
       email: formBuilder.control(null, [Validators.required, Validators.email]),
@@ -59,7 +61,7 @@ export class RegisterFormComponent implements AfterContentChecked {
     let confirmPassControl = group.get('repeatPassword');
     
     if (!passControl || !confirmPassControl) {
-      return null;  // Jeśli któryś z kontroli nie istnieje, zwróć null
+      return null; 
     }
     
     let pass = passControl.value;
@@ -94,12 +96,12 @@ export class RegisterFormComponent implements AfterContentChecked {
     this.http.post('http://localhost:5168/api/authorize/register', formData).subscribe(
         response => {
             console.log('Rejestracja zakończona pomyślnie!', response);
-
+            this._toastrService.success("Pomyślnie utworzono konto");
 
         },
         error => {
             console.error('Błąd podczas rejestracji:', error);
-        
+            this._toastrService.error(error.error, "Błąd podczas rejestracji.")
         }
     );
   }

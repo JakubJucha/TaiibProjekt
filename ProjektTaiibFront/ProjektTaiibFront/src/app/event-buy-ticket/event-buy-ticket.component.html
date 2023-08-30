@@ -20,19 +20,19 @@
                     <div class="col-1">w tym</div>
                     <input [(ngModel)]="normalPremiumTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="number" formControlName="normalPremiumTicket">
                     <div class="col-3">biletów premium.<span style="font-size: 20px;padding: 4px; cursor: help;"
-                            matTooltip="Bilet premium zapewnia darmowe piwo piweczko kocham piwo ale kosztuje 2 miliardy pesos"
+                            matTooltip="Bilet premium zapewnia dostęp na kulisy wydarzenia, spotkanie z artystami/sportowcami oraz dostęp do strefy gastronomicznej!"
                             class="material-icons">info</span></div>
                     <div class="col-3">Aktualna cena: {{normalticketsPrice | currency:'PLN'}}</div>
                 </div>
                 <div class="row" style=" width: auto;">
                     <div class="col-2">Bilet ulgowy:<span style="font-size: 20px;padding: 4px; cursor: help;"
-                            matTooltip="Bilet ulgowy obejmuje 50% ceny biletu normalnego. Ulga jest blablablalba"
+                            matTooltip="Bilet ulgowy obejmuje 50% ceny biletu normalnego. Uldze podlegają studenci i osoby niepełnosprawne."
                             class="material-icons">info</span> </div>
                     <input [(ngModel)]="reducedTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="number" formControlName="reducedTicket">
                     <div class="col-1">w tym</div>
                     <input [(ngModel)]="reducedPremiumTicketValue" (input)="checkTickets()" class="col-1" style="width: 50px; margin-left: 10px; margin-right: 10px;" type="number" formControlName="reducedPremiumTicket">
                     <div class="col-3">biletów premium. <span style="font-size: 20px;padding: 4px; cursor: help;"
-                            matTooltip="Bilet premium zapewnia darmowe piwo piweczko kocham piwo ale kosztuje 2 miliardy pesos"
+                            matTooltip="Bilet premium zapewnia dostęp na kulisy wydarzenia, spotkanie z artystami/sportowcami oraz dostęp do strefy gastronomicznej!"
                             class="material-icons">info</span></div>
                     <div class="col-3">Aktualna cena: {{reducedTicketPrice | currency:'PLN'}}</div>
                 </div>
