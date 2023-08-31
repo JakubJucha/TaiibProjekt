@@ -1,7 +1,10 @@
 a {
-
-    text-decoration: none !important;
+    text-decoration: none;
     color: inherit !important;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 div:has(a) {
