@@ -1,0 +1,22 @@
+﻿@*
+   
+*@
+@{
+ 
+}
+
+<h1>Statystyki serwisu BiletPol</h1>
+<br />
+<p>
+    Od początku naszej działalności miały miejsce niezliczone magiczne chwile, od małych, lokalnych wydarzeń do wielkich, międzynarodowych spektakli. Za nami lata intensywnej pracy, podczas których nieustannie staramy się spełniać oczekiwania naszych klientów i partnerów. Dzięki waszej nieocenionej obecności i wsparciu, BiletPol stał się platformą, która łączy ludzi z pasjami, artystów z publicznością i wydarzenia z pamiętnymi momentami.
+    <br /><br />
+    Przez cały okres naszej działalności obsłużyliśmy <strong>@ViewBag.EventsAmount</strong> wydarzeń,<br />
+    w których brało udział <strong>@ViewBag.UsersAmount</strong> klientów!<br />
+    Nasz serwis umożliwył kupno <strong>@ViewBag.TicketsAmount</strong> biletów,<br />
+    z których aż <strong>@ViewBag.maxTicketsForSingleEvent</strong> zostało zakupionych na wydarzenie<br />
+    o nazwie <strong>@ViewBag.MostPopularEventName</strong>, które odbyło się <strong>@ViewBag.MostPopularEventDate</strong> <br />
+    w lokalizacji - <strong>@ViewBag.MostPopularEventLocation</strong><br />
+<br />
+    Przy finansowaniu naszych wydarzeń wspomagało nas <strong>@ViewBag.SponsorsCount</strong> sponsorów
+    <br />A byli nimi: <strong>@ViewBag.Sponsors</strong>
+</p>
