@@ -154,32 +154,45 @@ namespace ProjektTaiibWeb.Controllers
                 var detailedInfo = _detailedInformationRepository
                     .GetInformationById(_detailedInformationRepository.getInformationIdByUserId(user.Id_user));
 
-                if (detailedInfo == null)
+                if (detailedInfo != null)
                 {
-                    return NotFound("Brak informacji szczegółowych dla użytkownika.");
+                    // return NotFound("Brak informacji szczegółowych dla użytkownika.");
+
+
+                    var response = new
+                    {
+                        UserId = user.Id_user,
+                        Username = user.Username,
+                        Email = user.Email,
+                        Login = user.Username,
+
+                        Name = detailedInfo.Name,
+                        Surname = detailedInfo.Surname,
+                        LocalNumber = detailedInfo.Local_number,
+                        HouseNumber = detailedInfo.House_number,
+                        Phone = detailedInfo.Phone,
+                        Street = detailedInfo.Street,
+                        Country = detailedInfo.Country,
+                        ZIPCode = detailedInfo.Zip_code,
+                        City = detailedInfo.City,
+                        Payment = detailedInfo.Payment,
+                        AdditionalInformation = detailedInfo.Additional_information
+                    };
+                    return Ok(response);
+                }
+                else {
+
+                    var response = new
+                    {
+                        UserId = user.Id_user,
+                        Username = user.Username,
+                        Email = user.Email,
+                        Login = user.Username,
+                    };
+                    return Ok(response);
                 }
 
-                var response = new
-                {
-                    UserId = user.Id_user,
-                    Username = user.Username,
-                    Email = user.Email,
-                    Login = user.Username,
-                    
-                    Name = detailedInfo.Name,
-                    Surname = detailedInfo.Surname,
-                    LocalNumber = detailedInfo.Local_number,
-                    HouseNumber = detailedInfo.House_number,
-                    Phone = detailedInfo.Phone,
-                    Street = detailedInfo.Street,
-                    Country = detailedInfo.Country,
-                    ZIPCode = detailedInfo.Zip_code,
-                    City = detailedInfo.City,
-                    Payment = detailedInfo.Payment,
-                    AdditionalInformation = detailedInfo.Additional_information
-                };
-
-                return Ok(response);
+               
             }
             catch (Exception ex)
             {
